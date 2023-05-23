@@ -6,16 +6,16 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model Car {
-  id        Int      @id @default(autoincrement())
-  name      String
-  brand     String
-  year      Int
-  price     Float
-  imageUrl  String
+  id       Int    @id @default(autoincrement())
+  name     String
+  brand    String
+  year     Int
+  price    Float
+  imageUrl String
 }
