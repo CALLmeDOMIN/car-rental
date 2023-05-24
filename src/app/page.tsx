@@ -1,128 +1,84 @@
-import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
-import Link from "next/link";
-
 export default function Home() {
     return (
-        <div>
-            <header className="bg-white">
-                <nav
-                    className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
-                    aria-label="Global"
+        <div className="h-screen w-full bg-neutral-900">
+            <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
+                <Image
+                    src={"/2.jpg"}
+                    alt=""
+                    className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
+                    width={1920}
+                    height={1080}
+                />
+                <div
+                    className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
+                    aria-hidden="true"
                 >
-                    <div className="flex lg:flex-1">
-                        <Link href="/" className="-m-1.5 p-1.5">
-                            <span className="sr-only">Your Company</span>
-                            <Image
-                                className="h-8 w-auto"
-                                src={"/logo.png"}
-                                alt="123"
-                                width={32}
-                                height={32}
-                            />
-                        </Link>
-                    </div>
-                    <div className="flex lg:hidden">
-                        <button
-                            type="button"
-                            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-                        >
-                            <span className="sr-only">Open main menu</span>
-                            <svg
-                                className="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                    <div className="hidden lg:flex lg:gap-x-12">
-                        <Link
-                            href="/cars"
-                            className="text-sm font-semibold leading-6 text-gray-900"
-                        >
-                            Cars
-                        </Link>
-                        <Link
-                            href="/contact"
-                            className="text-sm font-semibold leading-6 text-gray-900"
-                        >
-                            Contact Us
-                        </Link>
-                    </div>
-                    <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <UserButton afterSignOutUrl="/" />
-                    </div>
-                </nav>
-                {/* <!-- Mobile menu, show/hide based on menu open state. --> */}
-                <div className="lg:hidden" role="dialog" aria-modal="true">
-                    {/* <!-- Background backdrop, show/hide based on slide-over state. --> */}
-                    <div className="fixed inset-0 z-10"></div>
-                    <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-                        <div className="flex items-center justify-between">
-                            <Link href="/" className="-m-1.5 p-1.5">
-                                <span className="sr-only">Your Company</span>
-                                <Image
-                                    className="h-8 w-auto"
-                                    src={"/logo.png"}
-                                    alt="123"
-                                    width={32}
-                                    height={32}
-                                />
-                            </Link>
-                            <button
-                                type="button"
-                                className="-m-2.5 rounded-md p-2.5 text-gray-700"
-                            >
-                                <span className="sr-only">Close menu</span>
-                                <svg
-                                    className="h-6 w-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    aria-hidden="true"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
+                    <div className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-30"></div>
+                </div>
+                <div
+                    className="absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu"
+                    aria-hidden="true"
+                >
+                    <div className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-30"></div>
+                </div>
+                <div className="mx-auto max-w-7xl">
+                    <div className="mx-auto max-w-2xl lg:mx-0">
+                        <div className="rounded-r-md bg-neutral-900/95">
+                            <h2 className="p-2 px-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">
+                                Welcome to car-rental
+                            </h2>
                         </div>
-                        <div className="mt-6 flow-root">
-                            <div className="-my-6 divide-y divide-gray-500/10">
-                                <div className="space-y-2 py-6">
-                                    <Link
-                                        href="/cars"
-                                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                    >
-                                        Cars
-                                    </Link>
-                                    <Link
-                                        href="/contact"
-                                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                    >
-                                        Contact
-                                    </Link>
-                                </div>
-                                <div className="py-6">
-                                    <UserButton afterSignOutUrl="/" />
-                                </div>
+                        <div className="w-screen rounded-md  bg-neutral-900/95 lg:mx-8">
+                            <p className="mt-6 w-2/3 p-2 px-6 text-lg leading-8 text-gray-100">
+                                Here, we understand the importance of reliable
+                                transportation when it comes to exploring new
+                                destinations or simply getting around town.
+                                Whether you're a seasoned traveler or a local in
+                                need of a temporary set of wheels, we've got you
+                                covered.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none lg:px-8">
+                        <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
+                            <div className="flex flex-col-reverse bg-neutral-900/95 md:rounded-md md:p-4">
+                                <dt className="px-6 text-base leading-7 text-gray-300">
+                                    and Reliability
+                                </dt>
+                                <dd className="px-6 text-2xl font-bold leading-9 tracking-tight text-white">
+                                    Trust
+                                </dd>
                             </div>
-                        </div>
+                            <div className="flex flex-col-reverse bg-neutral-900/95 md:rounded-md md:p-4">
+                                <dt className=" px-6 text-base leading-7 text-gray-300">
+                                    Prices
+                                </dt>
+                                <dd className=" px-6 text-2xl font-bold leading-9 tracking-tight text-white">
+                                    Competitive
+                                </dd>
+                            </div>
+                            <div className="flex flex-col-reverse bg-neutral-900/95 md:rounded-md md:p-4">
+                                <dt className="px-6 text-base leading-7 text-gray-300">
+                                    Booking
+                                </dt>
+                                <dd className="px-6 text-2xl font-bold leading-9 tracking-tight text-white">
+                                    Convenient
+                                </dd>
+                            </div>
+                            <div className="flex flex-col-reverse bg-neutral-900/95 md:rounded-md md:p-4">
+                                <dt className="px-6 text-base leading-7 text-gray-300">
+                                    and Customization
+                                </dt>
+                                <dd className="px-6 text-2xl font-bold leading-9 tracking-tight text-white">
+                                    Flexibility
+                                </dd>
+                            </div>
+                        </dl>
                     </div>
                 </div>
-            </header>
+            </div>
         </div>
     );
 }
+1;
