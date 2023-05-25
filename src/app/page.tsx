@@ -34,8 +34,8 @@ export default function Home() {
                                 Here, we understand the importance of reliable
                                 transportation when it comes to exploring new
                                 destinations or simply getting around town.
-                                Whether you're a seasoned traveler or a local in
-                                need of a temporary set of wheels, we've got you
+                                Whether you`&apos;`re a seasoned traveler or a local in
+                                need of a temporary set of wheels, we`&apos;`ve got you
                                 covered.
                             </p>
                         </div>

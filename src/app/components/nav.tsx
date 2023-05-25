@@ -13,7 +13,7 @@ export default function Nav() {
     } fixed inset-0 z-40 flex`;
 
     return (
-        <header className="border-b border-neutral-500 bg-neutral-900">
+        <header className="border-b border-neutral-500 bg-white">
             <nav
                 className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
                 aria-label="Global"
@@ -56,13 +56,13 @@ export default function Nav() {
                 <div className="hidden lg:flex lg:gap-x-12">
                     <Link
                         href="/cars"
-                        className="text-sm font-semibold leading-6 text-white"
+                        className="text-sm font-semibold leading-6 text-black"
                     >
                         Cars
                     </Link>
                     <Link
                         href="/contact"
-                        className="text-sm font-semibold leading-6 text-white"
+                        className="text-sm font-semibold leading-6 text-black"
                     >
                         Contact Us
                     </Link>
