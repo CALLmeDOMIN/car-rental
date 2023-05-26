@@ -12,10 +12,13 @@ datasource db {
 }
 
 model Car {
-  id       Int    @id @default(autoincrement())
-  name     String
-  brand    String
-  year     Int
-  price    Float
-  imageUrl String
+  id           Int    @id @default(autoincrement())
+  name         String @default("")
+  brand        String @default("")
+  transmission String @default("")
+  year         Int    @default(0)
+  price        Float  @default(0)
+  distance     Int    @default(0)
+  passengers   Int    @default(2)
+  capacity     Int    @default(2)
 }

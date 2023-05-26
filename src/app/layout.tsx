@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Nav from "./components/nav";
 
 const inter = Inter({ subsets: ["latin"] });
+inter.className = inter.className + " bg-white";
 
 export const metadata = {
     title: "Create Next App",

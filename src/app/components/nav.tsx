@@ -13,7 +13,7 @@ export default function Nav() {
     } fixed inset-0 z-40 flex`;
 
     return (
-        <header className="border-b border-neutral-500 bg-white">
+        <header className="bg-white shadow-xl mb-8">
             <nav
                 className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
                 aria-label="Global"

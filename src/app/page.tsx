@@ -4,7 +4,7 @@ export default function Home() {
         <div className="h-screen w-full bg-neutral-900">
             <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
                 <Image
-                    src={"/2.jpg"}
+                    src={"/bg.jpg"}
                     alt=""
                     className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
                     width={1920}
