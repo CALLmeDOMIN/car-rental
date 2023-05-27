@@ -6,10 +6,11 @@ import {
     IconUser,
 } from "@tabler/icons-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const prisma = new PrismaClient();
 
-type Car = {
+interface Car {
     id: number;
     name: string;
     brand: string;
@@ -19,51 +20,83 @@ type Car = {
     distance: number;
     passengers: number;
     capacity: number;
-    imageUrl: string;
-};
+}
 
 export default async function Page() {
-    const data = (await prisma.car.findMany()) as Car[];
+    //fetch all cars that id is more than 0
+    const data = (
+        await prisma.car.findMany({
+            where: { id: { gt: 0 } },
+        })
+    ).filter((car) => car.id > 0) as unknown as Car[];
 
-    const gridh1Style = "font-bold flex items-center justify-between gap-2";
+    const gridh1Style = "font-semibold flex items-center gap-2";
+
     return (
         <main className="h-screen w-screen bg-white">
-            <div className="max-w-7xl rounded-xl bg-white shadow-lg">
-                <div className="grid gap-4 p-4 md:grid-cols-2 xl:grid-cols-3">
+            <div className="m-auto max-w-7xl">
+                <div className="m-auto grid max-w-2xl gap-4 p-4 md:grid-cols-2 xl:max-w-7xl xl:grid-cols-3">
                     {data.map((car) => (
-                        <div
-                            key={car.id}
-                            className="m-auto flex max-w-xl rounded-xl p-4 text-black shadow-lg"
-                        >
-                            <div className="w-2/3">
-                                <div className="flex flex-col">
-                                    <Image
-                                        src={"/" + car.id.toString() + ".jpg"}
-                                        width={200}
-                                        height={10}
-                                        alt="car image"
-                                        className="aspect-video rounded-xl object-cover shadow-xl"
-                                    />
-                                    <p>
-                                        {car.name} {car.brand}
-                                    </p>
+                        <Link href={"/car/" + car.id}>
+                            <div
+                                key={car.id}
+                                className="m-auto flex max-w-[300px] flex-col justify-between rounded-xl pb-1 pl-4 pr-4 pt-4 text-black shadow-lg transition duration-200 ease-in-out hover:cursor-pointer hover:shadow-2xl"
+                            >
+                                <div className="m-auto flex max-w-xl gap-2 rounded-xl">
+                                    <div className="w-2/3">
+                                        <div className="flex flex-col">
+                                            <Image
+                                                src={
+                                                    "/" +
+                                                    car.id.toString() +
+                                                    ".jpg"
+                                                }
+                                                width="200"
+                                                height="100"
+                                                alt="car image"
+                                                className="aspect-video rounded-xl object-cover shadow-xl "
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col justify-center">
+                                        <h1 className={gridh1Style}>
+                                            <IconBusinessplan
+                                                size={15}
+                                                className="text-red-600"
+                                            />{" "}
+                                            ${car.price}
+                                        </h1>
+                                        <h1 className={gridh1Style}>
+                                            <IconManualGearbox
+                                                size={17}
+                                                className="pl-[2px] text-red-600"
+                                            />{" "}
+                                            {car.transmission[0]}
+                                        </h1>
+                                        <h1 className={gridh1Style}>
+                                            <IconUser
+                                                size={15}
+                                                className="text-red-600"
+                                            />{" "}
+                                            {car.passengers}
+                                        </h1>
+                                        <h1 className={gridh1Style}>
+                                            <IconLuggage
+                                                size={15}
+                                                className="text-red-600"
+                                            />{" "}
+                                            {car.capacity}
+                                        </h1>
+                                    </div>
                                 </div>
+                                <p className="mb-1 mt-1 font-bold">
+                                    <span className="text-red-600">
+                                        {car.brand}
+                                    </span>{" "}
+                                    | {car.name}
+                                </p>
                             </div>
-                            <div className="flex flex-col justify-center">
-                                <h1 className={gridh1Style}>
-                                    <IconBusinessplan /> ${car.price}
-                                </h1>
-                                <h1 className={gridh1Style}>
-                                    <IconManualGearbox /> {car.transmission}
-                                </h1>
-                                <h1 className={gridh1Style}>
-                                    <IconUser /> {car.passengers}
-                                </h1>
-                                <h1 className={gridh1Style}>
-                                    <IconLuggage /> {car.capacity}
-                                </h1>
-                            </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

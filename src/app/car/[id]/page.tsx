@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
+import Error404 from "@/app/components/Page404";
 import {
     IconBusinessplan,
     IconCalendarUp,
@@ -15,7 +16,7 @@ type Params = {
     id: number;
 };
 
-type Car = {
+interface Car {
     id: number;
     name: string;
     brand: string;
@@ -25,76 +26,86 @@ type Car = {
     distance: number;
     passengers: number;
     capacity: number;
-    imageUrl: string;
-};
+}
 
 export default async function Page({ params }: { params: Params }) {
-    const id = Number(params.id);
-    const data = (await prisma.car.findUnique({ where: { id } })) as Car;
-    const imageSrc = "/" + data?.id + ".jpg";
+    const idN = Number(params.id);
+    const data = (await prisma.car.findUnique({
+        where: { id: idN },
+    })) as Car | null;
 
-    const gridStyle = "rounded-xl text-black p-4 shadow-lg";
+    if (!data) return <Error404 text="car" />;
+
+    const imageSrc = "/" + data.id + ".jpg";
+
+    const gridStyle =
+        "rounded-xl p-4 shadow-lg transition duration-200 ease-in-out hover:cursor-pointer hover:shadow-2xl";
     const gridh1Style = "text-xl font-bold pl-1";
     const gridpStyle = "text-sm font-bold pl-4";
 
-    const imgWidth = 400;
-    const imgHeight = 200;
-
     return (
         <main>
-            <div className="m-auto mt-20 flex max-w-7xl flex-row items-end space-x-4">
-                <h1 className="text-5xl font-bold">{data?.name}</h1>
-                <h1 className="text-5xl font-bold">{data?.brand}</h1>
+            <div className="mx-auto flex max-w-7xl justify-center gap-2 p-4 pb-0 pt-8 md:justify-normal">
+                <h1 className="font-bold md:text-5xl">{data.name}</h1>
+                <h1 className="font-bold md:text-5xl">{data.brand}</h1>
             </div>
-            <div className="m-auto h-screen max-w-7xl rounded-xl bg-white p-4">
-                <div className="flex h-2/3 max-h-80 items-center justify-evenly">
-                    <div className="grid grid-cols-3 gap-4">
+            <div className="mx-auto max-w-7xl p-4 md:rounded-xl md:shadow-xl">
+                <div className="flex flex-col items-center justify-evenly space-y-6 md:flex-row">
+                    <div className="block rounded-xl p-2 shadow-xl md:hidden">
+                        <Image
+                            src={imageSrc}
+                            width="400"
+                            height="200"
+                            alt="car image"
+                            className="aspect-video rounded-xl object-cover shadow-xl"
+                        />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
                         <div className={gridStyle}>
-                            <IconBusinessplan />
+                            <IconBusinessplan className="text-red-600" />
                             <h1 className={gridh1Style}> Price </h1>
-                            <p className={gridpStyle}> ${data?.price} </p>
+                            <p className={gridpStyle}> ${data.price} </p>
                         </div>
                         <div className={gridStyle}>
-                            <IconCalendarUp />
-                            <h1 className={gridh1Style}> Production year </h1>
-                            <p className={gridpStyle}> {data?.year} </p>
+                            <IconCalendarUp className="text-red-600" />
+                            <h1 className={gridh1Style}> Production </h1>
+                            <p className={gridpStyle}> {data.year} </p>
                         </div>
                         <div className={gridStyle}>
-                            <IconManualGearbox />
+                            <IconManualGearbox className="text-red-600" />
                             <h1 className={gridh1Style}> Transmission </h1>
-                            <p className={gridpStyle}> {data?.transmission} </p>
+                            <p className={gridpStyle}> {data.transmission} </p>
                         </div>
                         <div className={gridStyle}>
-                            <IconRoad />
+                            <IconRoad className="text-red-600" />
                             <h1 className={gridh1Style}>Distance</h1>
                             <p className={gridpStyle}>
-                                {data?.distance > 0
-                                    ? data?.distance.toString() + " km"
+                                {data.distance > 0
+                                    ? data.distance.toString() + " km"
                                     : "none"}
                             </p>
                         </div>
                         <div className={gridStyle}>
-                            <IconUser />
+                            <IconUser className="text-red-600" />
                             <h1 className={gridh1Style}>Passengers</h1>
                             <p className={gridpStyle}> {data.passengers} </p>
                         </div>
                         <div className={gridStyle}>
-                            <IconLuggage />
+                            <IconLuggage className="text-red-600" />
                             <h1 className={gridh1Style}>Capacity</h1>
                             <p className={gridpStyle}>
                                 {data.capacity.toString() + " bags"}
                             </p>
                         </div>
                     </div>
-                    <div className="rounded-xl p-2 shadow-xl">
+                    <div className="hidden rounded-xl p-2 shadow-xl md:block">
                         <Image
                             src={imageSrc}
-                            width={imgWidth}
-                            height={imgHeight}
+                            width="400"
+                            height="200"
                             alt="carimg"
-                            className="rounded-xl"
+                            className="aspect-video rounded-xl object-cover shadow-xl"
                         />
-                        <h1 className="text-black">{imageSrc}</h1>
                     </div>
                 </div>
             </div>
