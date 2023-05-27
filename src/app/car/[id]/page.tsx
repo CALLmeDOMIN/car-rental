@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
-import Error404 from "@/app/components/Page404";
+import Error404 from "@/app/components/error404";
 import {
     IconBusinessplan,
     IconCalendarUp,
