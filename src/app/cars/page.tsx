@@ -37,11 +37,8 @@ export default async function Page() {
             <div className="m-auto max-w-7xl">
                 <div className="m-auto grid max-w-2xl gap-4 p-4 md:grid-cols-2 xl:max-w-7xl xl:grid-cols-3">
                     {data.map((car) => (
-                        <Link href={"/car/" + car.id}>
-                            <div
-                                key={car.id}
-                                className="m-auto flex max-w-[300px] flex-col justify-between rounded-xl pb-1 pl-4 pr-4 pt-4 text-black shadow-lg transition duration-200 ease-in-out hover:cursor-pointer hover:shadow-2xl"
-                            >
+                        <Link href={"/car/" + car.id} key={car.id}>
+                            <div className="m-auto flex max-w-[300px] flex-col justify-between rounded-xl pb-1 pl-4 pr-4 pt-4 text-black shadow-lg transition duration-200 ease-in-out hover:cursor-pointer hover:shadow-2xl">
                                 <div className="m-auto flex max-w-xl gap-2 rounded-xl">
                                     <div className="w-2/3">
                                         <div className="flex flex-col">
