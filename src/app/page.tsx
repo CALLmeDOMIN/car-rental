@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Filter from "./cars/filter";
+
 export default function Home() {
     const tilesArr = [
         ["Trust", "and Reliability"],
