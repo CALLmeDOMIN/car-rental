@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname } from "next/navigation";
 import { useTransition, useState } from "react";
-import { IconPlus, IconMinus } from "@tabler/icons-react";
+// import { IconPlus, IconMinus } from "@tabler/icons-react";
 
 let filters = [
     {
@@ -19,11 +19,11 @@ let filters = [
                 label: "2",
                 checked: false,
             },
-            {
-                value: "3",
-                label: "3",
-                checked: false,
-            },
+            // {
+            //     value: "3",
+            //     label: "3",
+            //     checked: false,
+            // },
             {
                 value: "4",
                 label: "4",
@@ -50,9 +50,9 @@ let filters = [
 ];
 
 export default function Filter() {
-    let [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+    // let [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-    let [open, setOpen] = useState(false);
+    // let [open, setOpen] = useState(false);
 
     let { replace } = useRouter();
     let pathname = usePathname();
@@ -64,19 +64,28 @@ export default function Filter() {
         isChecked: boolean,
         label: string
     ) => {
-        startTransition(() => {
-            let params = new URLSearchParams(location.search);
-            if (isChecked) {
-                params.append(label[0], term);
-            } else {
-                params.delete(label[0]);
+        let params = new URLSearchParams(location.search);
+
+        if (isChecked) {
+            let filter = params.getAll("filter").join("");
+            params.set("filter", filter + label[0] + term);
+        } else {
+            let filter = params.getAll("filter").join("");
+            let newFilter = filter?.replace(label[0] + term, "");
+            params.set("filter", newFilter ?? "");
+            if (!params.getAll("filter").join("")) {
+                params.delete("filter");
             }
-            replace(pathname + "?" + params.toString());
+        }
+        params.delete("page");
+
+        startTransition(() => {
+            replace(`${pathname}?${params.toString()}`);
         });
     };
 
     return (
-        <div className="m-4 flex flex-col">
+        <div className="m-4 hidden w-full flex-col md:flex xl:justify-center">
             <h1 className="border-b border-gray-500 p-4 pl-0 text-xl">
                 Filters
             </h1>
@@ -84,13 +93,13 @@ export default function Filter() {
                 <div
                     key={filter.id}
                     className="border-b border-gray-200 py-6"
-                    onClick={() => setOpen(!open)}
+                    // onClick={() => setOpen(!open)}
                 >
                     <div className="flex">
                         <h3 className="-my-3 flow-root font-medium text-gray-900">
                             {filter.label}
                         </h3>
-                        {open ? (
+                        {/* {open ? (
                             <IconMinus
                                 className="-my-[0.65rem] ml-auto h-5 w-5"
                                 aria-hidden="true"
@@ -100,39 +109,39 @@ export default function Filter() {
                                 className="-my-[0.65rem] ml-auto h-5 w-5"
                                 aria-hidden="true"
                             />
-                        )}
+                        )} */}
                     </div>
-                    {open ? (
-                        <div className="space-y-4 pt-6">
-                            {filter.options.map((option, optionId) => (
-                                <div
-                                    key={option.value}
-                                    className="flex items-center"
-                                >
-                                    <input
-                                        id={
-                                            option.value.toString() +
-                                            optionId.toString()
-                                        }
-                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                        type="checkbox"
-                                        checked={option.checked}
-                                        onChange={() => {
-                                            option.checked = !option.checked;
-                                            handleFilterChange(
-                                                option.value,
-                                                option.checked,
-                                                filter.label
-                                            );
-                                        }}
-                                    />
-                                    <label className="ml-3 text-sm text-gray-600">
-                                        {option.label}
-                                    </label>
-                                </div>
-                            ))}
-                        </div>
-                    ) : null}
+                    {/* {open ? ( */}
+                    <div className="space-y-4 pt-6">
+                        {filter.options.map((option, optionId) => (
+                            <div
+                                key={option.value}
+                                className="flex items-center"
+                            >
+                                <input
+                                    id={
+                                        option.value.toString() +
+                                        optionId.toString()
+                                    }
+                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    type="checkbox"
+                                    checked={option.checked}
+                                    onChange={() => {
+                                        option.checked = !option.checked;
+                                        handleFilterChange(
+                                            option.value,
+                                            option.checked,
+                                            filter.label
+                                        );
+                                    }}
+                                />
+                                <label className="ml-3 text-sm text-gray-600">
+                                    {option.label}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                    {/* ) : null} */}
                 </div>
             ))}
         </div>
