@@ -1,7 +1,12 @@
 import Image from "next/image";
-import Filter from "./cars/filter";
+import Link from "next/link";
+import { IconSquareChevronRight } from "@tabler/icons-react";
+import { PrismaClient } from "@prisma/client";
+import MobileCarousel from "./components/mobileCarousel";
 
-export default function Home() {
+const prisma = new PrismaClient();
+
+export default async function Home() {
     const tilesArr = [
         ["Trust", "and Reliability"],
         ["Competitive", "Prices"],
@@ -9,9 +14,15 @@ export default function Home() {
         ["Flexibility", "and Customization"],
     ];
 
+    const cars = await prisma.car.findMany();
+
+    if (!cars) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <>
-            <div className="w-full bg-white">
+            <div className="mt-4 w-full bg-white">
                 <div className="relative isolate overflow-hidden py-24 sm:py-32">
                     <Image
                         src={"/bg.jpg"}
@@ -32,19 +43,17 @@ export default function Home() {
                     >
                         <div className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-30"></div>
                     </div>
-                    <div className="">
-                        <div className="mx-auto max-w-2xl lg:mx-0">
-                            <div className="rounded-r-md bg-neutral-900/[45%]">
-                                <h2 className="p-2 px-6 text-4xl font-bold tracking-tight text-white sm:text-6xl">
-                                    Welcome to car-rental
-                                </h2>
-                            </div>
+                    <div className="flex">
+                        <div className="rounded-r-md bg-neutral-900/[45%]">
+                            <h2 className="p-2 pr-4 text-3xl font-bold tracking-tight text-white sm:text-6xl">
+                                Welcome to car-rental
+                            </h2>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="mt-5 flex justify-center">
-                <div className="mx-auto w-screen max-w-3xl rounded-md  lg:mx-8">
+                <div className="mx-auto w-screen max-w-2xl rounded-md  px-2 lg:mx-8">
                     <p className="text-center text-lg leading-8 text-black">
                         Here, we understand the importance of reliable
                         transportation when it comes to exploring new
@@ -54,6 +63,18 @@ export default function Home() {
                     </p>
                 </div>
             </div>
+            <div className="flex justify-center p-4">
+                <Link href="/cars">
+                    <button
+                        type="button"
+                        className="mb-2 mr-2 flex rounded-lg border-2 border-red-700 py-2.5 pl-5 pr-3 text-center text-sm font-medium text-red-700 hover:bg-red-800 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 dark:border-red-500 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900"
+                    >
+                        Rent a car
+                        <IconSquareChevronRight className="ml-2" />
+                    </button>
+                </Link>
+            </div>
+            <MobileCarousel cars={cars} />
         </>
     );
     {
