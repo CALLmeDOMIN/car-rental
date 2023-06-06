@@ -12,18 +12,6 @@ import Filter from "./filter";
 
 const prisma = new PrismaClient();
 
-interface Car {
-    id: number;
-    name: string;
-    brand: string;
-    transmission: string;
-    year: number;
-    price: number;
-    distance: number;
-    passengers: number;
-    capacity: number;
-}
-
 export default async function Page({
     searchParams,
 }: {
@@ -62,8 +50,8 @@ export default async function Page({
                 { brand: { contains: search } },
             ],
             capacity: { in: capacity },
-            // { transmission: { in: transmission } },
-            // { passengers: { in: passengers } },
+            // transmission: { in: transmission },
+            // passengers: { in: passengers },
         },
         skip: offset,
         take: limit,
@@ -105,11 +93,7 @@ export default async function Page({
                                                 <div className="w-2/3">
                                                     <div className="flex flex-col">
                                                         <Image
-                                                            src={
-                                                                "/" +
-                                                                car.id.toString() +
-                                                                ".jpg"
-                                                            }
+                                                            src={car.imageUrl}
                                                             width="200"
                                                             height="100"
                                                             alt="car image"

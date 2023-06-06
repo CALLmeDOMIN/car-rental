@@ -26,6 +26,7 @@ interface Car {
     distance: number;
     passengers: number;
     capacity: number;
+    imageUrl: string;
 }
 
 export default async function Page({ params }: { params: Params }) {
@@ -35,8 +36,6 @@ export default async function Page({ params }: { params: Params }) {
     })) as Car | null;
 
     if (!data) return <Error404 text="car" />;
-
-    const imageSrc = "/" + data.id + ".jpg";
 
     const gridStyle =
         "rounded-xl p-4 shadow-lg transition duration-200 ease-in-out hover:cursor-pointer hover:shadow-2xl";
@@ -53,7 +52,7 @@ export default async function Page({ params }: { params: Params }) {
                 <div className="flex flex-col items-center justify-evenly space-y-6 md:flex-row">
                     <div className="block rounded-xl p-2 shadow-xl md:hidden">
                         <Image
-                            src={imageSrc}
+                            src={data.imageUrl}
                             width="400"
                             height="200"
                             alt="car image"
@@ -100,7 +99,7 @@ export default async function Page({ params }: { params: Params }) {
                     </div>
                     <div className="hidden rounded-xl p-2 shadow-xl md:block">
                         <Image
-                            src={imageSrc}
+                            src={data.imageUrl}
                             width="400"
                             height="200"
                             alt="carimg"

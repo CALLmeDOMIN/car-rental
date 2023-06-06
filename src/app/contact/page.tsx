@@ -1,3 +1,9 @@
+import Uploader from "../components/uploader";
+
 export default function Page() {
-    return <div>My Post</div>;
+    return (
+        <div>
+            <Uploader />
+        </div>
+    );
 }
