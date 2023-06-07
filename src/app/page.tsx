@@ -52,27 +52,30 @@ export default async function Home() {
                     </div>
                 </div>
             </div>
-            <div className="mt-5 flex justify-center">
-                <div className="mx-auto w-screen max-w-2xl rounded-md  px-2 lg:mx-8">
-                    <p className="text-center text-lg leading-8 text-black">
-                        Here, we understand the importance of reliable
-                        transportation when it comes to exploring new
-                        destinations or simply getting around town. Whether
-                        you&apos;re a seasoned traveler or a local in need of a
-                        temporary set of wheels, we&apos;ve got you covered.
-                    </p>
+            <div className="flex h-[60vh] flex-col justify-evenly md:h-auto">
+                <div className="mt-5 flex justify-center">
+                    <div className="mx-auto w-screen max-w-2xl rounded-md  px-2 lg:mx-8">
+                        <p className="text-center text-lg leading-8 text-black">
+                            Here, we understand the importance of reliable
+                            transportation when it comes to exploring new
+                            destinations or simply getting around town. Whether
+                            you&apos;re a seasoned traveler or a local in need
+                            of a temporary set of wheels, we&apos;ve got you
+                            covered.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div className="flex justify-center p-4">
-                <Link href="/cars">
-                    <button
-                        type="button"
-                        className="mb-2 mr-2 flex rounded-lg border-2 border-red-700 py-2.5 pl-5 pr-3 text-center text-sm font-medium text-red-700 hover:bg-red-800 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 dark:border-red-500 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900"
-                    >
-                        Rent a car
-                        <IconSquareChevronRight className="ml-2" />
-                    </button>
-                </Link>
+                <div className="flex justify-center p-4">
+                    <Link href="/cars">
+                        <button
+                            type="button"
+                            className="mb-2 mr-2 flex rounded-lg border-2 border-red-700 py-2.5 pl-5 pr-3 text-center text-sm font-medium text-red-700 hover:bg-red-800 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 dark:border-red-500 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900"
+                        >
+                            Rent a car
+                            <IconSquareChevronRight className="ml-2" />
+                        </button>
+                    </Link>
+                </div>
             </div>
             <MobileCarousel cars={cars} />
         </>
