@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconSquareChevronRight } from "@tabler/icons-react";
 import { PrismaClient } from "@prisma/client";
+import Gallery from "./components/carouselcmp";
 import MobileCarousel from "./components/mobileCarousel";
 
 const prisma = new PrismaClient();
@@ -22,36 +23,72 @@ export default async function Home() {
 
     return (
         <>
-            <div className="mt-4 w-full bg-white">
-                <div className="relative isolate overflow-hidden py-24 sm:py-32">
-                    <Image
-                        src={"/bg.jpg"}
-                        alt=""
-                        className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
-                        width={1920}
-                        height={1080}
-                    />
-                    <div
-                        className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
-                        aria-hidden="true"
-                    >
-                        <div className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-30"></div>
-                    </div>
-                    <div
-                        className="absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu"
-                        aria-hidden="true"
-                    >
-                        <div className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-30"></div>
-                    </div>
-                    <div className="flex">
-                        <div className="rounded-r-md bg-neutral-900/[45%]">
-                            <h2 className="p-2 pr-4 text-3xl font-bold tracking-tight text-white sm:text-6xl">
-                                Welcome to car-rental
-                            </h2>
-                        </div>
-                    </div>
+            <div className="relative mt-4 w-screen bg-white p-8">
+                <div className="absolute top-[10%] flex w-full flex-col items-center">
+                    <h2 className="mr-8 text-5xl font-bold">
+                        Welcome to car-rental
+                    </h2>
+                    <p className="mr-8">
+                        {" "}
+                        We offer professional car rental in our range of high
+                        end vehicles
+                    </p>
                 </div>
+                <Link
+                    href="/cars"
+                    className="absolute bottom-[10%] flex w-full justify-center"
+                >
+                    <button
+                        type="button"
+                        className="mb-2 mr-2 flex rounded-lg bg-black py-2.5 pl-5 pr-3 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
+                    >
+                        Car catalog
+                        <IconSquareChevronRight className="ml-2" />
+                    </button>
+                </Link>
+                <div className="absolute bottom-[11.5%] right-[5%] flex flex-col space-y-4 rounded-xl bg-white p-4">
+                    <h3>header</h3>
+                    <input
+                        className="border"
+                        type="text"
+                        name="adress1"
+                        id="adress1"
+                    />
+                    <input
+                        className="border"
+                        type="text"
+                        name="adress2"
+                        id="adress2"
+                    />
+                    <input
+                        className="border"
+                        type="text"
+                        name="adress2"
+                        id="adress2"
+                    />
+                    <input
+                        className="border"
+                        type="text"
+                        name="date1"
+                        id="date1"
+                    />
+                    <input
+                        className="border"
+                        type="text"
+                        name="date2"
+                        id="date2"
+                    />
+                    <button className="border">button</button>
+                </div>
+                <Image
+                    src={"/bg.jpg"}
+                    alt="landing page background image"
+                    className="max-h-[500px] rounded-xl object-cover object-center"
+                    width="1920"
+                    height="1080"
+                />
             </div>
+
             <div className="flex h-[60vh] flex-col justify-evenly md:h-auto">
                 <div className="mt-5 flex justify-center">
                     <div className="mx-auto w-screen max-w-2xl rounded-md  px-2 lg:mx-8">
@@ -65,19 +102,10 @@ export default async function Home() {
                         </p>
                     </div>
                 </div>
-                <div className="flex justify-center p-4">
-                    <Link href="/cars">
-                        <button
-                            type="button"
-                            className="mb-2 mr-2 flex rounded-lg border-2 border-red-700 py-2.5 pl-5 pr-3 text-center text-sm font-medium text-red-700 hover:bg-red-800 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 dark:border-red-500 dark:text-red-500 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900"
-                        >
-                            Rent a car
-                            <IconSquareChevronRight className="ml-2" />
-                        </button>
-                    </Link>
-                </div>
+                <div className="flex justify-center p-4"></div>
             </div>
             <MobileCarousel cars={cars} />
+            {/* <Gallery cars={cars} /> */}
         </>
     );
     {
