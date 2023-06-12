@@ -17,10 +17,10 @@ export default async function Home() {
         <>
             <div className="relative mt-4 w-screen bg-white p-8">
                 <div className="absolute top-[8%] mt-4 w-auto pl-4 md:mt-0 lg:left-1/2 lg:-translate-x-1/2">
-                    <h2 className="pl-4 text-2xl font-bold md:pl-0 md:text-5xl">
+                    <h2 className="pl-4 text-2xl font-bold md:pl-0 md:text-4xl lg:text-5xl">
                         Welcome to car-rental
                     </h2>
-                    <p className="md:max-w-auto max-w-xs pl-4 text-sm md:text-base">
+                    <p className="max-w-xs pl-4 text-sm md:text-base lg:max-w-none">
                         {" "}
                         We offer professional car rental in our range of high
                         end vehicles

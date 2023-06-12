@@ -36,14 +36,14 @@ export default function Dropdown({
                 >
                     <span className="flex items-center">
                         {locations.map(
-                            (location) =>
+                            (location, id) =>
                                 location.isSelected && (
-                                    <>
+                                    <div key={id}>
                                         {location.icon}
                                         <span className="ml-3 block truncate">
                                             {location.name}
                                         </span>
-                                    </>
+                                    </div>
                                 )
                         )}
                     </span>
@@ -73,6 +73,7 @@ export default function Dropdown({
                         <li
                             className="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900"
                             id={`listbox-option-${id}`}
+                            key={id}
                             role="option"
                             onClick={() => {
                                 locations.forEach(
