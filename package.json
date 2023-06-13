@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.15.0",
+    "@react-spring/web": "^9.7.2",
     "@tabler/icons-react": "^2.22.0",
     "@types/node": "20.2.3",
     "@types/react": "18.2.6",
