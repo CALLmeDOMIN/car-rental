@@ -1,11 +1,7 @@
 import Link from "next/link";
 
-type Props = {
-    text?: string;
-};
-
-export default function Error404(props: Props) {
-    let errorText = props.text ?? "Page";
+export default function Error404({ text }: { text?: string }) {
+    let errorText = text ?? "Page";
     errorText = errorText.charAt(0).toUpperCase() + errorText.slice(1);
 
     return (

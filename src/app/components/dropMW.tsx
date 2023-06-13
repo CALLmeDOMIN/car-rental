@@ -4,7 +4,7 @@ import { IconBuildingSkyscraper, IconHotelService } from "@tabler/icons-react";
 import { IconMapPins, IconPlaneDeparture } from "@tabler/icons-react";
 import Dropdown from "./dropdown";
 
-export default function Cokolwiek({ label }: { label: string }) {
+export default function DropMW({ label }: { label: string }) {
     const locations = [
         { name: "Address", isSelected: true, icon: <IconMapPins size="18" /> },
         {

@@ -7,7 +7,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { IconCalendar, IconColorPicker } from "@tabler/icons-react";
 
-export default function Example() {
+export default function Calendar() {
     const today = new Date();
     const [selected, setSelected] = useState<Date | undefined>(today);
     const [isOpen, setIsOpen] = useState(false);
@@ -36,15 +36,17 @@ export default function Example() {
         <>
             <button
                 type="button"
-                className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                className="relative w-full cursor-default rounded-md bg-white py-1.5 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
                 aria-haspopup="listbox"
                 aria-expanded="true"
                 aria-labelledby="listbox-label"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <span className="flex items-center">
-                    <IconCalendar />
-                    <span className="ml-3 block truncate">{choice}</span>
+                    <span className="px-2">
+                        <IconCalendar size="18" />
+                    </span>
+                    <h1 className="block truncate">{choice}</h1>
                 </span>
             </button>
             <DayPicker

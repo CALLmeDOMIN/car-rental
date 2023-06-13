@@ -28,7 +28,7 @@ export default function Dropdown({
             <div className="relative mt-1">
                 <button
                     type="button"
-                    className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                    className="relative w-full cursor-default rounded-md bg-white py-1.5 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
                     aria-haspopup="listbox"
                     aria-expanded="true"
                     aria-labelledby="listbox-label"
@@ -38,9 +38,11 @@ export default function Dropdown({
                         {locations.map(
                             (location, id) =>
                                 location.isSelected && (
-                                    <div key={id}>
-                                        {location.icon}
-                                        <span className="ml-3 block truncate">
+                                    <div key={id} className="flex items-center">
+                                        <span className="px-2">
+                                            {location.icon}
+                                        </span>
+                                        <span className="block truncate">
                                             {location.name}
                                         </span>
                                     </div>
@@ -75,6 +77,7 @@ export default function Dropdown({
                             id={`listbox-option-${id}`}
                             key={id}
                             role="option"
+                            aria-selected="true"
                             onClick={() => {
                                 locations.forEach(
                                     (location) => (location.isSelected = false)
