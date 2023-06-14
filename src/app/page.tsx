@@ -5,6 +5,7 @@ import { PrismaClient } from "@prisma/client";
 import DropMW from "./components/dropMW";
 import Calendar from "./components/calendar";
 import Slideshow from "./components/slideshow";
+import { IconArrowUpRight } from "@tabler/icons-react";
 
 const prisma = new PrismaClient();
 
@@ -17,6 +18,9 @@ export default async function Home() {
     const photos = cars.map((car) => ({
         id: car.id.toString(),
         imageUrl: car.imageUrl,
+        people: car.passengers,
+        bags: car.capacity,
+        name: car.brand + " " + car.name,
     }));
 
     return (
@@ -40,10 +44,10 @@ export default async function Home() {
                     >
                         <button
                             type="button"
-                            className="flex items-center rounded-md bg-white py-2.5 pl-5 pr-3 text-center text-sm font-medium text-black shadow-sm hover:bg-gray-50 hover:shadow-md focus:outline-none focus:ring-4"
+                            className="flex items-center justify-center rounded-md bg-white py-2 pl-6 text-center text-sm font-semibold text-black shadow-sm hover:bg-gray-50 hover:shadow-md focus:outline-none focus:ring-4"
                         >
                             Car catalog
-                            <IconSquareChevronRight className="ml-2" />
+                            <IconArrowUpRight className="mx-2 mr-4" size={16} />
                         </button>
                     </Link>
                     <div className="absolute bottom-[8%] right-[5%] hidden flex-col space-y-4 rounded-xl bg-white p-4 md:flex">
@@ -215,33 +219,31 @@ export default async function Home() {
 
             {/* our fleet section */}
             <section>
-                <div className="mt-4 h-screen w-screen p-8 ">
-                    <div className="w-full rounded-xl bg-white p-10 shadow-xl">
-                        <div className="grid grid-cols-3 grid-rows-3 gap-10">
-                            <div className="col-span-3 flex flex-col justify-center">
-                                <h1 className="p-12 text-7xl leading-6">
-                                    Our Fleet
-                                </h1>
-                                <p className="max-w-[64ch] pb-6">
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Ut, natus! Lorem ipsum,
-                                    dolor sit amet consectetur adipisicing elit.
-                                    Rem veritatis nostrum sequi quisquam amet
-                                    ipsa.
-                                </p>
-                            </div>
-                            <div className="col-span-3 row-span-2">
-                                {" "}
-                                <Slideshow photos={photos} />{" "}
-                            </div>
-                            {/* <div className="col-span-2 flex items-center justify-center">
-                                <button className=" bg-red-400">1321321</button>
-                            </div>
-                            <div className="flex justify-center gap-2">
-                                <button className="bg-red-100">prev</button>
-                                <button className="bg-red-100">next</button>
-                            </div> */}
-                        </div>
+                <div className="mt-4 p-2 md:p-8 ">
+                    <div className="flex flex-col md:p-10">
+                        <span className="mx-6 flex flex-col items-center justify-center gap-10 md:mx-0 md:flex-row">
+                            <h1 className="text-5xl leading-6 md:py-12 md:text-4xl xl:text-7xl">
+                                Our Fleet
+                            </h1>
+                            <p className="max-w-[32ch] md:py-12 lg:max-w-[64ch]">
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Ut, natus! Lorem ipsum, dolor
+                                sit amet consectetur adipisicing elit. Rem
+                                veritatis nostrum sequi quisquam amet ipsa.
+                            </p>
+                        </span>
+                        <span className="flex flex-col">
+                            <Slideshow photos={photos} />
+                            <span className="flex justify-center">
+                                <button className="flex items-center rounded-md border bg-white py-1.5 pl-6 font-semibold shadow-2xl">
+                                    <h3>Show more </h3>
+                                    <IconArrowUpRight
+                                        size={16}
+                                        className="mx-2 mr-4"
+                                    />
+                                </button>
+                            </span>
+                        </span>
                     </div>
                 </div>
             </section>
