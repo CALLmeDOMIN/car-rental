@@ -75,7 +75,7 @@ export default async function Page({
 
     return (
         <>
-            <div className="mt-4 flex min-w-[45ch] items-center justify-center">
+            <div className="mt-4 flex w-screen items-center justify-center">
                 <Search />
             </div>
             <div className="flex">
