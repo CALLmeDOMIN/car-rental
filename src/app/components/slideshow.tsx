@@ -1,6 +1,5 @@
 "use client";
 
-// import { getImage } from "@/api/clientFetch";
 import { animated, useSpring } from "@react-spring/web";
 import {
     IconCircleChevronLeft,
@@ -11,30 +10,27 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-// import useMeasure from "react-use-measure";
 
 function SlideshowElement({
-    index,
     current,
     children,
+    className,
 }: {
-    index: number;
     current: number;
     children: React.ReactNode;
     className?: string;
 }) {
     const getPercentage = () => ({
-        x: 100 * (index - current) + "%",
-        y: "5%",
+        x: -100 * current + "%",
     });
     const [springs, api] = useSpring(getPercentage);
 
     useEffect(() => {
         api.start({ to: getPercentage() });
-    }, [index, current]);
+    }, [current]);
 
     return (
-        <animated.div className={"absolute left-0"} style={springs}>
+        <animated.div className={className} style={springs}>
             {children}
         </animated.div>
     );
@@ -50,77 +46,98 @@ type Photo = {
 
 export default function Slideshow({ photos }: { photos: Photo[] }) {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const clamp = (index: number) => {
+        if (index < 0) return 0;
+        if (index >= photos.length - cols) return photos.length - cols;
+        return index;
+    };
+
+    const [cols, setCols] = useState(1);
+    const updateCols = () => {
+        if (window.innerWidth < 768) setCols(1);
+        else if (window.innerWidth < 1024) setCols(2);
+        else if (window.innerWidth < 1280) setCols(3);
+        else setCols(4);
+    };
+    useEffect(() => {
+        updateCols();
+        window?.addEventListener("resize", updateCols);
+        return () => window?.removeEventListener("resize", updateCols);
+    }, []);
 
     return (
-        <div className="relative">
-            <div className="relative min-h-[300px] overflow-x-hidden px-2 md:mx-5 md:h-full md:min-h-[400px] lg:mx-10">
-                <span className="">
-                    {photos.map((photo, index) => (
-                        <SlideshowElement
-                            key={photo.id}
-                            index={index}
-                            current={currentIndex}
+        <div
+            className="relative overflow-hidden pb-12 [--cols:1] md:[--cols:2] lg:[--cols:3] xl:[--cols:4]"
+            style={
+                {
+                    "--total": photos.length,
+                } as React.CSSProperties
+            }
+        >
+            <div className="flex">
+                {photos.map((photo) => (
+                    <SlideshowElement
+                        key={photo.id}
+                        current={currentIndex}
+                        className="h-full w-[calc(100%_/_var(--cols))] shrink-0"
+                    >
+                        <Link
+                            href={`/car/${photo.id}`}
+                            className="flex transform flex-col gap-2 rounded-xl p-5 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105"
                         >
-                            <Link href={`/car/${photo.id}`}>
-                                <div className="mx-2 flex max-w-[250px] transform flex-col space-y-2 rounded-xl p-2 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 md:mx-auto md:ml-5 md:max-w-none xl:ml-5 2xl:ml-10">
-                                    <Image
-                                        src={photo.imageUrl}
-                                        alt="image"
-                                        width={400}
-                                        height={200}
-                                        className={
-                                            "aspect-video rounded-3xl object-cover object-center"
-                                        }
+                            <Image
+                                src={photo.imageUrl}
+                                alt="image"
+                                width={1920}
+                                height={1080}
+                                className={
+                                    "aspect-video h-auto w-auto rounded-3xl object-cover object-center"
+                                }
+                            />
+                            <h1 className="text-xl font-bold">{photo.name}</h1>
+                            <div className="flex justify-start gap-2">
+                                <div className="flex items-center gap-1 rounded-md bg-black p-1 px-1 pr-2">
+                                    <IconUser
+                                        className="text-white"
+                                        size={20}
                                     />
-                                    <h1 className="text-xl font-bold">
-                                        {photo.name}
+                                    <h1 className="text-white">
+                                        {photo.people}
                                     </h1>
-                                    <div className="flex justify-start gap-2">
-                                        <div className="flex items-center gap-1 rounded-md bg-black p-1 px-1 pr-2">
-                                            <IconUser
-                                                className="text-white"
-                                                size={20}
-                                            />
-                                            <h1 className="text-white">
-                                                {photo.people}
-                                            </h1>
-                                        </div>
-                                        <div className="flex items-center gap-1 rounded-md bg-black p-1 px-1 pr-2">
-                                            <IconLuggage
-                                                className="text-white"
-                                                size={20}
-                                            />
-                                            <h1 className="text-white">
-                                                {photo.bags}
-                                            </h1>
-                                        </div>
-                                    </div>
                                 </div>
-                            </Link>
-                        </SlideshowElement>
-                    ))}{" "}
-                </span>
+                                <div className="flex items-center gap-1 rounded-md bg-black p-1 px-1 pr-2">
+                                    <IconLuggage
+                                        className="text-white"
+                                        size={20}
+                                    />
+                                    <h1 className="text-white">{photo.bags}</h1>
+                                </div>
+                            </div>
+                        </Link>
+                    </SlideshowElement>
+                ))}
             </div>
             <button
-                className="absolute bottom-3 left-1/2 md:bottom-[50%] md:left-full"
-                onClick={() => {
-                    if (currentIndex > photos.length - 2) setCurrentIndex(0);
-                    else setCurrentIndex(currentIndex + 1);
-                }}
+                className={
+                    "absolute bottom-0 right-1/2 z-50 " +
+                    (currentIndex
+                        ? "cursor-pointer"
+                        : "cursor-default text-gray-500")
+                }
+                onClick={() => setCurrentIndex(clamp(currentIndex - 1))}
             >
-                <IconCircleChevronRight />
+                <IconCircleChevronLeft />
             </button>
             <button
                 className={
-                    currentIndex
-                        ? "absolute bottom-3 right-1/2 cursor-pointer md:bottom-[50%] md:left-0"
-                        : "absolute bottom-3 right-1/2 cursor-default text-gray-500 md:bottom-[50%] md:left-0"
+                    "absolute bottom-0 left-1/2 z-50 " +
+                    (currentIndex != photos.length - cols
+                        ? "cursor-pointer"
+                        : "cursor-default text-gray-500")
                 }
-                onClick={() => {
-                    if (currentIndex) setCurrentIndex(currentIndex - 1);
-                }}
+                onClick={() => setCurrentIndex(clamp(currentIndex + 1))}
             >
-                <IconCircleChevronLeft />
+                <IconCircleChevronRight />
             </button>
         </div>
     );

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Icon24Hours, IconSquareChevronRight } from "@tabler/icons-react";
+import { Icon24Hours } from "@tabler/icons-react";
 import { PrismaClient } from "@prisma/client";
 import DropMW from "./components/dropMW";
 import Calendar from "./components/calendar";
@@ -27,7 +27,7 @@ export default async function Home() {
         <>
             {/* landing pricture and form */}
             <section>
-                <div className="relative mt-4 w-screen bg-white p-8">
+                <div className="relative mt-4 bg-white p-8">
                     <div className="absolute top-[8%] mt-4 w-auto pl-4 md:mt-0 lg:left-1/2 lg:-translate-x-1/2">
                         <h2 className="text-2xl font-bold md:pl-0 md:text-4xl lg:text-5xl">
                             Welcome to car-rental
@@ -97,8 +97,8 @@ export default async function Home() {
                         src={"/bg.jpg"}
                         alt="landing page background image"
                         className="max-h-[80vh] min-h-[30vh] rounded-xl object-cover object-center shadow-xl"
-                        width="1920"
-                        height="1080"
+                        width={1920}
+                        height={1080}
                     />
                 </div>
 
@@ -168,7 +168,7 @@ export default async function Home() {
                             width={500}
                             height={749}
                             alt="img1"
-                            className="max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl
+                            className="h-auto max-h-[280px] w-auto transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl
                             md:max-h-[600px]"
                         />
                         <button className="absolute bottom-[2%] left-[3%] rounded-md bg-white px-6 py-1.5 shadow-sm">
@@ -181,7 +181,7 @@ export default async function Home() {
                             width={1232}
                             height={821}
                             alt="img2"
-                            className="max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
+                            className="h-auto max-h-[280px] w-auto transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
                         />
                         <button className="absolute bottom-[5%] left-[3%] rounded-md bg-white px-6 py-1.5 shadow-sm">
                             Intercity trips
@@ -193,7 +193,7 @@ export default async function Home() {
                             width={1024}
                             height={453}
                             alt="img3"
-                            className="max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
+                            className="h-auto max-h-[280px] w-auto transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
                             hover:shadow-2xl"
                         />
                         <button className="absolute bottom-[5%] left-[3%] rounded-md bg-white px-6 py-1.5 shadow-sm">
@@ -206,7 +206,7 @@ export default async function Home() {
                             width={612}
                             height={408}
                             alt="img4"
-                            className="max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
+                            className="h-auto max-h-[280px] w-auto transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
                             hover:shadow-2xl"
                         />
                         <button className="absolute bottom-[5%] left-[3%] rounded-md bg-white px-6 py-1.5 shadow-sm">
@@ -234,7 +234,7 @@ export default async function Home() {
                         </span>
                         <span className="flex flex-col">
                             <Slideshow photos={photos} />
-                            <span className="flex justify-center">
+                            <span className="flex justify-center pt-4">
                                 <button className="flex items-center rounded-md border bg-white py-1.5 pl-6 font-semibold shadow-2xl">
                                     <h3>Show more </h3>
                                     <IconArrowUpRight
