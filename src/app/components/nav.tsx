@@ -21,7 +21,10 @@ export default function Nav() {
                 aria-label="Global"
             >
                 <div className="flex lg:flex-1">
-                    <Link href="/" className="-m-1.5 bg-black  p-1.5">
+                    <Link
+                        href="/"
+                        className="-m-1.5 rounded-3xl bg-black p-1.5"
+                    >
                         <Image
                             className="h-8 w-auto"
                             src={"/logo1.png"}
