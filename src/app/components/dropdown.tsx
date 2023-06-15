@@ -1,17 +1,45 @@
 "use client";
 
-import { useState, ReactNode } from "react";
+import { IconBuildingSkyscraper } from "@tabler/icons-react";
+import { IconHotelService } from "@tabler/icons-react";
+import { IconMapPins, IconPlaneDeparture } from "@tabler/icons-react";
+import { useState, ReactNode, forwardRef } from "react";
 
-type Location = { name: string; isSelected: boolean; icon: ReactNode };
+// type Location = { name: string; isSelected: boolean; icon: ReactNode };
 
-export default function Dropdown({
-    locations,
-    label,
-}: {
-    locations: Location[];
-    label: string;
-}) {
+const locations = [
+    {
+        name: "Address",
+        isSelected: true,
+        icon: <IconMapPins size="18" aria-label="map" />,
+    },
+    {
+        name: "Airport",
+        isSelected: false,
+        icon: <IconPlaneDeparture size="18" aria-label="plane" />,
+    },
+    {
+        name: "City",
+        isSelected: false,
+        icon: <IconBuildingSkyscraper size="18" aria-label="building" />,
+    },
+    {
+        name: "Hotel",
+        isSelected: false,
+        icon: <IconHotelService size="18" aria-label="hotel" />,
+    },
+];
+
+type Props = {
+    label?: string;
+};
+
+export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
+    props,
+    ref
+) {
     const [isOpen, setIsOpen] = useState(false);
+    const label = props.label;
 
     let openStyle = isOpen
         ? "absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
@@ -42,9 +70,7 @@ export default function Dropdown({
                                         <span className="px-2">
                                             {location.icon}
                                         </span>
-                                        <span className="block truncate">
-                                            {location.name}
-                                        </span>
+                                        <div ref={ref}>{location.name}</div>
                                     </div>
                                 )
                         )}
@@ -117,4 +143,4 @@ export default function Dropdown({
             </div>
         </div>
     );
-}
+});

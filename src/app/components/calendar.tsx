@@ -1,13 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { IconCalendar, IconColorPicker } from "@tabler/icons-react";
 
-export default function Calendar() {
+export const Calendar = forwardRef<HTMLHeadingElement, {}>(function Calendar(
+    props,
+    ref
+) {
     const today = new Date();
     const [selected, setSelected] = useState<Date | undefined>(today);
     const [isOpen, setIsOpen] = useState(false);
@@ -44,9 +47,11 @@ export default function Calendar() {
             >
                 <span className="flex items-center">
                     <span className="px-2">
-                        <IconCalendar size="18" aria-label="date"/>
+                        <IconCalendar size="18" aria-label="date" />
                     </span>
-                    <h1 className="block truncate">{choice}</h1>
+                    <h1 ref={ref} className="block truncate">
+                        {choice}
+                    </h1>
                 </span>
             </button>
             <DayPicker
@@ -60,4 +65,4 @@ export default function Calendar() {
             />
         </>
     );
-}
+});
