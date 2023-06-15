@@ -5,7 +5,7 @@ import React, { forwardRef, useState } from "react";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { IconCalendar, IconColorPicker } from "@tabler/icons-react";
+import { IconCalendar } from "@tabler/icons-react";
 
 export const Calendar = forwardRef<HTMLHeadingElement, {}>(function Calendar(
     props,
@@ -23,22 +23,22 @@ export const Calendar = forwardRef<HTMLHeadingElement, {}>(function Calendar(
 
     const footer = (
         <span className="flex justify-center">
-            <button
-                className="rounded-md border p-2 shadow-sm hover:bg-gray-50 hover:shadow-md "
+            <div
+                className="cursor-pointer rounded-md border p-2 shadow-sm hover:bg-gray-50 hover:shadow-md"
                 onClick={() => setIsOpen(false)}
+                aria-label="button"
             >
                 Close
-            </button>
+            </div>
         </span>
     );
 
     const openStyle = isOpen
-        ? "absolute z-10 w-full overflow-auto rounded-md bg-white p-4 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+        ? "absolute top-0 left-0 z-10 w-full rounded-md bg-white p-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
         : "hidden";
     return (
         <>
-            <button
-                type="button"
+            <div
                 className="relative w-full cursor-default rounded-md bg-white py-1.5 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
                 aria-haspopup="listbox"
                 aria-expanded="true"
@@ -53,8 +53,9 @@ export const Calendar = forwardRef<HTMLHeadingElement, {}>(function Calendar(
                         {choice}
                     </h1>
                 </span>
-            </button>
+            </div>
             <DayPicker
+                weekStartsOn={1}
                 mode="single"
                 required
                 selected={selected}
