@@ -61,22 +61,34 @@ export default async function Page({ params }: { params: Params }) {
                     </div>
                     <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
                         <div className={gridStyle}>
-                            <IconBusinessplan className="text-red-600" />
+                            <IconBusinessplan
+                                className="text-red-600"
+                                aria-label="price"
+                            />
                             <h1 className={gridh1Style}> Price </h1>
                             <p className={gridpStyle}> ${data.price} </p>
                         </div>
                         <div className={gridStyle}>
-                            <IconCalendarUp className="text-red-600" />
+                            <IconCalendarUp
+                                className="text-red-600"
+                                aria-label="date"
+                            />
                             <h1 className={gridh1Style}> Production </h1>
                             <p className={gridpStyle}> {data.year} </p>
                         </div>
                         <div className={gridStyle}>
-                            <IconManualGearbox className="text-red-600" />
+                            <IconManualGearbox
+                                className="text-red-600"
+                                aria-label="transmission"
+                            />
                             <h1 className={gridh1Style}> Transmission </h1>
                             <p className={gridpStyle}> {data.transmission} </p>
                         </div>
                         <div className={gridStyle}>
-                            <IconRoad className="text-red-600" />
+                            <IconRoad
+                                className="text-red-600"
+                                aria-label="distance"
+                            />
                             <h1 className={gridh1Style}>Distance</h1>
                             <p className={gridpStyle}>
                                 {data.distance > 0
@@ -85,12 +97,18 @@ export default async function Page({ params }: { params: Params }) {
                             </p>
                         </div>
                         <div className={gridStyle}>
-                            <IconUser className="text-red-600" />
+                            <IconUser
+                                className="text-red-600"
+                                aria-label="people"
+                            />
                             <h1 className={gridh1Style}>Passengers</h1>
                             <p className={gridpStyle}> {data.passengers} </p>
                         </div>
                         <div className={gridStyle}>
-                            <IconLuggage className="text-red-600" />
+                            <IconLuggage
+                                className="text-red-600"
+                                aria-label="bags"
+                            />
                             <h1 className={gridh1Style}>Capacity</h1>
                             <p className={gridpStyle}>
                                 {data.capacity.toString() + " bags"}

@@ -106,28 +106,32 @@ export default async function Page({
                                                         <IconBusinessplan
                                                             size={15}
                                                             className="text-red-600"
-                                                        />{" "}
+                                                            aria-label="price"
+                                                        />
                                                         ${car.price}
                                                     </h1>
                                                     <h1 className={gridh1Style}>
                                                         <IconManualGearbox
                                                             size={17}
                                                             className="pl-[2px] text-red-600"
-                                                        />{" "}
+                                                            aria-label="transmission"
+                                                        />
                                                         {car.transmission[0]}
                                                     </h1>
                                                     <h1 className={gridh1Style}>
                                                         <IconUser
                                                             size={15}
                                                             className="text-red-600"
-                                                        />{" "}
+                                                            aria-label="passengers"
+                                                        />
                                                         {car.passengers}
                                                     </h1>
                                                     <h1 className={gridh1Style}>
                                                         <IconLuggage
                                                             size={15}
                                                             className="text-red-600"
-                                                        />{" "}
+                                                            aria-label="bags"
+                                                        />
                                                         {car.capacity}
                                                     </h1>
                                                 </div>

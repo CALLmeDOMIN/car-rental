@@ -29,7 +29,7 @@ export function Search() {
         <div className="relative max-w-xs">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
                 <span className="text-gray-500 sm:text-sm">
-                    <IconSearch size="16px" />
+                    <IconSearch size="16px" aria-label="search" />
                 </span>
             </div>
             <input

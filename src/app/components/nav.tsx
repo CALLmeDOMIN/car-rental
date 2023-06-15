@@ -21,14 +21,14 @@ export default function Nav() {
                 aria-label="Global"
             >
                 <div className="flex lg:flex-1">
-                    <Link href="/" className="-m-1.5 bg-red-600  p-1.5">
-                        <span className="sr-only">Your Company</span>
+                    <Link href="/" className="-m-1.5 bg-black  p-1.5">
                         <Image
                             className="h-8 w-auto"
                             src={"/logo1.png"}
                             alt="123"
                             width="32"
                             height="32"
+                            aria-label="logo"
                         />
                     </Link>
                 </div>
@@ -36,7 +36,10 @@ export default function Nav() {
                     <button
                         onClick={() => setOpen(true)}
                         type="button"
-                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-red-600"
+                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black"
+                        aria-controls="mobile-menu"
+                        aria-expanded="false"
+                        tabIndex={0}
                     >
                         <span className="sr-only">Open main menu</span>
                         <svg
@@ -46,6 +49,7 @@ export default function Nav() {
                             strokeWidth={1.5}
                             stroke="currentColor"
                             aria-hidden={true}
+                            aria-label="Open main menu"
                         >
                             <path
                                 strokeLinecap={"round"}
@@ -59,40 +63,47 @@ export default function Nav() {
                     <Link
                         href="/cars"
                         className="text-sm font-semibold leading-6 text-black"
+                        tabIndex={0}
                     >
                         Cars
                     </Link>
                     <Link
                         href="/contact"
                         className="text-sm font-semibold leading-6 text-black"
+                        tabIndex={0}
                     >
                         Contact Us
                     </Link>
                 </div>
             </nav>
+
+            {/* mobile */}
+
             <div
                 className={openStyles}
                 role="dialog"
                 aria-modal="true"
+                aria-label="Mobile menu"
                 {...closeNav}
             >
                 <div className="fixed inset-0 z-10"></div>
                 <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div className="flex items-center justify-between">
                         <Link href="/" className="-m-1.5 p-1.5">
-                            <span className="sr-only">Your Company</span>
                             <Image
                                 className="h-8 w-auto"
                                 src={"/logo1.png"}
                                 alt="123"
                                 width="32"
                                 height="32"
+                                aria-label="logo"
                             />
                         </Link>
                         <button
                             onClick={() => setOpen(!open)}
                             type="button"
-                            className="-m-2.5 rounded-md p-2.5 text-red-600"
+                            className="-m-2.5 rounded-md p-2.5 text-black"
+                            tabIndex={0}
                         >
                             <span className="sr-only">Close menu</span>
                             <svg
@@ -102,6 +113,7 @@ export default function Nav() {
                                 strokeWidth={1.5}
                                 stroke="currentColor"
                                 aria-hidden={true}
+                                aria-label="Close menu"
                             >
                                 <path
                                     strokeLinecap={"round"}
@@ -118,15 +130,17 @@ export default function Nav() {
                                     href="/cars"
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                     {...closeNav}
+                                    tabIndex={0}
                                 >
-                                    Cars
+                                    <h1 aria-label="Cars">Cars</h1>
                                 </Link>
                                 <Link
                                     href="/contact"
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                     {...closeNav}
+                                    tabIndex={0}
                                 >
-                                    Contact
+                                    <h1 aria-label="Contact">Contact</h1>
                                 </Link>
                             </div>
                         </div>

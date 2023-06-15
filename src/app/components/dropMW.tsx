@@ -6,21 +6,25 @@ import Dropdown from "./dropdown";
 
 export default function DropMW({ label }: { label: string }) {
     const locations = [
-        { name: "Address", isSelected: true, icon: <IconMapPins size="18" /> },
+        {
+            name: "Address",
+            isSelected: true,
+            icon: <IconMapPins size="18" aria-label="map" />,
+        },
         {
             name: "Airport",
             isSelected: false,
-            icon: <IconPlaneDeparture size="18" />,
+            icon: <IconPlaneDeparture size="18" aria-label="plane" />,
         },
         {
             name: "City",
             isSelected: false,
-            icon: <IconBuildingSkyscraper size="18" />,
+            icon: <IconBuildingSkyscraper size="18" aria-label="building" />,
         },
         {
             name: "Hotel",
             isSelected: false,
-            icon: <IconHotelService size="18" />,
+            icon: <IconHotelService size="18" aria-label="hotel" />,
         },
     ];
 

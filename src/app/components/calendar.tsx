@@ -44,7 +44,7 @@ export default function Calendar() {
             >
                 <span className="flex items-center">
                     <span className="px-2">
-                        <IconCalendar size="18" />
+                        <IconCalendar size="18" aria-label="date"/>
                     </span>
                     <h1 className="block truncate">{choice}</h1>
                 </span>

@@ -55,6 +55,7 @@ export default function Dropdown({
                             viewBox="0 0 20 20"
                             fill="currentColor"
                             aria-hidden="true"
+                            aria-label="Open select menu"
                         >
                             <path
                                 fillRule={"evenodd"}
@@ -100,6 +101,7 @@ export default function Dropdown({
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                         aria-hidden="true"
+                                        aria-label="Selected"
                                     >
                                         <path
                                             fillRule={"evenodd"}

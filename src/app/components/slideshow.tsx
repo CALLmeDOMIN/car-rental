@@ -46,24 +46,13 @@ type Photo = {
 
 export default function Slideshow({ photos }: { photos: Photo[] }) {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const cols = useCols();
+
     const clamp = (index: number) => {
         if (index < 0) return 0;
         if (index >= photos.length - cols) return photos.length - cols;
         return index;
     };
-
-    const [cols, setCols] = useState(1);
-    const updateCols = () => {
-        if (window.innerWidth < 768) setCols(1);
-        else if (window.innerWidth < 1024) setCols(2);
-        else if (window.innerWidth < 1280) setCols(3);
-        else setCols(4);
-    };
-    useEffect(() => {
-        updateCols();
-        window?.addEventListener("resize", updateCols);
-        return () => window?.removeEventListener("resize", updateCols);
-    }, []);
 
     return (
         <div
@@ -100,6 +89,7 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                                     <IconUser
                                         className="text-white"
                                         size={20}
+                                        aria-label="people"
                                     />
                                     <h1 className="text-white">
                                         {photo.people}
@@ -109,6 +99,7 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                                     <IconLuggage
                                         className="text-white"
                                         size={20}
+                                        aria-label="bags"
                                     />
                                     <h1 className="text-white">{photo.bags}</h1>
                                 </div>
@@ -117,6 +108,7 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                     </SlideshowElement>
                 ))}
             </div>
+
             <button
                 className={
                     "absolute bottom-0 right-1/2 z-50 " +
@@ -126,8 +118,9 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                 }
                 onClick={() => setCurrentIndex(clamp(currentIndex - 1))}
             >
-                <IconCircleChevronLeft />
+                <IconCircleChevronLeft aria-label="slide left" />
             </button>
+
             <button
                 className={
                     "absolute bottom-0 left-1/2 z-50 " +
@@ -137,8 +130,27 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                 }
                 onClick={() => setCurrentIndex(clamp(currentIndex + 1))}
             >
-                <IconCircleChevronRight />
+                <IconCircleChevronRight aria-label="slide right" />
             </button>
         </div>
     );
 }
+
+const useCols = () => {
+    const [cols, setCols] = useState(1);
+
+    const updateCols = () => {
+        if (window.innerWidth < 768) setCols(1);
+        else if (window.innerWidth < 1024) setCols(2);
+        else if (window.innerWidth < 1280) setCols(3);
+        else setCols(4);
+    };
+
+    useEffect(() => {
+        updateCols();
+        window?.addEventListener("resize", updateCols);
+        return () => window?.removeEventListener("resize", updateCols);
+    }, []);
+
+    return cols;
+};
