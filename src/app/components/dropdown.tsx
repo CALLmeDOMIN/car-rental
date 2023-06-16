@@ -1,37 +1,12 @@
 "use client";
 
-import { IconBuildingSkyscraper } from "@tabler/icons-react";
-import { IconHotelService } from "@tabler/icons-react";
-import { IconMapPins, IconPlaneDeparture } from "@tabler/icons-react";
 import { useState, ReactNode, forwardRef } from "react";
 
-// type Location = { name: string; isSelected: boolean; icon: ReactNode };
-
-const locations = [
-    {
-        name: "Address",
-        isSelected: true,
-        icon: <IconMapPins size="18" aria-label="map" />,
-    },
-    {
-        name: "Airport",
-        isSelected: false,
-        icon: <IconPlaneDeparture size="18" aria-label="plane" />,
-    },
-    {
-        name: "City",
-        isSelected: false,
-        icon: <IconBuildingSkyscraper size="18" aria-label="building" />,
-    },
-    {
-        name: "Hotel",
-        isSelected: false,
-        icon: <IconHotelService size="18" aria-label="hotel" />,
-    },
-];
+type Location = { name: string; isSelected: boolean; icon: ReactNode };
 
 type Props = {
     label?: string;
+    locations: Location[];
 };
 
 export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
@@ -39,7 +14,9 @@ export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
     ref
 ) {
     const [isOpen, setIsOpen] = useState(false);
+
     const label = props.label;
+    let locations = props.locations;
 
     let openStyle = isOpen
         ? "absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"

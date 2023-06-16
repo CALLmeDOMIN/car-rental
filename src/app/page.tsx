@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { IconArrowNarrowRight, IconCopyright } from "@tabler/icons-react";
+import {
+    IconAlertSmall,
+    IconArrowNarrowRight,
+    IconCopyright,
+} from "@tabler/icons-react";
 import Slideshow from "./components/slideshow";
 import { IconArrowUpRight } from "@tabler/icons-react";
 import SubmitForm from "./components/submitForm";
-import { getAllCars } from "./api/prisma";
+import { getAllCars, getCertainCars } from "./api/prisma";
 import {
     cities,
     expolore,
@@ -16,6 +20,7 @@ import {
 
 export default async function Home() {
     const cars = await getAllCars();
+    const hotOffer = (await getCertainCars({ id: 6 }))[0];
 
     if (!cars) {
         return <div>Loading...</div>;
@@ -215,6 +220,96 @@ export default async function Home() {
                 </div>
             </section>
             {/* end of why choose us */}
+
+            {/* hot offer section */}
+            <section className="my-20 flex justify-center">
+                <div className="m-2 max-w-5xl sm:m-4">
+                    <div className="flex flex-col items-center gap-2 pb-3 pt-12 md:flex-row md:justify-center md:gap-10 md:py-12 md:pb-6">
+                        <h1 className="text-4xl font-bold leading-6 md:text-5xl xl:text-7xl">
+                            <span className="text-indigo-950"> Todays </span>
+                            Offer
+                        </h1>
+                        <p className="max-w-[32ch] font-semibold text-gray-600 lg:max-w-[48ch]">
+                            15% off
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-4 grid-rows-4 rounded-3xl border p-2 shadow-xl sm:p-4">
+                        <div className="col-span-2 flex items-center justify-center">
+                            <h1 className="font-semibold leading-6 sm:text-xl md:text-3xl lg:text-5xl">
+                                {hotOffer.brand + " "}
+                                <span className="text-indigo-950">
+                                    {hotOffer.name}
+                                </span>
+                            </h1>
+                        </div>
+                        <div className="col-span-2 row-span-3">
+                            <Image
+                                src={hotOffer.imageUrl}
+                                width={1920}
+                                height={1080}
+                                className="aspect-video h-auto w-auto rounded-3xl object-cover object-center shadow-md"
+                                alt="hot offer car image"
+                            />
+                        </div>
+                        <div className="col-span-2 row-span-2 flex items-center text-xs capitalize sm:text-lg md:col-span-1 md:items-stretch md:text-sm lg:text-base">
+                            <ul className="flex flex-col justify-center md:justify-around">
+                                <li className="flex items-center">
+                                    <IconAlertSmall aria-label="pointer" />
+                                    fast sports and drift car
+                                </li>
+                                <li className="flex items-center">
+                                    <IconAlertSmall aria-label="pointer" />
+                                    {hotOffer.transmission} transmission
+                                </li>
+                                <li className="flex items-center">
+                                    <IconAlertSmall aria-label="pointer" />
+                                    preparation for track usage
+                                </li>
+                                <li className="hidden items-center lg:flex ">
+                                    <IconAlertSmall aria-label="pointer" />
+                                    preparation for track usage
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="row-span-2 mr-2 hidden capitalize md:flex md:text-sm lg:text-base">
+                            <ul className="flex flex-col justify-around">
+                                <li className="flex items-center">
+                                    <IconAlertSmall aria-label="pointer" />
+                                    New tires on the car
+                                </li>
+                                <li className="flex items-center">
+                                    <IconAlertSmall aria-label="pointer" />
+                                    Discount on additional tires
+                                </li>
+                                <li className="flex items-center">
+                                    <IconAlertSmall aria-label="pointer" />
+                                    good sound system
+                                </li>
+                                <li className="hidden items-center lg:flex">
+                                    <IconAlertSmall aria-label="pointer" />
+                                    good sound system
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="col-span-2 flex items-center justify-center">
+                            <Link href={`/car/${hotOffer.id}`} className="m-1">
+                                <button
+                                    type="button"
+                                    className="flex items-center justify-center rounded-md bg-indigo-950 py-2 pl-3 text-center text-sm font-semibold text-white shadow-sm hover:shadow-md focus:outline-none focus:ring-4 md:pl-6"
+                                >
+                                    Reserve now
+                                    <IconArrowUpRight
+                                        className="mx-2 md:mr-4"
+                                        size={16}
+                                        aria-label="arrow up right"
+                                    />
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {/* end of hot offer section */}
 
             {/* footer */}
             <footer>

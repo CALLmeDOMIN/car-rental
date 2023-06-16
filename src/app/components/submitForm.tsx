@@ -1,9 +1,35 @@
 "use client";
 
+import { IconBuildingSkyscraper } from "@tabler/icons-react";
+import { IconHotelService } from "@tabler/icons-react";
+import { IconMapPins, IconPlaneDeparture } from "@tabler/icons-react";
 import { Icon24Hours } from "@tabler/icons-react";
 import { Calendar } from "./calendar";
 import { useRef } from "react";
 import { Dropdown } from "./dropdown";
+
+const locations = [
+    {
+        name: "Address",
+        isSelected: true,
+        icon: <IconMapPins size="18" aria-label="map" />,
+    },
+    {
+        name: "Airport",
+        isSelected: false,
+        icon: <IconPlaneDeparture size="18" aria-label="plane" />,
+    },
+    {
+        name: "City",
+        isSelected: false,
+        icon: <IconBuildingSkyscraper size="18" aria-label="building" />,
+    },
+    {
+        name: "Hotel",
+        isSelected: false,
+        icon: <IconHotelService size="18" aria-label="hotel" />,
+    },
+];
 
 export default function SubmitForm({ className }: { className?: string }) {
     const rentDaysRef = useRef<HTMLInputElement>(null!);
@@ -23,8 +49,16 @@ export default function SubmitForm({ className }: { className?: string }) {
 
     return (
         <form className={className} onSubmit={handleSubmit}>
-            <Dropdown label="Pick Up Location" ref={pickUpRef} />
-            <Dropdown label="Drop Off Location" ref={dropOffRef} />
+            <Dropdown
+                label="Pick Up Location"
+                locations={locations}
+                ref={pickUpRef}
+            />
+            <Dropdown
+                label="Drop Off Location"
+                locations={locations}
+                ref={dropOffRef}
+            />
 
             <span className="flex flex-col sm:leading-6">
                 <h3 className="block text-sm font-medium text-gray-900">
