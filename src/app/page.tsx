@@ -1,100 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-    Icon24Hours,
-    IconArrowNarrowRight,
-    IconBrandFacebook,
-    IconBrandInstagram,
-    IconBrandLinkedin,
-    IconBrandTwitter,
-    IconBrandYoutube,
-    IconCar,
-    IconCopyright,
-    IconDevices,
-    IconDiscount2,
-    IconRotateRectangle,
-} from "@tabler/icons-react";
-import { PrismaClient } from "@prisma/client";
+import { IconArrowNarrowRight, IconCopyright } from "@tabler/icons-react";
 import Slideshow from "./components/slideshow";
 import { IconArrowUpRight } from "@tabler/icons-react";
 import SubmitForm from "./components/submitForm";
-
-const prisma = new PrismaClient();
-
-type WhyChooseUs = {
-    title: string;
-    description: string;
-    icon: React.ReactNode;
-};
-
-let whyChooseUs: WhyChooseUs[] = [
-    {
-        title: "Variety of car brands",
-        description:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.",
-        icon: <IconCar size={96} aria-label="Car" />,
-    },
-    {
-        title: "Resonable Rates",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.",
-        icon: <IconDiscount2 size={96} aria-label="Price" />,
-    },
-    {
-        title: "Easy Online Booking",
-        description:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.",
-        icon: <IconDevices size={96} aria-label="Devices" />,
-    },
-    {
-        title: "Quick & Easy Pickup & Return",
-        description:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.",
-        icon: <IconRotateRectangle size={96} aria-label="Rotate rectangle" />,
-    },
-];
-
-let cities: string[] = [
-    "CityPlaceholder",
-    "CityPlaceholder",
-    "CityPlaceholder",
-    "CityPlaceholder",
-    "CityPlaceholder",
-];
-
-let expolore: string[] = [
-    "ExplorePlaceholder",
-    "ExplorePlaceholder",
-    "ExplorePlaceholder",
-    "ExplorePlaceholder",
-    "ExplorePlaceholder",
-];
-
-let intercity: string[] = [
-    "CityName - CityName2",
-    "CityName2 - CityName3",
-    "CityName3 - CityName1",
-    "CityName1 - CityName4",
-    "CityName4 - CityName2",
-];
-
-let terms: string[] = [
-    "Terms",
-    "Privacy Policy",
-    "Legal notice",
-    "Accessibility",
-];
-
-let socials = [
-    { key: 1, icon: <IconBrandYoutube size={24} aria-label="youtube" /> },
-    { key: 2, icon: <IconBrandFacebook size={24} aria-label="facebook" /> },
-    { key: 3, icon: <IconBrandTwitter size={24} aria-label="twitter" /> },
-    { key: 4, icon: <IconBrandInstagram size={24} aria-label="instagram" /> },
-    { key: 5, icon: <IconBrandLinkedin size={24} aria-label="linkedin" /> },
-];
+import { getAllCars } from "./api/prisma";
+import {
+    cities,
+    expolore,
+    intercity,
+    socials,
+    terms,
+    whyChooseUs,
+} from "./assets";
 
 export default async function Home() {
-    const cars = await prisma.car.findMany();
+    const cars = await getAllCars();
+
     if (!cars) {
         return <div>Loading...</div>;
     }

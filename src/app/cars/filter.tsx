@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { useTransition, useState } from "react";
-// import { IconPlus, IconMinus } from "@tabler/icons-react";
+import { useTransition, useState, useEffect } from "react";
+import { IconPlus, IconMinus } from "@tabler/icons-react";
 
 let filters = [
     {
@@ -35,8 +35,8 @@ let filters = [
         id: "transmission",
         label: "Transmission",
         options: [
-            { value: "manual", label: "Manual", checked: false },
-            { value: "automatic", label: "Automatic", checked: false },
+            { value: "Manual", label: "Manual", checked: false },
+            { value: "Automatic", label: "Automatic", checked: false },
         ],
     },
     {
@@ -49,17 +49,39 @@ let filters = [
     },
 ];
 
+export const filterSearchParams = (str: string) => {
+    let capacity: number[] = [];
+    let transmission: string[] = [];
+    let passengers: number[] = [];
+
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] === "C") {
+            capacity.push(Number(str[i + 1]));
+        } else if (str[i] === "T") {
+            if (str[i + 1] === "A") transmission.push("Automatic");
+            else transmission.push("Manual");
+        } else if (str[i] === "P") {
+            passengers.push(Number(str[i + 1]));
+        }
+    }
+
+    return { t: transmission, c: capacity, p: passengers };
+};
+
 export default function Filter() {
     // let [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-    // let [open, setOpen] = useState(false);
+    const [open0, setOpen0] = useState(false);
+    const [open1, setOpen1] = useState(false);
+    const [open2, setOpen2] = useState(false);
+    // let [open3, setOpen3] = useState(false);
 
-    let { replace } = useRouter();
-    let pathname = usePathname();
+    const { replace } = useRouter();
+    const pathname = usePathname();
 
-    let [isPending, startTransition] = useTransition();
+    const [isPending, startTransition] = useTransition();
 
-    let handleFilterChange = (
+    const handleFilterChange = (
         term: string,
         isChecked: boolean,
         label: string
@@ -84,22 +106,40 @@ export default function Filter() {
         });
     };
 
+    useEffect(() => {
+        let params = new URLSearchParams(location.search);
+        let filter = params.getAll("filter").join("");
+        let { t, c, p } = filterSearchParams(filter);
+        console.log(t, c, p);
+        filters[0].options.forEach((option) => {
+            c.includes(Number(option.value))
+                ? (option.checked = true)
+                : (option.checked = false);
+        });
+        filters[1].options.forEach((option) => {
+            t.includes(option.value)
+                ? (option.checked = true)
+                : (option.checked = false);
+        });
+        filters[2].options.forEach((option) => {
+            p.includes(Number(option.value))
+                ? (option.checked = true)
+                : (option.checked = false);
+        });
+    }, []);
+
     return (
         <div className="m-4 hidden w-full flex-col md:flex xl:justify-center">
             <h1 className="border-b border-gray-500 p-4 pl-0 text-xl">
                 Filters
             </h1>
-            {filters.map((filter) => (
-                <div
-                    key={filter.id}
-                    className="border-b border-gray-200 py-6"
-                    // onClick={() => setOpen(!open)}
-                >
-                    <div className="flex">
+            <div key={filters[0].id} className="border-b border-gray-200 py-6">
+                <span onClick={() => setOpen0(!open0)}>
+                    <div className="flex w-full">
                         <h3 className="-my-3 flow-root font-medium text-gray-900">
-                            {filter.label}
+                            {filters[0].label}
                         </h3>
-                        {/* {open ? (
+                        {open0 ? (
                             <IconMinus
                                 className="-my-[0.65rem] ml-auto h-5 w-5"
                                 aria-hidden="true"
@@ -109,11 +149,12 @@ export default function Filter() {
                                 className="-my-[0.65rem] ml-auto h-5 w-5"
                                 aria-hidden="true"
                             />
-                        )} */}
+                        )}
                     </div>
-                    {/* {open ? ( */}
+                </span>
+                {open0 ? (
                     <div className="space-y-4 pt-6">
-                        {filter.options.map((option, optionId) => (
+                        {filters[0].options.map((option, optionId) => (
                             <div
                                 key={option.value}
                                 className="flex items-center"
@@ -131,7 +172,7 @@ export default function Filter() {
                                         handleFilterChange(
                                             option.value,
                                             option.checked,
-                                            filter.label
+                                            filters[0].label
                                         );
                                     }}
                                 />
@@ -141,9 +182,106 @@ export default function Filter() {
                             </div>
                         ))}
                     </div>
-                    {/* ) : null} */}
+                ) : null}
+            </div>
+            <div key={filters[1].id} className="border-b border-gray-200 py-6">
+                <div className="flex" onClick={() => setOpen1(!open1)}>
+                    <h3 className="-my-3 flow-root font-medium text-gray-900">
+                        {filters[1].label}
+                    </h3>
+                    {open1 ? (
+                        <IconMinus
+                            className="-my-[0.65rem] ml-auto h-5 w-5"
+                            aria-hidden="true"
+                        />
+                    ) : (
+                        <IconPlus
+                            className="-my-[0.65rem] ml-auto h-5 w-5"
+                            aria-hidden="true"
+                        />
+                    )}
                 </div>
-            ))}
+                {open1 ? (
+                    <div className="space-y-4 pt-6">
+                        {filters[1].options.map((option, optionId) => (
+                            <div
+                                key={option.value}
+                                className="flex items-center"
+                            >
+                                <input
+                                    id={
+                                        option.value.toString() +
+                                        optionId.toString()
+                                    }
+                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    type="checkbox"
+                                    checked={option.checked}
+                                    onChange={() => {
+                                        option.checked = !option.checked;
+                                        handleFilterChange(
+                                            option.value,
+                                            option.checked,
+                                            filters[1].label
+                                        );
+                                    }}
+                                />
+                                <label className="ml-3 text-sm text-gray-600">
+                                    {option.label}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                ) : null}
+            </div>
+            <div key={filters[2].id} className="border-b border-gray-200 py-6">
+                <div className="flex" onClick={() => setOpen2(!open2)}>
+                    <h3 className="-my-3 flow-root font-medium text-gray-900">
+                        {filters[2].label}
+                    </h3>
+                    {open2 ? (
+                        <IconMinus
+                            className="-my-[0.65rem] ml-auto h-5 w-5"
+                            aria-hidden="true"
+                        />
+                    ) : (
+                        <IconPlus
+                            className="-my-[0.65rem] ml-auto h-5 w-5"
+                            aria-hidden="true"
+                        />
+                    )}
+                </div>
+                {open2 ? (
+                    <div className="space-y-4 pt-6">
+                        {filters[2].options.map((option, optionId) => (
+                            <div
+                                key={option.value}
+                                className="flex items-center"
+                            >
+                                <input
+                                    id={
+                                        option.value.toString() +
+                                        optionId.toString()
+                                    }
+                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    type="checkbox"
+                                    checked={option.checked}
+                                    onChange={() => {
+                                        option.checked = !option.checked;
+                                        handleFilterChange(
+                                            option.value,
+                                            option.checked,
+                                            filters[2].label
+                                        );
+                                    }}
+                                />
+                                <label className="ml-3 text-sm text-gray-600">
+                                    {option.label}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                ) : null}
+            </div>
         </div>
     );
 }

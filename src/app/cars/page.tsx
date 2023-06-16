@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import {
     IconBusinessplan,
     IconLuggage,
@@ -9,8 +8,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { Search } from "./search";
 import Filter from "./filter";
+import { getCars } from "../api/prisma";
 
-const prisma = new PrismaClient();
+export const filterSearchParams = (str: string) => {
+    let capacity: number[] = [];
+    let transmission: string[] = [];
+    let passengers: number[] = [];
+
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] === "C") {
+            capacity.push(Number(str[i + 1]));
+        } else if (str[i] === "T") {
+            if (str[i + 1] === "A") transmission.push("Automatic");
+            else transmission.push("Manual");
+        } else if (str[i] === "P") {
+            passengers.push(Number(str[i + 1]));
+        }
+    }
+
+    return { t: transmission, c: capacity, p: passengers };
+};
 
 export default async function Page({
     searchParams,
@@ -23,56 +40,33 @@ export default async function Page({
     let limit = 10;
     let offset = (page - 1) * limit;
 
-    let capacity: number[] = [];
-    let transmission: string[] = [];
-    let passengers: number[] = [];
+    let {
+        t: transmission,
+        c: capacity,
+        p: passengers,
+    } = filterSearchParams(filter);
 
-    for (let i = 0; i < filter.length; i++) {
-        if (filter[i] === "C") {
-            capacity.push(Number(filter[i + 1]));
-        }
-        if (filter[i] === "T") {
-            transmission.push(filter[i + 1].toUpperCase());
-        }
-        if (filter[i] === "P") {
-            passengers.push(Number(filter[i + 1]));
-        }
-    }
-
-    if (!capacity.length) capacity = [1, 2, 3, 4];
-    if (!transmission.length) transmission = ["A", "M"];
+    if (!transmission.length) transmission = ["Automatic", "Manual"];
+    if (!capacity.length) capacity = [1, 2, 4];
     if (!passengers.length) passengers = [2, 4];
 
-    let result = await prisma.car.findMany({
-        where: {
-            OR: [
-                { name: { contains: search } },
-                { brand: { contains: search } },
-            ],
-            capacity: { in: capacity },
-            // transmission: { in: transmission },
-            // passengers: { in: passengers },
-        },
-        skip: offset,
-        take: limit,
-    });
+    let cars = await getCars({ search, transmission, capacity, passengers });
 
-    let cars = result.length ? result : [];
-    let total = await prisma.car.count({
-        where: {
-            OR: [
-                { name: { contains: search } },
-                { brand: { contains: search } },
-            ],
-        },
-    });
+    // let cars = result.length ? result : [];
+    // let total = await prisma.car.count({
+    //     where: {
+    //         OR: [
+    //             { name: { contains: search } },
+    //             { brand: { contains: search } },
+    //         ],
+    //     },
+    // });
 
-    let totalPages = Math.ceil(total / limit);
-    let hasNextPage = page < totalPages;
-    let hasPreviousPage = page > 1;
+    // let totalPages = Math.ceil(total / limit);
+    // let hasNextPage = page < totalPages;
+    // let hasPreviousPage = page > 1;
 
     const gridh1Style = "font-semibold flex items-center gap-2";
-
     return (
         <>
             <div className="mt-4 flex w-screen items-center justify-center">
