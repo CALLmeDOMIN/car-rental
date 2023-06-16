@@ -10,7 +10,7 @@ import { Search } from "./search";
 import Filter from "./filter";
 import { getCars } from "../api/prisma";
 
-export const filterSearchParams = (str: string) => {
+const filterSearchParams = (str: string) => {
     let capacity: number[] = [];
     let transmission: string[] = [];
     let passengers: number[] = [];
@@ -72,71 +72,73 @@ export default async function Page({
             <div className="mt-4 flex w-screen items-center justify-center">
                 <Search />
             </div>
-            <div className="flex">
-                <div className="hidden justify-center p-4 md:flex md:w-1/4">
+            <div className="flex flex-col md:flex-row">
+                <div className="flex justify-end pr-6 pt-4 md:flex md:w-1/4 md:justify-center md:p-4">
                     <Filter />
                 </div>
-                <div className="m-auto mt-5 flex w-full flex-col md:w-3/4">
+                <div className="mx-auto flex w-full flex-col md:mt-5 md:w-3/4">
                     <main>
                         <div className="max-w-7xl">
-                            <div className="m-auto grid max-w-2xl gap-4 p-4 md:grid-cols-2 xl:max-w-7xl xl:grid-cols-3">
+                            <div className="m-auto grid max-w-2xl gap-4 p-4 pt-0 md:grid-cols-2 md:pt-4 xl:max-w-7xl xl:grid-cols-3">
                                 {cars.map((car) => (
-                                    <Link href={"/car/" + car.id} key={car.id}>
-                                        <div className="m-auto flex max-w-[300px] flex-col justify-between rounded-xl pb-1 pl-4 pr-4 pt-4 text-black shadow-lg transition duration-200 ease-in-out hover:cursor-pointer hover:shadow-2xl">
-                                            <div className="m-auto flex max-w-xl gap-2 rounded-xl">
-                                                <div className="w-2/3">
-                                                    <div className="flex flex-col">
-                                                        <Image
-                                                            src={car.imageUrl}
-                                                            width="200"
-                                                            height="100"
-                                                            alt="car image"
-                                                            className="aspect-video rounded-xl object-cover shadow-xl "
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="flex flex-col justify-center">
-                                                    <h1 className={gridh1Style}>
-                                                        <IconBusinessplan
-                                                            size={15}
-                                                            className="text-red-600"
-                                                            aria-label="price"
-                                                        />
-                                                        ${car.price}
-                                                    </h1>
-                                                    <h1 className={gridh1Style}>
-                                                        <IconManualGearbox
-                                                            size={17}
-                                                            className="pl-[2px] text-red-600"
-                                                            aria-label="transmission"
-                                                        />
-                                                        {car.transmission[0]}
-                                                    </h1>
-                                                    <h1 className={gridh1Style}>
-                                                        <IconUser
-                                                            size={15}
-                                                            className="text-red-600"
-                                                            aria-label="passengers"
-                                                        />
-                                                        {car.passengers}
-                                                    </h1>
-                                                    <h1 className={gridh1Style}>
-                                                        <IconLuggage
-                                                            size={15}
-                                                            className="text-red-600"
-                                                            aria-label="bags"
-                                                        />
-                                                        {car.capacity}
-                                                    </h1>
+                                    <Link
+                                        href={"/car/" + car.id}
+                                        key={car.id}
+                                        className="m-auto flex max-w-[300px] flex-col justify-between rounded-xl pb-1 pl-4 pr-4 pt-4 text-black shadow-lg transition duration-200 ease-in-out hover:cursor-pointer hover:shadow-2xl"
+                                    >
+                                        <div className="m-auto flex max-w-xl gap-2 rounded-xl">
+                                            <div className="w-2/3">
+                                                <div className="flex flex-col">
+                                                    <Image
+                                                        src={car.imageUrl}
+                                                        width="200"
+                                                        height="100"
+                                                        alt="car image"
+                                                        className="aspect-video rounded-xl object-cover shadow-xl "
+                                                    />
                                                 </div>
                                             </div>
-                                            <p className="mb-1 mt-1 font-bold">
-                                                <span className="text-red-600">
-                                                    {car.brand}
-                                                </span>{" "}
-                                                | {car.name}
-                                            </p>
+                                            <div className="flex flex-col justify-center">
+                                                <h1 className={gridh1Style}>
+                                                    <IconBusinessplan
+                                                        size={15}
+                                                        className="text-red-600"
+                                                        aria-label="price"
+                                                    />
+                                                    ${car.price}
+                                                </h1>
+                                                <h1 className={gridh1Style}>
+                                                    <IconManualGearbox
+                                                        size={17}
+                                                        className="pl-[2px] text-red-600"
+                                                        aria-label="transmission"
+                                                    />
+                                                    {car.transmission[0]}
+                                                </h1>
+                                                <h1 className={gridh1Style}>
+                                                    <IconUser
+                                                        size={15}
+                                                        className="text-red-600"
+                                                        aria-label="passengers"
+                                                    />
+                                                    {car.passengers}
+                                                </h1>
+                                                <h1 className={gridh1Style}>
+                                                    <IconLuggage
+                                                        size={15}
+                                                        className="text-red-600"
+                                                        aria-label="bags"
+                                                    />
+                                                    {car.capacity}
+                                                </h1>
+                                            </div>
                                         </div>
+                                        <p className="mb-1 mt-1 font-bold">
+                                            <span className="text-red-600">
+                                                {car.brand}
+                                            </span>{" "}
+                                            | {car.name}
+                                        </p>
                                     </Link>
                                 ))}
                             </div>
