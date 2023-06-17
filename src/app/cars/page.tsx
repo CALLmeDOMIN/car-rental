@@ -50,23 +50,13 @@ export default async function Page({
     if (!capacity.length) capacity = [1, 2, 4];
     if (!passengers.length) passengers = [2, 4];
 
-    let cars = await getCars({ search, transmission, capacity, passengers });
+    const cars = await getCars({ search, transmission, capacity, passengers });
 
-    // let cars = result.length ? result : [];
-    // let total = await prisma.car.count({
-    //     where: {
-    //         OR: [
-    //             { name: { contains: search } },
-    //             { brand: { contains: search } },
-    //         ],
-    //     },
-    // });
+    const total = cars.length;
+    let totalPages = Math.ceil(total / limit);
+    let hasNextPage = page < totalPages;
+    let hasPreviousPage = page > 1;
 
-    // let totalPages = Math.ceil(total / limit);
-    // let hasNextPage = page < totalPages;
-    // let hasPreviousPage = page > 1;
-
-    const gridh1Style = "font-semibold flex items-center gap-2";
     return (
         <>
             <div className="mt-4 flex w-screen items-center justify-center">
@@ -99,7 +89,7 @@ export default async function Page({
                                                 </div>
                                             </div>
                                             <div className="flex flex-col justify-center">
-                                                <h1 className={gridh1Style}>
+                                                <h1 className="flex items-center gap-2 font-semibold">
                                                     <IconBusinessplan
                                                         size={15}
                                                         className="text-red-600"
@@ -107,7 +97,7 @@ export default async function Page({
                                                     />
                                                     ${car.price}
                                                 </h1>
-                                                <h1 className={gridh1Style}>
+                                                <h1 className="flex items-center gap-2 font-semibold">
                                                     <IconManualGearbox
                                                         size={17}
                                                         className="pl-[2px] text-red-600"
@@ -115,7 +105,7 @@ export default async function Page({
                                                     />
                                                     {car.transmission[0]}
                                                 </h1>
-                                                <h1 className={gridh1Style}>
+                                                <h1 className="flex items-center gap-2 font-semibold">
                                                     <IconUser
                                                         size={15}
                                                         className="text-red-600"
@@ -123,7 +113,7 @@ export default async function Page({
                                                     />
                                                     {car.passengers}
                                                 </h1>
-                                                <h1 className={gridh1Style}>
+                                                <h1 className="flex items-center gap-2 font-semibold">
                                                     <IconLuggage
                                                         size={15}
                                                         className="text-red-600"

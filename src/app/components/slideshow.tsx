@@ -36,15 +36,19 @@ function SlideshowElement({
     );
 }
 
-type Photo = {
+export type Photo = {
     id: string;
     imageUrl: string;
-    people: number;
-    bags: number;
-    name: string;
+    people?: number;
+    bags?: number;
+    name?: string;
 };
 
-export default function Slideshow({ photos }: { photos: Photo[] }) {
+export default function Slideshow({
+    photos,
+}: {
+    photos: Photo[];
+}) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const cols = useCols();
 
@@ -56,7 +60,9 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
 
     return (
         <div
-            className="relative overflow-hidden pt-6 font-sans [--cols:1] md:[--cols:2] lg:[--cols:3] xl:[--cols:4]"
+            className={
+                "relative overflow-hidden pt-6 font-sans [--cols:1] md:[--cols:2] lg:[--cols:3] xl:[--cols:4]"
+            }
             style={
                 {
                     "--total": photos.length,
@@ -73,10 +79,11 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                         <Link
                             href={`/car/${photo.id}`}
                             className={
-                                "mx-2 flex transform flex-col gap-2 rounded-2xl p-5 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 " +
+                                "mx-2 flex transform flex-col gap-2 rounded-2xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 " +
                                 (photo.id === "1"
                                     ? "bg-indigo-950/20"
-                                    : "bg-gray-950/5")
+                                    : "bg-gray-950/5") +
+                                (photo.name ? "p-5" : " p-0")
                             }
                         >
                             <Image
@@ -88,29 +95,35 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                                     "aspect-video h-auto w-auto rounded-md object-cover object-center shadow-md"
                                 }
                             />
-                            <h1 className="text-xl font-semibold">
-                                {photo.name}
-                            </h1>
-                            <div className="flex justify-start gap-2">
-                                <div className="flex items-center gap-1 rounded-md bg-indigo-950 p-1 px-1 pr-2">
-                                    <IconUser
-                                        className="text-white"
-                                        size={20}
-                                        aria-label="people"
-                                    />
-                                    <h1 className="text-white">
-                                        {photo.people}
-                                    </h1>
+                            {photo.name && (
+                                <h1 className="text-xl font-semibold">
+                                    {photo.name}
+                                </h1>
+                            )}
+                            {photo.people && (
+                                <div className="flex justify-start gap-2">
+                                    <div className="flex items-center gap-1 rounded-md bg-indigo-950 p-1 px-1 pr-2">
+                                        <IconUser
+                                            className="text-white"
+                                            size={20}
+                                            aria-label="people"
+                                        />
+                                        <h1 className="text-white">
+                                            {photo.people}
+                                        </h1>
+                                    </div>
+                                    <div className="flex items-center gap-1 rounded-md bg-indigo-950 p-1 px-1 pr-2">
+                                        <IconLuggage
+                                            className="text-white"
+                                            size={20}
+                                            aria-label="bags"
+                                        />
+                                        <h1 className="text-white">
+                                            {photo.bags}
+                                        </h1>
+                                    </div>
                                 </div>
-                                <div className="flex items-center gap-1 rounded-md bg-indigo-950 p-1 px-1 pr-2">
-                                    <IconLuggage
-                                        className="text-white"
-                                        size={20}
-                                        aria-label="bags"
-                                    />
-                                    <h1 className="text-white">{photo.bags}</h1>
-                                </div>
-                            </div>
+                            )}
                         </Link>
                     </SlideshowElement>
                 ))}

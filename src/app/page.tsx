@@ -205,7 +205,7 @@ export default async function Home() {
                     <div className="grid gap-10 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-4 xl:grid-rows-1">
                         {whyChooseUs.map((el, index) => (
                             <div key={index} className="flex flex-col">
-                                <div className="flex aspect-square items-center justify-center rounded-xl text-indigo-950 shadow-xl">
+                                <div className="flex aspect-square transform items-center justify-center rounded-xl text-indigo-950 shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105">
                                     {el.icon}
                                 </div>
                                 <h1 className="pt-6 text-lg font-semibold text-indigo-950">
