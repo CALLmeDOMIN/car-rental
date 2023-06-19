@@ -71,7 +71,7 @@ const filterSearchParams = (str: string) => {
     return { t: transmission, c: capacity, p: passengers };
 };
 
-export default function Filter() {
+export const Filter = () => {
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
     const [open0, setOpen0] = useState(false);
@@ -141,9 +141,12 @@ export default function Filter() {
     return (
         <>
             <button onClick={() => setMobileFilterOpen(!mobileFilterOpen)}>
-                <IconFilter className="block md:hidden" aria-label="filter" />
+                <IconFilter
+                    className="fixed right-6 block md:hidden"
+                    aria-label="filter"
+                />
             </button>
-            <div className="m-4 hidden w-full flex-col md:flex xl:justify-center">
+            <div className="m-4 hidden w-full flex-col md:flex">
                 <h1 className="border-b border-gray-500 p-4 pl-0 text-xl">
                     Filters
                 </h1>
@@ -523,4 +526,4 @@ export default function Filter() {
             </div>
         </>
     );
-}
+};

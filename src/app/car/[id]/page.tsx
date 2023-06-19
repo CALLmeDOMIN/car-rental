@@ -2,7 +2,6 @@ import Image from "next/image";
 import Error404 from "@/app/components/error404";
 import {
     IconBookmarkPlus,
-    IconBrandToyota,
     IconEngine,
     IconGasStation,
     IconHammer,
@@ -14,6 +13,7 @@ import { getCertainCars } from "@/app/api/prisma";
 import { IconBrandSpeedtest } from "@tabler/icons-react";
 import { IconPlaystationCircle } from "@tabler/icons-react";
 import Slideshow, { Photo } from "@/app/components/slideshow";
+import { CarTile } from "@/app/components/carTile";
 
 type Params = {
     id: number;
@@ -31,60 +31,26 @@ export default async function Page({ params }: { params: Params }) {
     return (
         <main className="mt-4 flex justify-center bg-gray-50">
             {/* main grid */}
-            <div className="grid max-w-7xl grid-cols-3 gap-6 rounded-xl p-4">
-                <div className="row-span-6 h-screen rounded-xl   bg-white shadow-xl">
-                    123
+            <div className="grid max-w-7xl gap-6 rounded-xl p-4 md:grid-cols-3">
+                <div className="row-span-6 hidden h-screen rounded-xl bg-white shadow-xl md:block">
+                    TODO
                 </div>
-                <div className="col-span-2 row-span-1 grid grid-cols-2 gap-4">
-                    <div className="flex max-w-md flex-col rounded-2xl bg-white p-4 pt-0 shadow-md">
-                        <div className="flex items-center gap-2 p-2">
-                            <div className="mr-2 aspect-square">
-                                <IconBrandToyota
-                                    className="h-12 w-auto"
-                                    aria-label="brand-logo"
-                                />
-                            </div>
-                            <div className="flex grow flex-col">
-                                <h1 className="text-xl font-semibold">
-                                    {car.brand}
-                                </h1>
-                                <h1 className="font-semibold text-gray-600">
-                                    {car.name}
-                                </h1>
-                            </div>
-                            <div className="aspect-square">
-                                <IconBookmarkPlus aria-label="bookmark" />
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-4 grid-rows-1">
-                            <Image
-                                src={car.imageUrl}
-                                width={1920}
-                                height={1080}
-                                alt="car image"
-                                className="col-span-3 aspect-video h-auto max-w-[280px] grow rounded-3xl object-cover object-center shadow-2xl"
-                            />
-                            <div className="flex flex-col items-end justify-end gap-1 pr-2 text-white">
-                                <div
-                                    aria-label="color 1"
-                                    className="aspect-square w-6 rounded-full border bg-white text-black shadow-2xl"
-                                ></div>
-                                <div
-                                    aria-label="color 2"
-                                    className="aspect-square w-6 rounded-full bg-emerald-600 shadow-2xl"
-                                ></div>
-                                <div
-                                    aria-label="color 3"
-                                    className="aspect-square w-6 rounded-full bg-sky-500 shadow-2xl"
-                                ></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="rounded-2xl bg-white p-2 shadow-md">
-                        123
+                <div className="col-span-2 row-span-1 flex flex-col gap-8 md:flex-row">
+                    <CarTile
+                        imageUrl={car.imageUrl}
+                        brand={car.brand}
+                        name={car.name}
+                        className="mx-auto gap-1 md:mx-0 md:justify-normal"
+                    />
+                    <div className="mx-auto ml-2 rounded-2xl bg-white p-2 px-4 shadow-md md:mx-0">
+                        <h1 className="pb-2 text-3xl font-bold">Owner Info</h1>
+                        <p className="font-semibold text-gray-500">
+                            Lorem, ipsum dolor sit amet consectetur adipisicing
+                            elit. Temporibus aut animi veritatis vero in qui.
+                        </p>
                     </div>
                 </div>
-                <div className="col-span-2 row-span-1  my-4">
+                <div className="col-span-2 row-span-1 my-4 px-2">
                     <h1 className="py-5 text-3xl font-bold">
                         Vehicle Information
                     </h1>
@@ -96,9 +62,9 @@ export default async function Page({ params }: { params: Params }) {
                         saepe nihil?
                     </p>
                 </div>
-                <div className="col-span-2 row-span-1 grid grid-cols-4 grid-rows-1  gap-4">
+                <div className="col-span-2 row-span-1 grid grid-cols-2 grid-rows-2 gap-4 md:grid-cols-4  md:grid-rows-1">
                     <div className="flex transform flex-col items-center rounded-xl bg-white p-2 shadow-lg shadow-amber-700/30 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105">
-                        <div className="aspect-square rounded-full bg-amber-600/20 p-2 text-amber-700 shadow-md shadow-amber-700/30">
+                        <div className="aspect-square rounded-full bg-amber-600/20 p-2 text-amber-700 shadow-sm shadow-amber-700">
                             <IconEngine
                                 aria-label="engine"
                                 className="h-10 w-auto"
@@ -110,7 +76,7 @@ export default async function Page({ params }: { params: Params }) {
                         </h1>
                     </div>
                     <div className="flex transform flex-col items-center rounded-xl bg-white p-2 shadow-lg shadow-rose-700/30 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105">
-                        <div className="aspect-square rounded-full bg-rose-600/20 p-2 text-rose-700 shadow-md shadow-rose-700/30">
+                        <div className="aspect-square rounded-full bg-rose-600/20 p-2 text-rose-700 shadow-sm shadow-rose-700">
                             <IconHorseToy
                                 aria-label="horse"
                                 className="h-10 w-auto"
@@ -122,7 +88,7 @@ export default async function Page({ params }: { params: Params }) {
                         </h1>
                     </div>
                     <div className="flex transform flex-col items-center rounded-xl bg-white p-2 shadow-lg shadow-indigo-700/30 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105">
-                        <div className="aspect-square rounded-full bg-indigo-600/20 p-2 text-indigo-700 shadow-md shadow-indigo-700/30">
+                        <div className="aspect-square rounded-full bg-indigo-600/20 p-2 text-indigo-700 shadow-sm shadow-indigo-700">
                             <IconBrandSpeedtest
                                 aria-label="speedometer"
                                 className="h-10 w-auto"
@@ -134,7 +100,7 @@ export default async function Page({ params }: { params: Params }) {
                         </h1>
                     </div>
                     <div className="flex transform flex-col items-center rounded-xl bg-white p-2 shadow-lg shadow-emerald-700/30 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105">
-                        <div className="aspect-square rounded-full bg-emerald-600/20 p-2 text-emerald-700 shadow-md shadow-emerald-700/30">
+                        <div className="aspect-square rounded-full bg-emerald-600/20 p-2 text-emerald-700 shadow-sm shadow-emerald-700">
                             <IconManualGearbox
                                 aria-label="gearbox"
                                 className="h-10 w-auto"
@@ -146,7 +112,7 @@ export default async function Page({ params }: { params: Params }) {
                         </h1>
                     </div>
                 </div>
-                <div className="col-span-2 row-span-1 grid grid-cols-2 gap-4">
+                <div className="col-span-2 row-span-1 grid gap-4 md:grid-cols-2">
                     <div className="rounded-xl bg-white p-3 py-1.5 shadow-md">
                         <h1 className="border-b pb-3 pt-5 text-2xl font-bold capitalize">
                             vehicle condition
@@ -157,7 +123,9 @@ export default async function Page({ params }: { params: Params }) {
                                     aria-label="circle"
                                     className="text-rose-700"
                                 />
-                                <h1 className="grow">New Grip Tires</h1>
+                                <h1 className="grow font-semibold text-gray-800">
+                                    New Grip Tires
+                                </h1>
                                 <h1 className="font-semibold text-green-400"></h1>
                             </li>
                             <li className="flex gap-1">
@@ -165,7 +133,7 @@ export default async function Page({ params }: { params: Params }) {
                                     aria-label="fuel"
                                     className="text-rose-700"
                                 />
-                                <h1 className="grow">
+                                <h1 className="grow font-semibold text-gray-800">
                                     Average Fuel Consumption
                                 </h1>
                                 <h1 className="font-semibold text-green-400">
@@ -177,7 +145,9 @@ export default async function Page({ params }: { params: Params }) {
                                     aria-label="fuel"
                                     className="text-rose-700"
                                 />
-                                <h1 className="grow">New Ceramic Breaks</h1>
+                                <h1 className="grow font-semibold text-gray-800">
+                                    New Ceramic Breaks
+                                </h1>
                                 <h1 className="font-semibold text-green-400"></h1>
                             </li>
                         </ul>
@@ -192,7 +162,7 @@ export default async function Page({ params }: { params: Params }) {
                                     aria-label="hammer"
                                     className="text-emerald-700"
                                 />
-                                <h1 className="grow">
+                                <h1 className="grow font-semibold text-gray-800">
                                     Lorem ipsum dolor sit amet.
                                 </h1>
                                 <h1 className="font-semibold text-gray-400">
@@ -204,7 +174,7 @@ export default async function Page({ params }: { params: Params }) {
                                     aria-label="hammer"
                                     className="text-emerald-700"
                                 />
-                                <h1 className="grow">
+                                <h1 className="grow font-semibold text-gray-800">
                                     Lorem ipsum dolor sit amet.
                                 </h1>
                                 <h1 className="font-semibold text-gray-400">
@@ -216,7 +186,7 @@ export default async function Page({ params }: { params: Params }) {
                                     aria-label="hammer"
                                     className="text-emerald-700"
                                 />
-                                <h1 className="grow">
+                                <h1 className="grow font-semibold text-gray-800">
                                     Lorem ipsum dolor sit amet.
                                 </h1>
                                 <h1 className="font-semibold text-gray-400">
