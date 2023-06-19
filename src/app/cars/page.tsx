@@ -63,11 +63,11 @@ export default async function Page({
             <div className="mt-4 flex w-screen items-center justify-center">
                 <Search />
             </div>
-            <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col lg:flex-row">
                 <div className="lg:flex lg:w-1/4 lg:p-4">
                     <Filter />
                 </div>
-                <div className="mx-auto flex w-full justify-center md:mt-5 lg:w-3/4">
+                <div className="mx-auto flex w-screen justify-center md:mt-5 lg:w-3/4">
                     <div className="grid max-w-md gap-4 p-4 pt-0 md:max-w-3xl md:grid-cols-2 md:pt-4 lg:max-w-4xl xl:max-w-7xl 2xl:grid-cols-3">
                         {cars.map((car) => (
                             <Link

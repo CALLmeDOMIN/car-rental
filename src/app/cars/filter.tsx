@@ -112,17 +112,19 @@ export const Filter = () => {
         let params = new URLSearchParams(location.search);
         let filter = params.getAll("filter").join("");
         let { t, c, p } = filterSearchParams(filter);
-        console.log(t, c, p);
+
         filters[0].options.forEach((option) => {
             c.includes(Number(option.value))
                 ? (option.checked = true)
                 : (option.checked = false);
         });
+
         filters[1].options.forEach((option) => {
             t.includes(option.value)
                 ? (option.checked = true)
                 : (option.checked = false);
         });
+
         filters[2].options.forEach((option) => {
             p.includes(Number(option.value))
                 ? (option.checked = true)
@@ -142,11 +144,11 @@ export const Filter = () => {
         <>
             <button onClick={() => setMobileFilterOpen(!mobileFilterOpen)}>
                 <IconFilter
-                    className="fixed right-6 block md:hidden"
                     aria-label="filter"
+                    className="fixed right-3 top-24"
                 />
             </button>
-            <div className="m-4 hidden w-full flex-col md:flex">
+            <div className="m-4 hidden w-full flex-col lg:flex">
                 <h1 className="border-b border-gray-500 p-4 pl-0 text-xl">
                     Filters
                 </h1>

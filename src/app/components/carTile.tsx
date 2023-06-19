@@ -37,7 +37,7 @@ export const CarTile = ({
                         className="aspect-video h-auto max-w-[280px] rounded-3xl object-cover object-center shadow-lg"
                     />
                 </div>
-                <div className="flex flex-col items-end justify-end gap-1 lg:flex-row">
+                <div className="flex flex-col items-end justify-end gap-1 xl:flex-row">
                     <div className="aspect-square h-6 rounded-full border bg-white shadow-md"></div>
                     <div className="aspect-square h-6 rounded-full bg-indigo-950 shadow-md"></div>
                     <div className="aspect-square h-6 rounded-full bg-yellow-400 shadow-md"></div>
