@@ -20,11 +20,15 @@ export async function getCars({
     transmission,
     capacity,
     passengers,
+    startPrice,
+    endPrice,
 }: {
-    search: string;
-    transmission: string[];
-    capacity: number[];
-    passengers: number[];
+    search?: string;
+    transmission?: string[];
+    capacity?: number[];
+    passengers?: number[];
+    startPrice?: number;
+    endPrice?: number;
 }) {
     return await prisma.car.findMany({
         where: {
@@ -38,6 +42,8 @@ export async function getCars({
                 transmission: { in: transmission },
             }),
             ...(capacity && { capacity: { in: capacity } }),
+            ...(startPrice && { price: { gte: startPrice } }),
+            ...(endPrice && { price: { lte: endPrice } }),
         },
     });
 }

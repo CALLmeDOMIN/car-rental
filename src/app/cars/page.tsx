@@ -15,6 +15,8 @@ const filterSearchParams = (str: string) => {
     let capacity: number[] = [];
     let transmission: string[] = [];
     let passengers: number[] = [];
+    let startPrice: number = 0;
+    let endPrice: number = 0;
 
     for (let i = 0; i < str.length; i++) {
         if (str[i] === "C") {
@@ -24,10 +26,31 @@ const filterSearchParams = (str: string) => {
             else transmission.push("Manual");
         } else if (str[i] === "P") {
             passengers.push(Number(str[i + 1]));
+        } else if (str[i] === "S") {
+            let startPriceStr = "";
+            while (str[i + 1] !== "-") {
+                startPriceStr += str[i + 1];
+                i++;
+            }
+            startPrice = Number(startPriceStr);
+
+            i++;
+            let endPriceStr = "";
+            while (str[i + 1] !== "E") {
+                endPriceStr += str[i + 1];
+                i++;
+            }
+            endPrice = Number(endPriceStr);
         }
     }
 
-    return { t: transmission, c: capacity, p: passengers };
+    return {
+        t: transmission,
+        c: capacity,
+        p: passengers,
+        s: startPrice,
+        e: endPrice,
+    };
 };
 
 export default async function Page({
@@ -45,13 +68,22 @@ export default async function Page({
         t: transmission,
         c: capacity,
         p: passengers,
+        s: startPrice,
+        e: endPrice,
     } = filterSearchParams(filter);
 
     if (!transmission.length) transmission = ["Automatic", "Manual"];
     if (!capacity.length) capacity = [1, 2, 4];
     if (!passengers.length) passengers = [2, 4];
 
-    const cars = await getCars({ search, transmission, capacity, passengers });
+    const cars = await getCars({
+        search,
+        transmission,
+        capacity,
+        passengers,
+        startPrice,
+        endPrice,
+    });
 
     const total = cars.length;
     let totalPages = Math.ceil(total / limit);

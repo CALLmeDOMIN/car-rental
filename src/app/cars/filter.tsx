@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { useTransition, useState, useEffect } from "react";
+import { useTransition, useState, useEffect, useRef } from "react";
 import { IconPlus, IconMinus } from "@tabler/icons-react";
 import { IconFilter } from "@tabler/icons-react";
 import Link from "next/link";
@@ -56,6 +56,8 @@ const filterSearchParams = (str: string) => {
     let capacity: number[] = [];
     let transmission: string[] = [];
     let passengers: number[] = [];
+    let startPrice: number = 0;
+    let endPrice: number = 0;
 
     for (let i = 0; i < str.length; i++) {
         if (str[i] === "C") {
@@ -65,18 +67,43 @@ const filterSearchParams = (str: string) => {
             else transmission.push("Manual");
         } else if (str[i] === "P") {
             passengers.push(Number(str[i + 1]));
+        } else if (str[i] === "S") {
+            let startPriceStr = "";
+            while (str[i + 1] !== "-") {
+                startPriceStr += str[i + 1];
+                i++;
+            }
+            startPrice = Number(startPriceStr);
+
+            i++;
+            let endPriceStr = "";
+            while (str[i + 1] !== "E") {
+                endPriceStr += str[i + 1];
+                i++;
+            }
+            endPrice = Number(endPriceStr);
         }
     }
 
-    return { t: transmission, c: capacity, p: passengers };
+    return {
+        t: transmission,
+        c: capacity,
+        p: passengers,
+        s: startPrice,
+        e: endPrice,
+    };
 };
 
 export const Filter = () => {
+    const startPriceRef = useRef<HTMLInputElement>(null!);
+    const endPriceRef = useRef<HTMLInputElement>(null!);
+
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
     const [open0, setOpen0] = useState(false);
     const [open1, setOpen1] = useState(false);
     const [open2, setOpen2] = useState(false);
+    const [open3, setOpen3] = useState(false);
 
     const { replace } = useRouter();
     const pathname = usePathname();
@@ -85,8 +112,8 @@ export const Filter = () => {
 
     const handleFilterChange = (
         term: string,
-        isChecked: boolean,
-        label: string
+        label: string,
+        isChecked?: boolean
     ) => {
         let params = new URLSearchParams(location.search);
 
@@ -96,6 +123,59 @@ export const Filter = () => {
         } else {
             let filter = params.getAll("filter").join("");
             let newFilter = filter?.replace(label[0] + term, "");
+            params.set("filter", newFilter ?? "");
+            if (!params.getAll("filter").join("")) {
+                params.delete("filter");
+            }
+        }
+        params.delete("page");
+
+        startTransition(() => {
+            replace(`${pathname}?${params.toString()}`);
+        });
+    };
+
+    const handleInputChange = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        let params = new URLSearchParams(location.search);
+
+        let filter = params.getAll("filter").join("");
+        if (startPriceRef.current.value && endPriceRef.current.value) {
+            if (filter.includes("S")) {
+                let newFilter = filter?.replace(
+                    /S.*E/,
+                    "S" +
+                        startPriceRef.current.value +
+                        "-" +
+                        endPriceRef.current.value +
+                        "E"
+                );
+                params.set("filter", newFilter ?? "");
+            } else {
+                params.set(
+                    "filter",
+                    filter +
+                        "S" +
+                        startPriceRef.current.value +
+                        "-" +
+                        endPriceRef.current.value +
+                        "E"
+                );
+            }
+        } else if (startPriceRef.current.value) {
+            params.set(
+                "filter",
+                filter + "S" + startPriceRef.current.value + "-" + "E"
+            );
+        } else if (endPriceRef.current.value) {
+            params.set(
+                "filter",
+                filter + "S0-" + endPriceRef.current.value + "E"
+            );
+        } else {
+            //delete only price filter
+            let newFilter = filter?.replace(/S\d+-\d+E/, "");
             params.set("filter", newFilter ?? "");
             if (!params.getAll("filter").join("")) {
                 params.delete("filter");
@@ -142,20 +222,17 @@ export const Filter = () => {
 
     return (
         <>
-            <button onClick={() => setMobileFilterOpen(!mobileFilterOpen)}>
-                <IconFilter
-                    aria-label="filter"
-                    className="fixed right-3 top-24"
-                />
+            <button
+                onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
+                className="fixed right-3 top-24 lg:hidden"
+            >
+                <IconFilter aria-label="filter" />
             </button>
             <div className="m-4 hidden w-full flex-col lg:flex">
                 <h1 className="border-b border-gray-500 p-4 pl-0 text-xl">
                     Filters
                 </h1>
-                <div
-                    key={filters[0].id}
-                    className="border-b border-gray-200 py-6"
-                >
+                <div className="border-b border-gray-200 py-6">
                     <span onClick={() => setOpen0(!open0)}>
                         <div className="flex w-full">
                             <h3 className="-my-3 flow-root font-medium text-gray-900">
@@ -193,8 +270,8 @@ export const Filter = () => {
                                             option.checked = !option.checked;
                                             handleFilterChange(
                                                 option.value,
-                                                option.checked,
-                                                filters[0].label
+                                                filters[0].label,
+                                                option.checked
                                             );
                                         }}
                                     />
@@ -206,10 +283,7 @@ export const Filter = () => {
                         </div>
                     ) : null}
                 </div>
-                <div
-                    key={filters[1].id}
-                    className="border-b border-gray-200 py-6"
-                >
+                <div className="border-b border-gray-200 py-6">
                     <div className="flex" onClick={() => setOpen1(!open1)}>
                         <h3 className="-my-3 flow-root font-medium text-gray-900">
                             {filters[1].label}
@@ -245,8 +319,8 @@ export const Filter = () => {
                                             option.checked = !option.checked;
                                             handleFilterChange(
                                                 option.value,
-                                                option.checked,
-                                                filters[1].label
+                                                filters[1].label,
+                                                option.checked
                                             );
                                         }}
                                     />
@@ -258,10 +332,7 @@ export const Filter = () => {
                         </div>
                     ) : null}
                 </div>
-                <div
-                    key={filters[2].id}
-                    className="border-b border-gray-200 py-6"
-                >
+                <div className="border-b border-gray-200 py-6">
                     <div className="flex" onClick={() => setOpen2(!open2)}>
                         <h3 className="-my-3 flow-root font-medium text-gray-900">
                             {filters[2].label}
@@ -297,8 +368,8 @@ export const Filter = () => {
                                             option.checked = !option.checked;
                                             handleFilterChange(
                                                 option.value,
-                                                option.checked,
-                                                filters[2].label
+                                                filters[2].label,
+                                                option.checked
                                             );
                                         }}
                                     />
@@ -307,6 +378,62 @@ export const Filter = () => {
                                     </label>
                                 </div>
                             ))}
+                        </div>
+                    ) : null}
+                </div>
+                <div
+                    className={
+                        "border-b border-gray-200 py-6 " + (open3 ? "pb-2" : "")
+                    }
+                >
+                    <div className="flex" onClick={() => setOpen3(!open3)}>
+                        <h3 className="-my-3 flow-root font-medium text-gray-900">
+                            Price
+                        </h3>
+                        {open3 ? (
+                            <IconMinus
+                                className="-my-[0.65rem] ml-auto h-5 w-5"
+                                aria-hidden="true"
+                            />
+                        ) : (
+                            <IconPlus
+                                className="-my-[0.65rem] ml-auto h-5 w-5"
+                                aria-hidden="true"
+                            />
+                        )}
+                    </div>
+                    {open3 ? (
+                        <div className="p-2 pt-6">
+                            <form
+                                className="flex flex-col items-center gap-4"
+                                onSubmit={handleInputChange}
+                            >
+                                <span className="flex items-center gap-2">
+                                    <input
+                                        ref={startPriceRef}
+                                        type="text"
+                                        placeholder="0"
+                                        pattern="[0-9]*"
+                                        inputMode="numeric"
+                                        className="max-w-[80px] rounded border border-gray-300 p-1 font-semibold text-text focus:ring-indigo-500"
+                                    />
+                                    <span className="text-gray-600">to</span>
+                                    <input
+                                        ref={endPriceRef}
+                                        type="text"
+                                        placeholder="0"
+                                        pattern="[0-9]*"
+                                        inputMode="numeric"
+                                        className="max-w-[80px] rounded border border-gray-300 p-1 font-semibold text-text focus:ring-indigo-500"
+                                    />
+                                </span>
+                                <button
+                                    type="submit"
+                                    className="rounded bg-indigo-600 px-2 py-1 text-white"
+                                >
+                                    Button
+                                </button>
+                            </form>
                         </div>
                     ) : null}
                 </div>
@@ -339,10 +466,7 @@ export const Filter = () => {
                     <div className="mt-6 flow-root">
                         <div className="-my-6 divide-y divide-gray-500/10 ">
                             <div className="space-y-2 py-6">
-                                <div
-                                    key={filters[0].id}
-                                    className="border-b border-gray-200 py-6"
-                                >
+                                <div className="border-b border-gray-200 py-6">
                                     <span onClick={() => setOpen0(!open0)}>
                                         <div className="flex w-full">
                                             <h3 className="-my-3 flow-root font-medium text-gray-900">
@@ -384,9 +508,9 @@ export const Filter = () => {
                                                                     !option.checked;
                                                                 handleFilterChange(
                                                                     option.value,
-                                                                    option.checked,
                                                                     filters[0]
-                                                                        .label
+                                                                        .label,
+                                                                    option.checked
                                                                 );
                                                             }}
                                                         />
@@ -399,10 +523,7 @@ export const Filter = () => {
                                         </div>
                                     ) : null}
                                 </div>
-                                <div
-                                    key={filters[1].id}
-                                    className="border-b border-gray-200 py-6"
-                                >
+                                <div className="border-b border-gray-200 py-6">
                                     <div
                                         className="flex"
                                         onClick={() => setOpen1(!open1)}
@@ -445,9 +566,9 @@ export const Filter = () => {
                                                                     !option.checked;
                                                                 handleFilterChange(
                                                                     option.value,
-                                                                    option.checked,
                                                                     filters[1]
-                                                                        .label
+                                                                        .label,
+                                                                    option.checked
                                                                 );
                                                             }}
                                                         />
@@ -460,10 +581,7 @@ export const Filter = () => {
                                         </div>
                                     ) : null}
                                 </div>
-                                <div
-                                    key={filters[2].id}
-                                    className="border-b border-gray-200 py-6"
-                                >
+                                <div className="border-b border-gray-200 py-6">
                                     <div
                                         className="flex"
                                         onClick={() => setOpen2(!open2)}
@@ -506,9 +624,9 @@ export const Filter = () => {
                                                                     !option.checked;
                                                                 handleFilterChange(
                                                                     option.value,
-                                                                    option.checked,
                                                                     filters[2]
-                                                                        .label
+                                                                        .label,
+                                                                    option.checked
                                                                 );
                                                             }}
                                                         />

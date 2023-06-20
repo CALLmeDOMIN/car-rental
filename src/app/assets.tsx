@@ -2044,7 +2044,7 @@ export const logos: brandIcons = {
             y="0px"
             width="100%"
             viewBox="0 0 1203 1254"
-            enable-background="new 0 0 1203 1254"
+            enableBackground={"new 0 0 1203 1254"}
             // xml:space="preserve"
         >
             <path
@@ -5933,10 +5933,10 @@ z"
             height="4500"
             viewBox="0 0 192.756 192.756"
         >
-            <g fill-rule="evenodd" clip-rule="evenodd">
+            <g fillRule={"evenodd"} clipRule={"evenodd"}>
                 <path
                     fill="#fff"
-                    fill-opacity="0"
+                    fillOpacity={0}
                     d="M0 0h192.756v192.756H0V0z"
                 />
                 <path
@@ -5988,7 +5988,7 @@ z"
             y="0px"
             width="100%"
             viewBox="0 0 1024 1024"
-            enable-background="new 0 0 1024 1024"
+            enableBackground={"new 0 0 1024 1024"}
         >
             <path
                 fill="#000000"
