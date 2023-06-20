@@ -22,11 +22,6 @@ let filters = [
                 label: "2",
                 checked: false,
             },
-            // {
-            //     value: "3",
-            //     label: "3",
-            //     checked: false,
-            // },
             {
                 value: "4",
                 label: "4",
@@ -164,18 +159,33 @@ export const Filter = () => {
                 );
             }
         } else if (startPriceRef.current.value) {
-            params.set(
-                "filter",
-                filter + "S" + startPriceRef.current.value + "-" + "E"
-            );
+            if (filter.includes("S")) {
+                let newFilter = filter?.replace(
+                    /S.*E/,
+                    "S" + startPriceRef.current.value + "-" + "E"
+                );
+                params.set("filter", newFilter ?? "");
+            } else {
+                params.set(
+                    "filter",
+                    filter + "S" + startPriceRef.current.value + "-" + "E"
+                );
+            }
         } else if (endPriceRef.current.value) {
-            params.set(
-                "filter",
-                filter + "S0-" + endPriceRef.current.value + "E"
-            );
+            if (filter.includes("S")) {
+                let newFilter = filter?.replace(
+                    /S.*E/,
+                    "S0-" + endPriceRef.current.value + "E"
+                );
+                params.set("filter", newFilter ?? "");
+            } else {
+                params.set(
+                    "filter",
+                    filter + "S0-" + endPriceRef.current.value + "E"
+                );
+            }
         } else {
-            //delete only price filter
-            let newFilter = filter?.replace(/S\d+-\d+E/, "");
+            let newFilter = filter?.replace(/S.*E/, "");
             params.set("filter", newFilter ?? "");
             if (!params.getAll("filter").join("")) {
                 params.delete("filter");
@@ -210,6 +220,20 @@ export const Filter = () => {
                 ? (option.checked = true)
                 : (option.checked = false);
         });
+
+        return () => {
+            filters[0].options.forEach((option) => {
+                option.checked = false;
+            });
+
+            filters[1].options.forEach((option) => {
+                option.checked = false;
+            });
+
+            filters[2].options.forEach((option) => {
+                option.checked = false;
+            });
+        };
     }, []);
 
     const openStyles = `${

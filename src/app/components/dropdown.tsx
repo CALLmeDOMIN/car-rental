@@ -25,7 +25,7 @@ export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
     return (
         <div className="flex flex-col">
             <label
-                id="listbox-label"
+                id={`listbox-label-${label}`}
                 className="block text-sm font-medium leading-6 text-gray-900"
             >
                 {label}
@@ -33,7 +33,7 @@ export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
             <div className="relative mt-1">
                 <button
                     type="button"
-                    className="relative w-full cursor-default rounded-md bg-white py-1.5 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                    className="focus:ring-indigo-500 relative w-full cursor-default rounded-md bg-white py-1.5 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 sm:text-sm sm:leading-6"
                     aria-haspopup="listbox"
                     aria-expanded="true"
                     aria-labelledby="listbox-label"
@@ -73,7 +73,7 @@ export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
                     tabIndex={-1}
                     role="listbox"
                     aria-labelledby="listbox-label"
-                    aria-activedescendant="listbox-option-3"
+                    aria-activedescendant={`listbox-option-${label}`}
                 >
                     {locations.map((location, id) => (
                         <li
@@ -98,7 +98,7 @@ export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
                             </div>
 
                             {location.isSelected && (
-                                <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
+                                <span className="text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4">
                                     <svg
                                         className="h-5 w-5"
                                         viewBox="0 0 20 20"

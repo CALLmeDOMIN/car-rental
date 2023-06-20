@@ -27,6 +27,7 @@ function SlideshowElement({
 
     useEffect(() => {
         api.start({ to: getPercentage() });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [current]);
 
     return (
@@ -57,7 +58,7 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
     return (
         <div
             className={
-                "relative overflow-hidden pt-6 font-sans [--cols:1] md:[--cols:2] lg:[--cols:3] xl:[--cols:4]"
+                "relative overflow-hidden pt-10 font-sans [--cols:1] md:[--cols:2] lg:[--cols:3] xl:[--cols:4]"
             }
             style={
                 {
@@ -82,15 +83,19 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                                 (photo.name ? "p-5" : " p-0")
                             }
                         >
-                            <Image
-                                src={photo.imageUrl}
-                                alt="image"
-                                width={1920}
-                                height={1080}
-                                className={
-                                    "aspect-video h-auto w-auto rounded-md object-cover object-center shadow-md"
-                                }
-                            />
+                            <div className="relative min-h-[150px]">
+                                <Image
+                                    src={photo.imageUrl}
+                                    alt="image"
+                                    // width={1920}
+                                    // height={1080}
+                                    fill
+                                    sizes="(max-width: 768px) 80vw, (max-width: 1024px) 33vw, 25vw"
+                                    className={
+                                        "aspect-video rounded-md object-cover object-center shadow-md"
+                                    }
+                                />
+                            </div>
                             {photo.name && (
                                 <h1 className="text-xl font-semibold text-text">
                                     {photo.name}
@@ -100,21 +105,21 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                                 <div className="flex justify-start gap-2">
                                     <div className="flex items-center gap-1 rounded-md bg-secondaryButton p-1 px-1 pr-2">
                                         <IconUser
-                                            className="font-semibold text-text"
+                                            className="font-semibold text-white"
                                             size={20}
                                             aria-label="people"
                                         />
-                                        <h1 className="font-semibold text-text">
+                                        <h1 className="font-semibold text-white">
                                             {photo.people}
                                         </h1>
                                     </div>
                                     <div className="flex items-center gap-1 rounded-md bg-secondaryButton p-1 px-1 pr-2">
                                         <IconLuggage
-                                            className="font-semibold text-text"
+                                            className="font-semibold text-white"
                                             size={20}
                                             aria-label="bags"
                                         />
-                                        <h1 className="font-semibold text-text">
+                                        <h1 className="font-semibold text-white">
                                             {photo.bags}
                                         </h1>
                                     </div>
@@ -127,26 +132,26 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
 
             <button
                 className={
-                    "absolute right-10 top-0 z-10 " +
+                    "absolute right-16 top-0 z-10 " +
                     (currentIndex
                         ? "cursor-pointer text-primaryButton"
                         : "cursor-default text-gray-950/10")
                 }
                 onClick={() => setCurrentIndex(clamp(currentIndex - 1))}
             >
-                <IconCircleChevronLeft aria-label="slide left" />
+                <IconCircleChevronLeft size={48} aria-label="slide left" />
             </button>
 
             <button
                 className={
-                    "absolute right-4 top-0 z-10" +
+                    "absolute right-4 top-0 z-10 " +
                     (currentIndex != photos.length - cols
                         ? "cursor-pointer text-primaryButton"
                         : "cursor-default text-gray-500")
                 }
                 onClick={() => setCurrentIndex(clamp(currentIndex + 1))}
             >
-                <IconCircleChevronRight aria-label="slide right" />
+                <IconCircleChevronRight size={48} aria-label="slide right" />
             </button>
         </div>
     );

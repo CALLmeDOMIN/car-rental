@@ -105,7 +105,7 @@ export default async function Page({
                             <Link
                                 href={"/car/" + car.id}
                                 key={car.id}
-                                className="grid transform grid-cols-1 rounded-2xl shadow-md transition-all duration-200 hover:scale-105 hover:shadow-xl"
+                                className="max-h-[287px] transform rounded-2xl shadow-md transition-all duration-200 hover:scale-105 hover:shadow-xl"
                             >
                                 <CarTile
                                     imageUrl={car.imageUrl}
@@ -135,7 +135,7 @@ export default async function Page({
                                         {car.capacity}
                                     </h1>
                                     <div className="flex items-end">
-                                        <h1 className="font-mono text-2xl font-bold text-indigo-950">
+                                        <h1 className="text-indigo-950 font-mono text-2xl font-bold">
                                             ${car.price}
                                         </h1>
                                         <h1 className="text-lg font-semibold text-gray-600">
@@ -145,6 +145,10 @@ export default async function Page({
                                 </div>
                             </Link>
                         ))}
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
             </div>

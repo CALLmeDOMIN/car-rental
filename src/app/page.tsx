@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-    IconAlertSmall,
+    IconFlame,
     IconArrowNarrowRight,
     IconCopyright,
 } from "@tabler/icons-react";
@@ -37,21 +37,20 @@ export default async function Home() {
     return (
         <>
             {/* landing pricture and form */}
-            <section>
-                <div className="relative mt-4 p-8">
-                    <div className="absolute top-[8%] mt-4 w-auto pl-4 md:mt-0 lg:left-1/2 lg:-translate-x-1/2">
-                        <h2 className="text-2xl font-bold text-text md:pl-0 md:text-4xl lg:text-5xl">
+            <section className="p-8">
+                <div className="relative mt-4 min-h-[80vh]">
+                    <div className="absolute top-[8%] mt-4 flex w-auto flex-col items-center justify-center px-4 md:mt-0 lg:left-1/2 lg:-translate-x-1/2">
+                        <h2 className="text-2xl font-bold text-text md:text-4xl lg:text-5xl">
                             Welcome to car-rental
                         </h2>
-                        <p className="max-w-[280px] text-sm text-text sm:max-w-xs md:text-base lg:flex lg:max-w-none lg:justify-center">
-                            {" "}
+                        <p className="max-w-[280px] text-justify text-sm text-text sm:max-w-xs md:text-left md:text-base lg:flex lg:max-w-none lg:justify-center">
                             We offer professional car rental in our range of
                             high end vehicles
                         </p>
                     </div>
                     <Link
                         href="/cars"
-                        className="absolute bottom-[15%] ml-4 md:bottom-[8%] lg:left-1/2 lg:-translate-x-1/2"
+                        className="absolute bottom-5 ml-4 md:bottom-[8%] lg:left-1/2 lg:-translate-x-1/2"
                     >
                         <button
                             type="button"
@@ -69,14 +68,14 @@ export default async function Home() {
                     <Image
                         src={"/hero.jpg"}
                         alt="landing page background image"
-                        className="min-h-[30vh] rounded-xl object-cover object-center shadow-xl lg:max-h-[80vh]"
-                        width={1920}
-                        height={1080}
+                        className="-z-10 rounded-xl object-cover object-center shadow-xl lg:max-h-[80vh]"
+                        fill
+                        sizes="90vw"
                     />
                 </div>
 
                 {/* MOBILE VERSION */}
-                <SubmitForm className="mx-4 flex flex-col space-y-4 rounded-xl bg-background p-4 shadow-md md:hidden" />
+                <SubmitForm className="mx-4 mt-4 flex flex-col space-y-4 rounded-xl bg-background p-4 shadow-md md:hidden" />
                 {/* end of mobile version */}
             </section>
             {/* end of landing first screen */}
@@ -86,8 +85,7 @@ export default async function Home() {
                 <div className="grid gap-5 px-8 md:grid-cols-2 md:gap-10 md:px-36 lg:grid-rows-2 xl:grid-cols-3">
                     <div className="flex flex-col items-center leading-6 md:block">
                         <h2 className="py-12 text-4xl font-bold md:text-3xl lg:text-5xl 2xl:text-6xl">
-                            Our{" "}
-                            <span className="text-primaryButton">Services</span>
+                            Our <span className="text-accent">Services</span>
                         </h2>
                         <p className="pb-3 pl-1 font-semibold text-gray-700 md:max-w-[32ch] md:pb-8 md:text-sm lg:text-base">
                             Lorem ipsum dolor sit amet consectetur adipisicing
@@ -95,11 +93,11 @@ export default async function Home() {
                             Quisquam, voluptatum.
                         </p>
                     </div>
-                    <div className="relative flex items-end justify-center md:row-span-2">
+                    <div className="relative flex min-h-[280px] items-end justify-center md:row-span-2">
                         <Image
                             src={"/wedding.jpg"}
-                            width={1920}
-                            height={1080}
+                            fill
+                            sizes="(max-width: 768px) 100vw,(max-width: 1280px) 50vw, 33vw"
                             alt="img1"
                             className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl
                             md:max-h-[600px]"
@@ -108,36 +106,36 @@ export default async function Home() {
                             Wedding events
                         </button>
                     </div>
-                    <div className="relative flex items-end">
+                    <div className="relative flex min-h-[280px] items-end">
                         <Image
                             src={"/intercity.jpg"}
-                            width={1920}
-                            height={1080}
+                            fill
+                            sizes="(max-width: 768px) 100vw,(max-width: 1280px) 50vw, 33vw"
                             alt="img2"
-                            className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
+                            className="h-full max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
                         />
                         <button className="absolute bottom-[5%] left-[3%] rounded-md bg-white px-6 py-1.5 shadow-sm">
                             Intercity trips
                         </button>
                     </div>
-                    <div className="relative flex items-end">
+                    <div className="relative flex min-h-[280px] items-end">
                         <Image
+                            fill
+                            sizes="(max-width: 768px) 100vw,(max-width: 1280px) 50vw, 33vw"
                             src={"/airport.jpg"}
-                            width={1920}
-                            height={1080}
                             alt="img3"
-                            className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
+                            className="max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
                             hover:shadow-2xl"
                         />
                         <button className="absolute bottom-[5%] left-[3%] rounded-md bg-white px-6 py-1.5 shadow-sm">
                             Airport transfers
                         </button>
                     </div>
-                    <div className="relative flex items-end">
+                    <div className="relative flex min-h-[280px] items-end">
                         <Image
                             src={"/buisness.jpg"}
-                            width={1920}
-                            height={1080}
+                            fill
+                            sizes="(max-width: 768px) 100vw,(max-width: 1280px) 50vw, 33vw"
                             alt="img4"
                             className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
                             hover:shadow-2xl"
@@ -157,12 +155,9 @@ export default async function Home() {
                         <div className="mx-6 flex flex-col items-center justify-center gap-10 md:mx-0 md:flex-row">
                             <h1 className="text-5xl font-bold leading-6 md:py-12 md:text-4xl xl:text-7xl">
                                 Our
-                                <span className="text-primaryButton">
-                                    {" "}
-                                    Fleet
-                                </span>
+                                <span className="text-accent"> Fleet</span>
                             </h1>
-                            <p className="max-w-[32ch] font-semibold text-gray-700 md:py-12 lg:max-w-[64ch]">
+                            <p className="max-w-[64ch] font-semibold text-gray-700 md:max-w-[32ch] md:py-12 lg:max-w-[64ch]">
                                 Lorem ipsum dolor sit amet consectetur
                                 adipisicing elit. Ut, natus! Lorem ipsum, dolor
                                 sit amet consectetur adipisicing elit. Rem
@@ -174,7 +169,7 @@ export default async function Home() {
                             <span className="flex justify-center pt-4">
                                 <Link href={"/cars"}>
                                     <button className="flex transform items-center rounded-md bg-primaryButton py-1.5 pl-6 text-text shadow-md shadow-primaryButton duration-500 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:shadow-primaryButton">
-                                        <h3> Show more </h3>
+                                        <h1> Show more </h1>
                                         <IconArrowUpRight
                                             size={16}
                                             className="mx-2 mr-4"
@@ -195,12 +190,9 @@ export default async function Home() {
                     <div className="flex flex-col items-center justify-center gap-10 pb-6 pt-12 md:flex-row md:py-12">
                         <h1 className="text-4xl font-bold leading-6 md:text-5xl xl:text-7xl">
                             Why
-                            <span className="text-primaryButton">
-                                {" "}
-                                Choose Us
-                            </span>
+                            <span className="text-accent"> Choose Us</span>
                         </h1>
-                        <p className="max-w-[32ch] font-semibold text-gray-600 lg:max-w-[48ch]">
+                        <p className="max-w-[64ch] font-semibold text-gray-600 md:max-w-[32ch] lg:max-w-[48ch]">
                             Lorem ipsum dolor sit, amet consectetur adipisicing
                             elit. Unde, aliquam placeat inventore laborum sint
                             corrupti.
@@ -214,7 +206,7 @@ export default async function Home() {
                                 <div className="flex aspect-square transform items-center justify-center rounded-xl text-text shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105">
                                     {el.icon}
                                 </div>
-                                <h1 className="pt-6 text-lg font-semibold text-primaryButton">
+                                <h1 className="pt-6 text-lg font-semibold text-accent">
                                     {el.title}
                                 </h1>
                                 <p className="max-w-[24ch] pt-2 text-sm font-semibold text-gray-700">
@@ -232,7 +224,7 @@ export default async function Home() {
                 <div className="m-2 max-w-5xl sm:m-4">
                     <div className="flex flex-col items-center justify-center gap-2 pb-3 pt-12 md:flex-row md:justify-center md:gap-10 md:py-12 md:pb-6">
                         <h1 className="text-4xl font-bold leading-6 md:text-5xl xl:text-7xl">
-                            <span className="text-primaryButton"> Todays </span>
+                            <span className="text-accent"> Todays </span>
                             Offer
                         </h1>
                         <p className="max-w-[32ch] font-semibold text-gray-600 lg:max-w-[48ch]">
@@ -243,47 +235,51 @@ export default async function Home() {
                         <div className="col-span-2 flex items-center justify-center">
                             <h1 className="font-semibold leading-6 sm:text-xl md:text-3xl lg:text-5xl">
                                 {hotOffer.brand + " "}
-                                <span className="text-primary">
+                                <span className="text-primaryButton">
                                     {hotOffer.name}
                                 </span>
                             </h1>
                         </div>
-                        <div className="col-span-2 row-span-3">
+                        <div className="relative col-span-2 row-span-3 flex min-h-[280px]">
                             <Image
                                 src={hotOffer.imageUrl}
-                                width={1920}
-                                height={1080}
-                                className="aspect-video h-auto w-auto rounded-3xl object-cover object-center shadow-md"
+                                fill
+                                sizes="50vw"
+                                className="rounded-3xl object-cover object-center shadow-md"
                                 alt="hot offer car image"
                             />
                         </div>
                         <div className="col-span-2 row-span-2 flex items-center text-xs capitalize sm:text-lg md:col-span-1 md:items-stretch md:text-sm lg:text-base">
                             <ul className="flex flex-col justify-center md:justify-around">
                                 <li className="flex items-center text-text">
-                                    <IconAlertSmall
+                                    <IconFlame
+                                        size={32}
                                         aria-label="pointer"
-                                        className="text-accent"
+                                        className="text-primaryButton"
                                     />
                                     fast sports and drift car
                                 </li>
                                 <li className="flex items-center text-text">
-                                    <IconAlertSmall
+                                    <IconFlame
+                                        size={32}
                                         aria-label="pointer"
-                                        className="text-accent"
+                                        className="text-primaryButton"
                                     />
                                     {hotOffer.transmission} transmission
                                 </li>
                                 <li className="flex items-center text-text">
-                                    <IconAlertSmall
+                                    <IconFlame
+                                        size={32}
                                         aria-label="pointer"
-                                        className="text-accent"
+                                        className="text-primaryButton"
                                     />
                                     preparation for track usage
                                 </li>
                                 <li className="hidden items-center text-text lg:flex ">
-                                    <IconAlertSmall
+                                    <IconFlame
+                                        size={32}
                                         aria-label="pointer"
-                                        className="text-accent"
+                                        className="text-primaryButton"
                                     />
                                     preparation for track usage
                                 </li>
@@ -292,27 +288,34 @@ export default async function Home() {
                         <div className="row-span-2 mr-2 hidden capitalize md:flex md:text-sm lg:text-base">
                             <ul className="flex flex-col justify-around">
                                 <li className="flex items-center text-text">
-                                    <IconAlertSmall
+                                    <IconFlame
+                                        size={32}
                                         aria-label="pointer"
-                                        className="text-accent"
+                                        className="text-primaryButton"
                                     />
                                     New tires on the car
                                 </li>
                                 <li className="flex items-center text-text">
-                                    <IconAlertSmall
+                                    <IconFlame
+                                        size={32}
                                         aria-label="pointer"
-                                        className="text-accent"
+                                        className="text-primaryButton"
                                     />
                                     Discount on additional tires
                                 </li>
                                 <li className="flex items-center">
-                                    <IconAlertSmall aria-label="pointer" />
+                                    <IconFlame
+                                        size={32}
+                                        aria-label="pointer"
+                                        className="text-primaryButton"
+                                    />
                                     good sound system
                                 </li>
                                 <li className="hidden items-center text-text lg:flex">
-                                    <IconAlertSmall
+                                    <IconFlame
+                                        size={32}
                                         aria-label="pointer"
-                                        className="text-accent"
+                                        className="text-primaryButton"
                                     />
                                     good sound system
                                 </li>
@@ -322,7 +325,7 @@ export default async function Home() {
                             <Link href={`/car/${hotOffer.id}`} className="m-1">
                                 <button
                                     type="button"
-                                    className="flex transform items-center justify-center rounded-md bg-secondaryButton py-2 pl-3 text-center text-sm font-semibold text-text shadow-sm shadow-secondaryButton duration-500 ease-in-out hover:-translate-y-1 hover:shadow-md hover:shadow-secondaryButton focus:outline-none focus:ring-4 md:pl-6"
+                                    className="flex transform items-center justify-center rounded-md bg-secondaryButton py-2 pl-3 text-center text-sm font-semibold text-white shadow-sm shadow-secondaryButton duration-500 ease-in-out hover:-translate-y-1 hover:shadow-md hover:shadow-secondaryButton focus:outline-none focus:ring-4 md:pl-6"
                                 >
                                     Reserve now
                                     <IconArrowUpRight
@@ -369,7 +372,7 @@ export default async function Home() {
                         <div className="relative w-3/5">
                             <input
                                 type="text"
-                                className="w-full cursor-default rounded-md border-none bg-transparent py-1.5 pl-4 pr-10 text-left text-gray-50 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                                className="focus:ring-indigo-500 w-full cursor-default rounded-md border-none bg-transparent py-1.5 pl-4 pr-10 text-left text-gray-50 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 sm:text-sm sm:leading-6"
                                 placeholder="Email"
                             />
                             <button className="absolute bottom-0 right-0 p-1.5 pr-2 text-white">

@@ -27,20 +27,20 @@ export const CarTile = ({
                     <IconBookmarkPlus aria-label="bookmark" />
                 </div>
             </div>
-            <div className="flex">
-                <div className="grow pr-2">
+            <div className="flex gap-3">
+                <div className="relative min-h-[150px] min-w-[280px] grow">
                     <Image
                         src={imageUrl}
-                        width={1920}
-                        height={1080}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px): 50vw, 33vw"
                         alt="car image"
-                        className="aspect-video h-auto max-w-[280px] rounded-3xl object-cover object-center shadow-lg"
+                        className="aspect-video rounded-3xl object-cover object-center shadow-lg"
                     />
                 </div>
-                <div className="flex flex-col items-end justify-end gap-1 xl:flex-row">
+                <div className="flex flex-col items-end justify-end gap-1">
                     <div className="aspect-square h-6 rounded-full border bg-white shadow-md"></div>
-                    <div className="aspect-square h-6 rounded-full bg-indigo-950 shadow-md"></div>
-                    <div className="aspect-square h-6 rounded-full bg-yellow-400 shadow-md"></div>
+                    <div className="bg-indigo-950 aspect-square h-6 rounded-full shadow-md"></div>
+                    <div className="bg-yellow-400 aspect-square h-6 rounded-full shadow-md"></div>
                 </div>
             </div>
         </div>
