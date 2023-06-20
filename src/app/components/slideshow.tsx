@@ -44,11 +44,7 @@ export type Photo = {
     name?: string;
 };
 
-export default function Slideshow({
-    photos,
-}: {
-    photos: Photo[];
-}) {
+export default function Slideshow({ photos }: { photos: Photo[] }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const cols = useCols();
 
@@ -81,8 +77,8 @@ export default function Slideshow({
                             className={
                                 "mx-2 flex transform flex-col gap-2 rounded-2xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 " +
                                 (photo.id === "1"
-                                    ? "bg-indigo-950/20"
-                                    : "bg-gray-950/5") +
+                                    ? "bg-primaryButton/20 "
+                                    : "bg-secondaryButton/10 ") +
                                 (photo.name ? "p-5" : " p-0")
                             }
                         >
@@ -96,29 +92,29 @@ export default function Slideshow({
                                 }
                             />
                             {photo.name && (
-                                <h1 className="text-xl font-semibold">
+                                <h1 className="text-xl font-semibold text-text">
                                     {photo.name}
                                 </h1>
                             )}
                             {photo.people && (
                                 <div className="flex justify-start gap-2">
-                                    <div className="flex items-center gap-1 rounded-md bg-indigo-950 p-1 px-1 pr-2">
+                                    <div className="flex items-center gap-1 rounded-md bg-secondaryButton p-1 px-1 pr-2">
                                         <IconUser
-                                            className="text-white"
+                                            className="font-semibold text-text"
                                             size={20}
                                             aria-label="people"
                                         />
-                                        <h1 className="text-white">
+                                        <h1 className="font-semibold text-text">
                                             {photo.people}
                                         </h1>
                                     </div>
-                                    <div className="flex items-center gap-1 rounded-md bg-indigo-950 p-1 px-1 pr-2">
+                                    <div className="flex items-center gap-1 rounded-md bg-secondaryButton p-1 px-1 pr-2">
                                         <IconLuggage
-                                            className="text-white"
+                                            className="font-semibold text-text"
                                             size={20}
                                             aria-label="bags"
                                         />
-                                        <h1 className="text-white">
+                                        <h1 className="font-semibold text-text">
                                             {photo.bags}
                                         </h1>
                                     </div>
@@ -133,7 +129,7 @@ export default function Slideshow({
                 className={
                     "absolute right-10 top-0 z-10 " +
                     (currentIndex
-                        ? "cursor-pointer text-indigo-950"
+                        ? "cursor-pointer text-primaryButton"
                         : "cursor-default text-gray-950/10")
                 }
                 onClick={() => setCurrentIndex(clamp(currentIndex - 1))}
@@ -145,7 +141,7 @@ export default function Slideshow({
                 className={
                     "absolute right-4 top-0 z-10" +
                     (currentIndex != photos.length - cols
-                        ? "cursor-pointer text-indigo-950"
+                        ? "cursor-pointer text-primaryButton"
                         : "cursor-default text-gray-500")
                 }
                 onClick={() => setCurrentIndex(clamp(currentIndex + 1))}

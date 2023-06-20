@@ -61,7 +61,7 @@ export default function SubmitForm({ className }: { className?: string }) {
             />
 
             <span className="flex flex-col sm:leading-6">
-                <h3 className="block text-sm font-medium text-gray-900">
+                <h3 className="block text-sm font-medium text-text">
                     Rental Days
                 </h3>
                 <span
@@ -79,21 +79,21 @@ export default function SubmitForm({ className }: { className?: string }) {
                         name="time"
                         id="time"
                         inputMode="numeric"
-                        className="mr-2 block w-full rounded-md border-0 py-1.5 pl-8 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="mr-2 block w-full rounded-md border-0 py-1.5 pl-8 pr-3 text-text ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         placeholder="0"
                         pattern="[0-9]*"
                         aria-labelledby="rental-days-input"
                         aria-label="rental days input"
                         ref={rentDaysRef}
                     />
-                    <h3 className="block text-sm font-medium text-gray-900">
+                    <h3 className="block text-sm font-medium text-text">
                         Days
                     </h3>
                 </span>
             </span>
 
             <span className="flex flex-col">
-                <h3 className="block text-sm font-medium leading-6 text-gray-900">
+                <h3 className="block text-sm font-medium leading-6 text-text">
                     Pick Up Date
                 </h3>
 
@@ -102,7 +102,7 @@ export default function SubmitForm({ className }: { className?: string }) {
 
             <button
                 type="submit"
-                className="transform cursor-pointer rounded-md border px-6 py-1.5 shadow-md duration-300 ease-in-out hover:bg-gray-50 hover:shadow-xl"
+                className="transform cursor-pointer rounded-md bg-primaryButton px-6 py-1.5 shadow-md shadow-primaryButton/30 duration-300 ease-in-out hover:shadow-xl hover:shadow-primaryButton/30"
             >
                 Reserve now
             </button>

@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={inter.className + " font-sans"}>
+            <body className={inter.className + " bg-background font-sans"}>
                 <Nav />
                 {children}
             </body>
