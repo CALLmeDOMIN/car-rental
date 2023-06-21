@@ -1,4 +1,11 @@
 "use client";
+import {
+    SignInButton,
+    SignedIn,
+    SignedOut,
+    UserButton,
+    useUser,
+} from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -13,6 +20,8 @@ export default function Nav() {
     } fixed inset-0 z-40 flex`;
 
     const closeNav = { onClick: () => setOpen(false) };
+
+    const { user } = useUser();
 
     return (
         <header className="bg-white shadow-xl">
@@ -62,21 +71,35 @@ export default function Nav() {
                         </svg>
                     </button>
                 </div>
-                <div className="hidden lg:flex lg:gap-x-12">
+                <div className="hidden items-center lg:flex lg:gap-x-12">
                     <Link
                         href="/cars"
-                        className="text-sm font-semibold leading-6 text-black"
+                        className="transform text-sm font-semibold leading-6 text-black duration-300 ease-in-out hover:-translate-y-1"
                         tabIndex={0}
                     >
                         Cars
                     </Link>
                     <Link
                         href="/contact"
-                        className="text-sm font-semibold leading-6 text-black"
+                        className="transform text-sm font-semibold leading-6 text-black duration-300 ease-in-out hover:-translate-y-1"
                         tabIndex={0}
                     >
                         Contact Us
                     </Link>
+
+                    <SignedIn>
+                        <UserButton
+                            defaultOpen={true}
+                            showName={true}
+                            afterSignOutUrl="/"
+                            userProfileMode={"navigation"}
+                            userProfileUrl={`/profile/${user?.id}`}
+                            appearance={{}}
+                        />
+                    </SignedIn>
+                    <SignedOut>
+                        <SignInButton />
+                    </SignedOut>
                 </div>
             </nav>
 
@@ -87,7 +110,7 @@ export default function Nav() {
                 role="dialog"
                 aria-modal="true"
                 aria-label="Mobile menu"
-                {...closeNav}
+                // {...closeNav}
             >
                 <div className="fixed inset-0 z-10"></div>
                 <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
@@ -102,6 +125,19 @@ export default function Nav() {
                                 aria-label="logo"
                             />
                         </Link>
+                        <SignedIn>
+                            <UserButton
+                                defaultOpen={false}
+                                showName={true}
+                                afterSignOutUrl="/"
+                                userProfileMode={"navigation"}
+                                userProfileUrl={`/profile/${user?.id}`}
+                                appearance={{}}
+                            />
+                        </SignedIn>
+                        <SignedOut>
+                            <SignInButton />
+                        </SignedOut>
                         <button
                             onClick={() => setOpen(!open)}
                             type="button"
