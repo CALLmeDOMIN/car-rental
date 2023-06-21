@@ -12,14 +12,25 @@ datasource db {
 }
 
 model Car {
-  id           Int    @id @default(autoincrement())
-  name         String @default("")
-  brand        String @default("")
-  transmission String @default("")
-  year         Int    @default(0)
-  price        Float  @default(0)
-  distance     Int    @default(0)
-  passengers   Int    @default(2)
-  capacity     Int    @default(2)
-  imageUrl     String @default("")
+  id             Int    @id @default(autoincrement())
+  name           String @default("")
+  brand          String @default("")
+  transmission   String @default("")
+  year           Int    @default(0)
+  price          Float  @default(0)
+  distance       Int    @default(0)
+  passengers     Int    @default(2)
+  capacity       Int    @default(2)
+  engineCapacity Float  @default(0)
+  horsepower     Int    @default(0)
+  topSpeed       Int    @default(0)
+  description    String @default("") @db.VarChar(650)
+  imageUrl       String @default("")
+}
+
+model repair {
+  id    Int    @id @default(autoincrement())
+  name  String @default("")
+  date  String @default("")
+  carId Int    @default(0)
 }

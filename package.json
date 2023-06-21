@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.21.8",
     "@prisma/client": "^4.15.0",
     "@react-spring/web": "^9.7.2",
     "@tabler/icons-react": "^2.22.0",
@@ -34,6 +35,6 @@
   "devDependencies": {
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
-    "prisma": "^4.14.1"
+    "prisma": "^4.16.0"
   }
 }
