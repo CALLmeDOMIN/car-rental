@@ -9,18 +9,33 @@ import {
     IconInnerShadowRight,
     IconManualGearbox,
 } from "@tabler/icons-react";
-import { getCertainCars } from "@/app/api/prisma";
 import { IconBrandSpeedtest } from "@tabler/icons-react";
 import { IconPlaystationCircle } from "@tabler/icons-react";
 import Slideshow, { Photo } from "@/app/components/slideshow";
 import { CarTile } from "@/app/components/carTile";
+import { prisma } from "@/../lib/prisma";
 
 type Params = {
     id: number;
 };
 
 export default async function Page({ params }: { params: Params }) {
-    const car = (await getCertainCars({ id: Number(params.id) }))[0];
+    const car = await prisma.car.findUnique({
+        where: {
+            id: Number(params.id),
+        },
+        select: {
+            id: true,
+            name: true,
+            brand: true,
+            engineCapacity: true,
+            horsepower: true,
+            topSpeed: true,
+            transmission: true,
+            description: true,
+            imageUrl: true,
+        },
+    });
 
     if (!car) return <Error404 text="car" />;
 
@@ -55,11 +70,7 @@ export default async function Page({ params }: { params: Params }) {
                         Vehicle Information
                     </h1>
                     <p className="font-semibold text-gray-500">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Reiciendis reprehenderit labore eos repudiandae
-                        rerum commodi, eligendi culpa iusto facere laborum
-                        fugiat sunt consequuntur at libero quidem obcaecati ad
-                        saepe nihil?
+                        {car.description}
                     </p>
                 </div>
                 <div className="col-span-2 row-span-1 grid grid-cols-2 grid-rows-2 gap-4 md:grid-cols-4  md:grid-rows-1">
@@ -70,7 +81,13 @@ export default async function Page({ params }: { params: Params }) {
                                 className="h-10 w-auto"
                             />
                         </div>
-                        <p className="font-bold uppercase">number unit</p>
+                        <p className="font-bold uppercase">
+                            {car.engineCapacity.toString()[
+                                car.engineCapacity.toString().length - 2
+                            ] !== "."
+                                ? car.engineCapacity + ".0l"
+                                : car.engineCapacity + "l"}
+                        </p>
                         <h1 className="text-sm font-bold uppercase  text-gray-500">
                             engine capacity
                         </h1>
@@ -82,7 +99,7 @@ export default async function Page({ params }: { params: Params }) {
                                 className="h-10 w-auto"
                             />
                         </div>
-                        <p className="font-bold uppercase">number unit</p>
+                        <p className="font-bold uppercase">{car.horsepower}</p>
                         <h1 className="text-sm font-bold uppercase  text-gray-500">
                             horsepower
                         </h1>
@@ -94,7 +111,7 @@ export default async function Page({ params }: { params: Params }) {
                                 className="h-10 w-auto"
                             />
                         </div>
-                        <p className="font-bold uppercase">number unit</p>
+                        <p className="font-bold ">{car.topSpeed} km/h</p>
                         <h1 className="text-sm font-bold uppercase text-gray-500">
                             top speed
                         </h1>
@@ -106,7 +123,9 @@ export default async function Page({ params }: { params: Params }) {
                                 className="h-10 w-auto"
                             />
                         </div>
-                        <p className="font-bold uppercase">number unit</p>
+                        <p className="font-bold uppercase">
+                            {car.transmission}
+                        </p>
                         <h1 className="text-sm font-bold uppercase text-gray-500">
                             transmission
                         </h1>
@@ -126,7 +145,7 @@ export default async function Page({ params }: { params: Params }) {
                                 <h1 className="grow font-semibold text-gray-800">
                                     New Grip Tires
                                 </h1>
-                                <h1 className="font-semibold text-green-400"></h1>
+                                <h1 className="text-green-400 font-semibold"></h1>
                             </li>
                             <li className="flex gap-1">
                                 <IconGasStation
@@ -136,7 +155,7 @@ export default async function Page({ params }: { params: Params }) {
                                 <h1 className="grow font-semibold text-gray-800">
                                     Average Fuel Consumption
                                 </h1>
-                                <h1 className="font-semibold text-green-400">
+                                <h1 className="text-green-400 font-semibold">
                                     8 km/l
                                 </h1>
                             </li>
@@ -148,7 +167,7 @@ export default async function Page({ params }: { params: Params }) {
                                 <h1 className="grow font-semibold text-gray-800">
                                     New Ceramic Breaks
                                 </h1>
-                                <h1 className="font-semibold text-green-400"></h1>
+                                <h1 className="text-green-400 font-semibold"></h1>
                             </li>
                         </ul>
                     </div>

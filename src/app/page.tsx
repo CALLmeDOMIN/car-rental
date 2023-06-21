@@ -5,10 +5,9 @@ import {
     IconArrowNarrowRight,
     IconCopyright,
 } from "@tabler/icons-react";
-import Slideshow from "./components/slideshow";
 import { IconArrowUpRight } from "@tabler/icons-react";
+import Slideshow from "./components/slideshow";
 import SubmitForm from "./components/submitForm";
-import { getAllCars, getCertainCars } from "./api/prisma";
 import {
     cities,
     expolore,
@@ -17,10 +16,23 @@ import {
     terms,
     whyChooseUs,
 } from "./assets";
+import { prisma } from "../../lib/prisma";
+import Alert from "./alert";
 
 export default async function Home() {
-    const cars = await getAllCars();
-    const hotOffer = (await getCertainCars({ id: 6 }))[0];
+    const cars = await prisma.car.findMany({
+        select: {
+            id: true,
+            brand: true,
+            name: true,
+            transmission: true,
+            capacity: true,
+            passengers: true,
+            imageUrl: true,
+        },
+    });
+
+    const hotOffer = cars[6];
 
     if (!cars) {
         return <div>Loading...</div>;
@@ -39,11 +51,11 @@ export default async function Home() {
             {/* landing pricture and form */}
             <section className="p-8">
                 <div className="relative mt-4 min-h-[80vh]">
-                    <div className="absolute top-[8%] mt-4 flex w-auto flex-col items-center justify-center px-4 md:mt-0 lg:left-1/2 lg:-translate-x-1/2">
+                    <div className="absolute top-[8%] mt-4 flex w-full flex-col items-center justify-center md:mt-0 lg:left-1/2 lg:-translate-x-1/2">
                         <h2 className="text-2xl font-bold text-text md:text-4xl lg:text-5xl">
                             Welcome to car-rental
                         </h2>
-                        <p className="max-w-[280px] text-justify text-sm text-text sm:max-w-xs md:text-left md:text-base lg:flex lg:max-w-none lg:justify-center">
+                        <p className="flex max-w-[280px] justify-center text-center text-sm text-text sm:max-w-xs md:text-left md:text-base lg:max-w-none">
                             We offer professional car rental in our range of
                             high end vehicles
                         </p>
@@ -372,15 +384,10 @@ export default async function Home() {
                         <div className="relative w-3/5">
                             <input
                                 type="text"
-                                className="focus:ring-indigo-500 w-full cursor-default rounded-md border-none bg-transparent py-1.5 pl-4 pr-10 text-left text-gray-50 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 sm:text-sm sm:leading-6"
+                                className="w-full cursor-default rounded-md border-none bg-transparent py-1.5 pl-4 pr-10 text-left text-gray-50 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
                                 placeholder="Email"
                             />
-                            <button className="absolute bottom-0 right-0 p-1.5 pr-2 text-white">
-                                <IconArrowNarrowRight
-                                    size={24}
-                                    aria-label="arrow right"
-                                />
-                            </button>
+                            <Alert />
                         </div>
                         {/* </form> */}
                     </div>
@@ -413,7 +420,7 @@ export default async function Home() {
                     <div className="hidden items-end gap-1 pl-4 text-white lg:flex">
                         <span className="flex items-center">
                             <IconCopyright size={14} aria-label="copyright" />
-                            <h3 className="text-sm">2023 Car-rental</h3>
+                            <h1 className="text-sm">2023 Car-rental</h1>
                         </span>
                     </div>
                     <div className="col-span-2 flex items-center justify-center gap-6 text-xs font-semibold text-white md:text-sm lg:col-span-3 lg:items-end">

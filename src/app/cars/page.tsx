@@ -4,12 +4,11 @@ import {
     IconManualGearbox,
     IconUser,
 } from "@tabler/icons-react";
-import Image from "next/image";
 import Link from "next/link";
 import { Search } from "./search";
 import { Filter } from "./filter";
-import { getCars } from "../api/prisma";
 import { CarTile } from "../components/carTile";
+import { prisma } from "../../../lib/prisma";
 
 const filterSearchParams = (str: string) => {
     let capacity: number[] = [];
@@ -76,13 +75,17 @@ export default async function Page({
     if (!capacity.length) capacity = [1, 2, 4];
     if (!passengers.length) passengers = [2, 4];
 
-    const cars = await getCars({
-        search,
-        transmission,
-        capacity,
-        passengers,
-        startPrice,
-        endPrice,
+    const cars = await prisma.car.findMany({
+        select: {
+            id: true,
+            name: true,
+            brand: true,
+            imageUrl: true,
+            passengers: true,
+            transmission: true,
+            capacity: true,
+            price: true,
+        },
     });
 
     const total = cars.length;
@@ -92,18 +95,18 @@ export default async function Page({
 
     return (
         <>
-            <div className="mt-4 flex w-screen items-center justify-center">
+            <div className="mt-4 flex items-center justify-center">
                 <Search />
             </div>
             <div className="flex flex-col lg:flex-row">
                 <div className="lg:flex lg:w-1/4 lg:p-4">
                     <Filter />
                 </div>
-                <div className="mx-auto flex w-screen justify-center md:mt-5 lg:w-3/4">
+                <div className="mx-auto flex justify-center md:mt-5 lg:w-3/4">
                     <div className="grid max-w-md gap-4 p-4 pt-0 md:max-w-3xl md:grid-cols-2 md:pt-4 lg:max-w-4xl xl:max-w-7xl 2xl:grid-cols-3">
                         {cars.map((car) => (
                             <Link
-                                href={"/car/" + car.id}
+                                href={"/cars/" + car.id}
                                 key={car.id}
                                 className="max-h-[287px] transform rounded-2xl shadow-md transition-all duration-200 hover:scale-105 hover:shadow-xl"
                             >
@@ -135,7 +138,7 @@ export default async function Page({
                                         {car.capacity}
                                     </h1>
                                     <div className="flex items-end">
-                                        <h1 className="text-indigo-950 font-mono text-2xl font-bold">
+                                        <h1 className="font-mono text-2xl font-bold text-indigo-950">
                                             ${car.price}
                                         </h1>
                                         <h1 className="text-lg font-semibold text-gray-600">
