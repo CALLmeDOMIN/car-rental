@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Error404 from "@/app/components/error404";
 import {
     IconBookmarkPlus,
     IconEngine,
@@ -14,6 +12,7 @@ import { IconPlaystationCircle } from "@tabler/icons-react";
 import Slideshow, { Photo } from "@/app/components/slideshow";
 import { CarTile } from "@/app/components/carTile";
 import { prisma } from "@/../lib/prisma";
+import Error from "@/app/components/errorSite";
 
 type Params = {
     id: number;
@@ -37,7 +36,7 @@ export default async function Page({ params }: { params: Params }) {
         },
     });
 
-    if (!car) return <Error404 text="car" />;
+    if (!car) return <Error code={404} />;
 
     const photos: Photo[] = [];
     for (let i = 0; i < 6; ++i)

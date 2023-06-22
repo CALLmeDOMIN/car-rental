@@ -1,19 +1,41 @@
 import Link from "next/link";
 
-export default function Error404({ text }: { text?: string }) {
-    let errorText = text ?? "Page";
-    errorText = errorText.charAt(0).toUpperCase() + errorText.slice(1);
+const errorCodes: { [key: number]: { title: string; description: string } } = {
+    404: {
+        title: "Page not found",
+        description: "Sorry, we couldn't find the page you're looking for.",
+    },
+    401: {
+        title: "Unauthorized",
+        description: "Sorry, you aren't authorized to access this page.",
+    },
+    500: {
+        title: "Internal Server Error",
+        description: "Sorry, something went wrong.",
+    },
+};
 
+export default function Error({
+    code,
+    className,
+}: {
+    code: number;
+    className?: string;
+}) {
     return (
-        <main className="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
+        <main
+            className={
+                "grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8 " +
+                className
+            }
+        >
             <div className="text-center">
-                <p className="text-base font-semibold text-red-600">404</p>
+                <p className="text-base font-semibold text-red-600">{code}</p>
                 <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                    {errorText} not found
+                    {errorCodes[code].title}
                 </h1>
                 <p className="mt-6 text-base leading-7 text-gray-600">
-                    Sorry, we couldn&apos;t find the {errorText.toLowerCase()}{" "}
-                    you&apos;re looking for.
+                    {errorCodes[code].description}
                 </p>
                 <div className="mt-10 flex items-center justify-center gap-x-6">
                     <Link

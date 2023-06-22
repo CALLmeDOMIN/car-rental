@@ -1,10 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-    IconFlame,
-    IconArrowNarrowRight,
-    IconCopyright,
-} from "@tabler/icons-react";
+import { IconFlame, IconCopyright } from "@tabler/icons-react";
 import { IconArrowUpRight } from "@tabler/icons-react";
 import Slideshow from "./components/slideshow";
 import SubmitForm from "./components/submitForm";
@@ -32,7 +28,7 @@ export default async function Home() {
         },
     });
 
-    const hotOffer = cars[6];
+    const hotOffer = cars[5];
 
     if (!cars) {
         return <div>Loading...</div>;
