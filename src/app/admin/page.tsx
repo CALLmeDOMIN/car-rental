@@ -1,19 +1,27 @@
-import Error from "../components/errorSite";
+import type { Car } from "../cars/page";
 import { prisma } from "../../../lib/prisma";
 import { currentUser } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
-// import Form from "./form";
+import Form from "./form/form";
+import Img from "./image/Img";
+import Upload from "./upload";
+import Error from "../components/errorSite";
 
 export default async function Page() {
-    const cars = await prisma.car.findMany();
+    const cars = (await prisma.car.findMany()) as Car[];
 
-    async function deleteRecord(data: any) {
+    async function handleRecord(data: any) {
         "use server";
-        const dcar = await prisma.car.delete({
-            where: {
-                id: parseInt(data.get("toDelete")),
-            },
-        });
+        console.log(data);
+
+        let newCar = {};
+
+        if (data.get("toDelete"))
+            newCar = await prisma.car.delete({
+                where: {
+                    id: parseInt(data.get("toDelete")),
+                },
+            });
 
         revalidatePath("/admin");
     }
@@ -26,58 +34,61 @@ export default async function Page() {
 
     return (
         <main className="mx-auto max-w-7xl">
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center justify-center space-y-4">
                 <h1 className="text-7xl text-text">Hello {user?.firstName}!</h1>
-            </div>
-            {/* <Form /> */}
-            <div className="grid place-items-center">
-                <div className="">
-                    {/*    // <div className="border p-1 px-2 font-semibold">id</div>
-                    <div className="border p-1 px-2 font-semibold">
-                        name brand
-                    </div>
-                    <div className="border p-1 px-2 font-semibold">
-                        transmission
-                    </div>
-                    <div className="border p-1 px-2 font-semibold">year</div>
-                    <div className="border p-1 px-2 font-semibold">price</div>
-                    <div className="border p-1 px-2 font-semibold">
-                        distance
-                    </div>
-                    <div className="border p-1 px-2 font-semibold">
-                        passengers
-                    </div>
-                    <div className="border p-1 px-2 font-semibold">
-                        capacity
-                    </div>
-                    <div className="border p-1 px-2 font-semibold">
-                        engine capacity
-                    </div>
-                    <div className="border p-1 px-2 font-semibold">
-                        horsepower
-                    </div>
-                    <div className="border p-1 px-2 font-semibold">
-                        top speed
-                    </div>
-                    <div className="border p-1 px-2 font-semibold">delete</div> */}
+                <div className="flex gap-2 flex-col md:flex-row">
+                    <Form />
+                    <Upload />
+                </div>
+                <div className="flex">
                     <form
-                        action={deleteRecord}
+                        action={handleRecord}
                         className="grid grid-cols-12 text-center"
                     >
+                        <div className="border p-1 px-2 font-semibold">
+                            brand name
+                        </div>
+                        <div className="border p-1 px-2 font-semibold">
+                            transmission
+                        </div>
+                        <div className="border p-1 px-2 font-semibold">
+                            price
+                        </div>
+                        <div className="border p-1 px-2 font-semibold">
+                            distance
+                        </div>
+                        <div className="border p-1 px-2 font-semibold">
+                            passengers
+                        </div>
+                        <div className="border p-1 px-2 font-semibold">
+                            capacity
+                        </div>
+                        <div className="border p-1 px-2 font-semibold">
+                            engine capacity
+                        </div>
+                        <div className="border p-1 px-2 font-semibold">
+                            horsepower
+                        </div>
+                        <div className="border p-1 px-2 font-semibold">
+                            top speed
+                        </div>
+                        <div className="border p-1 px-2 font-semibold">
+                            delete
+                        </div>
+                        <div className="border p-1 px-2 font-semibold">
+                            change picture
+                        </div>
+                        <div className="border p-1 px-2 font-semibold">
+                            edit
+                        </div>
                         {cars.map((car) => (
                             <>
                                 <div className="border p-1 px-2 font-semibold">
-                                    {car.id}
-                                </div>
-                                <div className="border p-1 px-2 font-semibold">
-                                    {car.name + " "}
-                                    {car.brand}
+                                    {car.brand + " "}
+                                    {car.name}
                                 </div>
                                 <div className="border p-1 px-2 font-semibold">
                                     {car.transmission}
-                                </div>
-                                <div className="border p-1 px-2 font-semibold">
-                                    {car.year}
                                 </div>
                                 <div className="border p-1 px-2 font-semibold">
                                     {car.price}
@@ -100,8 +111,21 @@ export default async function Page() {
                                 <div className="border p-1 px-2 font-semibold">
                                     {car.topSpeed}
                                 </div>
-                                <button name="toDelete" value={car.id}>
+                                <button
+                                    name="toDelete"
+                                    value={car.id}
+                                    className="border border-red-600 font-semibold text-red-600"
+                                >
                                     -
+                                </button>
+                                <Img id={car.id} />
+                                <button
+                                    type="button"
+                                    name="edit"
+                                    value={car.id}
+                                    className="border border-blue-600 font-semibold text-blue-600"
+                                >
+                                    edit
                                 </button>
                             </>
                         ))}

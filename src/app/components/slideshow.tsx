@@ -74,6 +74,7 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                         className="h-full w-[calc(100%_/_var(--cols))] shrink-0 p-3"
                     >
                         <Link
+                            passHref
                             href={`/car/${photo.id}`}
                             className={
                                 "mx-2 flex transform flex-col gap-2 rounded-2xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 " +

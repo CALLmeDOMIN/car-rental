@@ -10,6 +10,23 @@ import { Filter } from "./filter";
 import { CarTile } from "../components/carTile";
 import { prisma } from "../../../lib/prisma";
 
+export interface Car {
+    id: number;
+    name: string;
+    brand: string;
+    transmission: string;
+    year: number;
+    price: number;
+    distance: number;
+    passengers: number;
+    capacity: number;
+    engineCapacity: number;
+    horsepower: number;
+    topSpeed: number;
+    description: string;
+    imageUrl: string;
+}
+
 const filterSearchParams = (str: string) => {
     let capacity: number[] = [];
     let transmission: string[] = [];
@@ -75,7 +92,7 @@ export default async function Page({
     if (!capacity.length) capacity = [1, 2, 4];
     if (!passengers.length) passengers = [2, 4];
 
-    const cars = await prisma.car.findMany({
+    const cars = (await prisma.car.findMany({
         select: {
             id: true,
             name: true,
@@ -86,7 +103,7 @@ export default async function Page({
             capacity: true,
             price: true,
         },
-    });
+    })) as Car[];
 
     const total = cars.length;
     let totalPages = Math.ceil(total / limit);
@@ -106,6 +123,7 @@ export default async function Page({
                     <div className="grid max-w-md gap-4 p-4 pt-0 md:max-w-3xl md:grid-cols-2 md:pt-4 lg:max-w-4xl xl:max-w-7xl 2xl:grid-cols-3">
                         {cars.map((car) => (
                             <Link
+                                passHref
                                 href={"/cars/" + car.id}
                                 key={car.id}
                                 className="max-h-[287px] transform rounded-2xl shadow-md transition-all duration-200 hover:scale-105 hover:shadow-xl"
