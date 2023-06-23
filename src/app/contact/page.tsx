@@ -1,5 +1,3 @@
-import Uploader from "../components/uploader";
-
 export default function Page() {
-    return <div>{/* <Uploader /> */}</div>;
+    return <div>Contact us</div>;
 }
