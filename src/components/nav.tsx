@@ -1,44 +1,46 @@
-"use client";
+'use client'
+
 import {
     SignInButton,
     SignedIn,
     SignedOut,
     UserButton,
     useUser,
-} from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+} from '@clerk/nextjs'
+import { dark } from '@clerk/themes'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import React from 'react'
 
 export default function Nav() {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
 
     const openStyles = `${
         open
-            ? "translate-x-0 ease-out duration-300 backdrop-blur-sm bg-black bg-opacity-50"
-            : "translate-x-full ease-in duration-300"
-    } fixed inset-0 z-40 flex`;
+            ? 'translate-x-0 ease-out duration-300 backdrop-blur-sm bg-black bg-opacity-50'
+            : 'translate-x-full ease-in duration-300'
+    } fixed inset-0 z-40 flex`
 
-    const closeNav = { onClick: () => setOpen(false) };
+    const closeNav = { onClick: () => setOpen(false) }
 
-    const { user } = useUser();
+    const { user } = useUser()
 
     return (
-        <header className="mb-10 dark:bg-background">
+        <header className="mb-10 bg-background dark:bg-darkbg">
             <nav
-                className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+                className="mx-auto flex max-w-7xl items-center p-6 lg:px-8"
                 aria-label="Global"
             >
-                <div className="flex lg:flex-1">
+                <div className="flex grow">
                     <Link
                         passHref
                         href="/"
-                        className="-m-1.5 rounded-3xl p-1.5"
+                        className="-m-1.5 rounded-full bg-darkbg p-1.5  dark:bg-transparent"
                     >
                         <Image
                             className="h-8 w-auto"
-                            src={"/logo1.png"}
+                            src={'/logo1.png'}
                             alt="123"
                             width="32"
                             height="32"
@@ -50,7 +52,7 @@ export default function Nav() {
                     <button
                         onClick={() => setOpen(true)}
                         type="button"
-                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-text"
+                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-text dark:text-darktext"
                         aria-controls="mobile-menu"
                         aria-expanded="false"
                         tabIndex={0}
@@ -66,45 +68,53 @@ export default function Nav() {
                             aria-label="Open main menu"
                         >
                             <path
-                                strokeLinecap={"round"}
-                                strokeLinejoin={"round"}
+                                strokeLinecap={'round'}
+                                strokeLinejoin={'round'}
                                 d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                             />
                         </svg>
                     </button>
                 </div>
-                <div className="hidden items-center lg:flex lg:gap-x-12">
-                    <Link
-                        href="/cars"
-                        className="transform text-sm font-semibold leading-6 text-text duration-300 ease-in-out hover:-translate-y-1"
-                        tabIndex={0}
-                    >
-                        Cars
-                    </Link>
-                    <Link
-                        href="/contact"
-                        className="transform text-sm font-semibold leading-6 text-text duration-300 ease-in-out hover:-translate-y-1"
-                        tabIndex={0}
-                    >
-                        Contact Us
-                    </Link>
-
-                    <SignedIn>
-                        <UserButton
-                            showName={true}
-                            afterSignOutUrl="/"
-                            userProfileMode={"navigation"}
-                            userProfileUrl={`/profile/${user?.id}`}
-                            appearance={{
-                                baseTheme: dark,
-                            }}
-                        />
-                    </SignedIn>
-                    <SignedOut>
-                        <span className="text-text">
+                <div className="hidden items-center justify-center lg:flex lg:gap-x-12">
+                    <div className="flex lg:gap-x-12">
+                        <Link
+                            href="/cars"
+                            className="transform text-sm font-semibold leading-6 text-text duration-300 ease-in-out hover:-translate-y-1 dark:text-darktext"
+                            tabIndex={0}
+                        >
+                            Cars
+                        </Link>
+                        <Link
+                            href="/contact"
+                            className="transform text-sm font-semibold leading-6 text-text duration-300 ease-in-out hover:-translate-y-1 dark:text-darktext"
+                            tabIndex={0}
+                        >
+                            Contact Us
+                        </Link>
+                    </div>
+                    <div className="mr-10 font-semibold text-text dark:text-darktext">
+                        <SignedIn>
+                            <span className="font-semibold text-text dark:text-darktext">
+                                <UserButton
+                                    showName={true}
+                                    afterSignOutUrl="/"
+                                    userProfileMode={'navigation'}
+                                    userProfileUrl={`/profile/${user?.id}`}
+                                    appearance={{
+                                        baseTheme: dark,
+                                        variables: {
+                                            colorText: '#dde8ee',
+                                            colorBackground: '#0c1418',
+                                            fontWeight: { bold: 600 },
+                                        },
+                                    }}
+                                />
+                            </span>
+                        </SignedIn>
+                        <SignedOut>
                             <SignInButton />
-                        </span>
-                    </SignedOut>
+                        </SignedOut>
+                    </div>
                 </div>
             </nav>
 
@@ -118,12 +128,16 @@ export default function Nav() {
                 // {...closeNav}
             >
                 <div className="fixed inset-0 z-10"></div>
-                <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-background px-6 py-6 dark:bg-darkbg sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div className="flex items-center justify-between">
-                        <Link passHref href="/" className="-m-1.5 p-1.5">
+                        <Link
+                            passHref
+                            href="/"
+                            className="-m-1.5 rounded-full bg-darkbg p-1.5 dark:bg-transparent"
+                        >
                             <Image
                                 className="h-8 w-auto"
-                                src={"/logo1.png"}
+                                src={'/logo1.png'}
                                 alt="123"
                                 width="32"
                                 height="32"
@@ -134,13 +148,13 @@ export default function Nav() {
                             <UserButton
                                 showName={true}
                                 afterSignOutUrl="/"
-                                userProfileMode={"navigation"}
+                                userProfileMode={'navigation'}
                                 userProfileUrl={`/profile/${user?.id}`}
                                 appearance={{
                                     baseTheme: dark,
                                     variables: {
-                                        colorBackground: "#0c1418",
-                                        colorText: "#dde8ee",
+                                        colorBackground: '#0c1418',
+                                        colorText: '#dde8ee',
                                     },
                                 }}
                             />
@@ -151,7 +165,7 @@ export default function Nav() {
                         <button
                             onClick={() => setOpen(!open)}
                             type="button"
-                            className="-m-2.5 rounded-md p-2.5 text-text"
+                            className="-m-2.5 rounded-md p-2.5 text-text dark:text-darktext"
                             tabIndex={0}
                         >
                             <span className="sr-only">Close menu</span>
@@ -165,8 +179,8 @@ export default function Nav() {
                                 aria-label="Close menu"
                             >
                                 <path
-                                    strokeLinecap={"round"}
-                                    strokeLinejoin={"round"}
+                                    strokeLinecap={'round'}
+                                    strokeLinejoin={'round'}
                                     d="M6 18L18 6M6 6l12 12"
                                 />
                             </svg>
@@ -178,7 +192,7 @@ export default function Nav() {
                                 <Link
                                     passHref
                                     href="/cars"
-                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-text hover:bg-gray-50"
+                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-text  hover:bg-gray-50 dark:text-darktext"
                                     {...closeNav}
                                     tabIndex={0}
                                 >
@@ -187,7 +201,7 @@ export default function Nav() {
                                 <Link
                                     passHref
                                     href="/contact"
-                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-text hover:bg-gray-50"
+                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-text hover:bg-gray-50 dark:text-darktext"
                                     {...closeNav}
                                     tabIndex={0}
                                 >
@@ -199,5 +213,5 @@ export default function Nav() {
                 </div>
             </div>
         </header>
-    );
+    )
 }
