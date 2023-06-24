@@ -3,7 +3,7 @@
 import { IconSearch } from "@tabler/icons-react";
 import { useRouter, usePathname } from "next/navigation";
 import { useTransition } from "react";
-import Spinner from "../../../components/spinner";
+import Spinner from "../../components/spinner";
 
 export function Search() {
     let { replace } = useRouter();

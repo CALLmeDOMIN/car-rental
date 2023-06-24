@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconFlame, IconCopyright } from "@tabler/icons-react";
 import { IconArrowUpRight } from "@tabler/icons-react";
-import Slideshow, { Photo } from "../../components/slideshow";
-import SubmitForm from "../../components/submitForm";
+import Slideshow, { Photo } from "../components/slideshow";
+import SubmitForm from "../components/submitForm";
 import {
     cities,
     expolore,
@@ -13,7 +13,7 @@ import {
     whyChooseUs,
 } from "../../public/assets";
 import { prisma } from "../../lib/prisma";
-import Alert from "../../components/alert";
+import Alert from "../components/alert";
 import { Car } from "./cars/page";
 
 export default async function Home() {

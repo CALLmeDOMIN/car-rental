@@ -7,7 +7,7 @@ import {
 import Link from "next/link";
 import { Search } from "./search";
 import { Filter } from "./filter";
-import { CarTile } from "../../../components/carTile";
+import { CarTile } from "../../components/carTile";
 import { prisma } from "../../../lib/prisma";
 
 export interface Car {

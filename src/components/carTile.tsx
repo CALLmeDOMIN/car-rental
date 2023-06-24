@@ -1,6 +1,6 @@
 import { IconBookmarkPlus } from "@tabler/icons-react";
 import Image from "next/image";
-import { logos } from "../public/assets";
+import { logos } from "../../public/assets";
 
 export const CarTile = ({
     imageUrl,

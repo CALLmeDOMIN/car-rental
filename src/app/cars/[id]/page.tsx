@@ -9,10 +9,10 @@ import {
 } from "@tabler/icons-react";
 import { IconBrandSpeedtest } from "@tabler/icons-react";
 import { IconPlaystationCircle } from "@tabler/icons-react";
-import Slideshow, { Photo } from "../../../../components/slideshow";
-import { CarTile } from "../../../../components/carTile";
+import Slideshow, { Photo } from "../../../components/slideshow";
+import { CarTile } from "../../../components/carTile";
 import { prisma } from "@/../lib/prisma";
-import Error from "../../../../components/errorSite";
+import Error from "../../../components/errorSite";
 
 type Params = {
     id: number;
