@@ -19,21 +19,21 @@ export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
     let locations = props.locations;
 
     let openStyle = isOpen
-        ? "absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+        ? "absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-background py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm border border-text"
         : "hidden";
 
     return (
         <div className="flex flex-col">
             <label
                 id={`listbox-label-${label}`}
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-text"
             >
                 {label}
             </label>
             <div className="relative mt-1">
                 <button
                     type="button"
-                    className="focus:ring-indigo-500 relative w-full cursor-default rounded-md bg-white py-1.5 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 sm:text-sm sm:leading-6"
+                    className="focus:ring-indigo-500 relative w-full cursor-default rounded-md bg-background py-1.5 pr-10 text-left text-text shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 sm:text-sm sm:leading-6"
                     aria-haspopup="listbox"
                     aria-expanded="true"
                     aria-labelledby="listbox-label"
@@ -77,7 +77,7 @@ export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
                 >
                     {locations.map((location, id) => (
                         <li
-                            className="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900"
+                            className="relative cursor-default select-none py-2 pl-3 pr-9 text-text"
                             id={`listbox-option-${id}`}
                             key={id}
                             role="option"
@@ -98,7 +98,7 @@ export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
                             </div>
 
                             {location.isSelected && (
-                                <span className="text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4">
+                                <span className="text-primary-button absolute inset-y-0 right-0 flex items-center pr-4">
                                     <svg
                                         className="h-5 w-5"
                                         viewBox="0 0 20 20"

@@ -6,6 +6,7 @@ import {
     UserButton,
     useUser,
 } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -24,15 +25,16 @@ export default function Nav() {
     const { user } = useUser();
 
     return (
-        <header className="mb-10 bg-white shadow-xl">
+        <header className="mb-10 dark:bg-background">
             <nav
                 className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
                 aria-label="Global"
             >
                 <div className="flex lg:flex-1">
                     <Link
+                        passHref
                         href="/"
-                        className="-m-1.5 rounded-3xl bg-black p-1.5"
+                        className="-m-1.5 rounded-3xl p-1.5"
                     >
                         <Image
                             className="h-8 w-auto"
@@ -48,7 +50,7 @@ export default function Nav() {
                     <button
                         onClick={() => setOpen(true)}
                         type="button"
-                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black"
+                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-text"
                         aria-controls="mobile-menu"
                         aria-expanded="false"
                         tabIndex={0}
@@ -74,14 +76,14 @@ export default function Nav() {
                 <div className="hidden items-center lg:flex lg:gap-x-12">
                     <Link
                         href="/cars"
-                        className="transform text-sm font-semibold leading-6 text-black duration-300 ease-in-out hover:-translate-y-1"
+                        className="transform text-sm font-semibold leading-6 text-text duration-300 ease-in-out hover:-translate-y-1"
                         tabIndex={0}
                     >
                         Cars
                     </Link>
                     <Link
                         href="/contact"
-                        className="transform text-sm font-semibold leading-6 text-black duration-300 ease-in-out hover:-translate-y-1"
+                        className="transform text-sm font-semibold leading-6 text-text duration-300 ease-in-out hover:-translate-y-1"
                         tabIndex={0}
                     >
                         Contact Us
@@ -89,16 +91,19 @@ export default function Nav() {
 
                     <SignedIn>
                         <UserButton
-                            defaultOpen={true}
                             showName={true}
                             afterSignOutUrl="/"
                             userProfileMode={"navigation"}
                             userProfileUrl={`/profile/${user?.id}`}
-                            appearance={{}}
+                            appearance={{
+                                baseTheme: dark,
+                            }}
                         />
                     </SignedIn>
                     <SignedOut>
-                        <SignInButton />
+                        <span className="text-text">
+                            <SignInButton />
+                        </span>
                     </SignedOut>
                 </div>
             </nav>
@@ -113,9 +118,9 @@ export default function Nav() {
                 // {...closeNav}
             >
                 <div className="fixed inset-0 z-10"></div>
-                <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div className="flex items-center justify-between">
-                        <Link href="/" className="-m-1.5 p-1.5">
+                        <Link passHref href="/" className="-m-1.5 p-1.5">
                             <Image
                                 className="h-8 w-auto"
                                 src={"/logo1.png"}
@@ -127,12 +132,17 @@ export default function Nav() {
                         </Link>
                         <SignedIn>
                             <UserButton
-                                defaultOpen={false}
                                 showName={true}
                                 afterSignOutUrl="/"
                                 userProfileMode={"navigation"}
                                 userProfileUrl={`/profile/${user?.id}`}
-                                appearance={{}}
+                                appearance={{
+                                    baseTheme: dark,
+                                    variables: {
+                                        colorBackground: "#0c1418",
+                                        colorText: "#dde8ee",
+                                    },
+                                }}
                             />
                         </SignedIn>
                         <SignedOut>
@@ -141,7 +151,7 @@ export default function Nav() {
                         <button
                             onClick={() => setOpen(!open)}
                             type="button"
-                            className="-m-2.5 rounded-md p-2.5 text-black"
+                            className="-m-2.5 rounded-md p-2.5 text-text"
                             tabIndex={0}
                         >
                             <span className="sr-only">Close menu</span>
@@ -166,16 +176,18 @@ export default function Nav() {
                         <div className="-my-6 divide-y divide-gray-500/10 ">
                             <div className="space-y-2 py-6">
                                 <Link
+                                    passHref
                                     href="/cars"
-                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-text hover:bg-gray-50"
                                     {...closeNav}
                                     tabIndex={0}
                                 >
                                     <h1 aria-label="Cars">Cars</h1>
                                 </Link>
                                 <Link
+                                    passHref
                                     href="/contact"
-                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-text hover:bg-gray-50"
                                     {...closeNav}
                                     tabIndex={0}
                                 >

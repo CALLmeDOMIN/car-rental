@@ -23,23 +23,24 @@ export const Calendar = forwardRef<HTMLHeadingElement, {}>(function Calendar(
 
     const footer = (
         <span className="flex justify-center">
-            <div
+            <button
+                type="button"
                 className="cursor-pointer rounded-md border p-2 shadow-sm hover:bg-gray-50 hover:shadow-md"
                 onClick={() => setIsOpen(false)}
                 aria-label="button"
             >
                 Close
-            </div>
+            </button>
         </span>
     );
 
     const openStyle = isOpen
-        ? "absolute top-0 left-0 z-10 w-full rounded-md bg-white p-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+        ? "absolute top-[95%] right-1/2 translate-x-1/2 z-10 rounded-md bg-background text-text p-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
         : "hidden";
     return (
         <>
             <div
-                className="relative w-full cursor-default rounded-md bg-white py-1.5 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                className="relative w-full cursor-default rounded-md bg-background py-1.5 text-left text-text shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-button-500 sm:text-sm sm:leading-6"
                 aria-expanded="true"
                 onClick={() => setIsOpen(!isOpen)}
             >

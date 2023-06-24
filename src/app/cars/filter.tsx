@@ -248,18 +248,18 @@ export const Filter = () => {
         <>
             <button
                 onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-                className="fixed right-3 top-24 lg:hidden"
+                className="fixed right-3 top-24 lg:hidden text-text"
             >
                 <IconFilter aria-label="filter" />
             </button>
             <div className="m-4 hidden w-full flex-col lg:flex">
-                <h1 className="border-b border-gray-500 p-4 pl-0 text-xl">
+                <h1 className="border-b border-text text-text p-4 pl-0 text-xl">
                     Filters
                 </h1>
                 <div className="border-b border-gray-200 py-6">
                     <span onClick={() => setOpen0(!open0)}>
-                        <div className="flex w-full">
-                            <h3 className="-my-3 flow-root font-medium text-gray-900">
+                        <div className="flex w-full text-text">
+                            <h3 className="-my-3 flow-root font-medium">
                                 {filters[0].label}
                             </h3>
                             {open0 ? (
@@ -287,7 +287,7 @@ export const Filter = () => {
                                             option.value.toString() +
                                             optionId.toString()
                                         }
-                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                        className="h-4 w-4 rounded border-gray-300 text-primary-button focus:ring-primary-button"
                                         type="checkbox"
                                         checked={option.checked}
                                         onChange={() => {
@@ -299,7 +299,7 @@ export const Filter = () => {
                                             );
                                         }}
                                     />
-                                    <label className="ml-3 text-sm text-gray-600">
+                                    <label className="ml-3 text-sm text-text">
                                         {option.label}
                                     </label>
                                 </div>
@@ -307,9 +307,12 @@ export const Filter = () => {
                         </div>
                     ) : null}
                 </div>
-                <div className="border-b border-gray-200 py-6">
-                    <div className="flex" onClick={() => setOpen1(!open1)}>
-                        <h3 className="-my-3 flow-root font-medium text-gray-900">
+                <div className="border-b border-text py-6">
+                    <div
+                        className="flex text-text"
+                        onClick={() => setOpen1(!open1)}
+                    >
+                        <h3 className="-my-3 flow-root font-medium text-text">
                             {filters[1].label}
                         </h3>
                         {open1 ? (
@@ -336,7 +339,7 @@ export const Filter = () => {
                                             option.value.toString() +
                                             optionId.toString()
                                         }
-                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                        className="h-4 w-4 rounded border-text text-primary-button focus:ring-primary-button"
                                         type="checkbox"
                                         checked={option.checked}
                                         onChange={() => {
@@ -348,7 +351,7 @@ export const Filter = () => {
                                             );
                                         }}
                                     />
-                                    <label className="ml-3 text-sm text-gray-600">
+                                    <label className="ml-3 text-sm text-text">
                                         {option.label}
                                     </label>
                                 </div>
@@ -357,8 +360,11 @@ export const Filter = () => {
                     ) : null}
                 </div>
                 <div className="border-b border-gray-200 py-6">
-                    <div className="flex" onClick={() => setOpen2(!open2)}>
-                        <h3 className="-my-3 flow-root font-medium text-gray-900">
+                    <div
+                        className="flex text-text"
+                        onClick={() => setOpen2(!open2)}
+                    >
+                        <h3 className="-my-3 flow-root font-medium ">
                             {filters[2].label}
                         </h3>
                         {open2 ? (
@@ -385,7 +391,7 @@ export const Filter = () => {
                                             option.value.toString() +
                                             optionId.toString()
                                         }
-                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                        className="h-4 w-4 rounded border-text text-primary-button focus:ring-primary-button"
                                         type="checkbox"
                                         checked={option.checked}
                                         onChange={() => {
@@ -397,7 +403,7 @@ export const Filter = () => {
                                             );
                                         }}
                                     />
-                                    <label className="ml-3 text-sm text-gray-600">
+                                    <label className="ml-3 text-sm text-text">
                                         {option.label}
                                     </label>
                                 </div>
@@ -407,13 +413,14 @@ export const Filter = () => {
                 </div>
                 <div
                     className={
-                        "border-b border-gray-200 py-6 " + (open3 ? "pb-2" : "")
+                        "border-b border-ttext py-6 " + (open3 ? "pb-2" : "")
                     }
                 >
-                    <div className="flex" onClick={() => setOpen3(!open3)}>
-                        <h3 className="-my-3 flow-root font-medium text-gray-900">
-                            Price
-                        </h3>
+                    <div
+                        className="flex text-text"
+                        onClick={() => setOpen3(!open3)}
+                    >
+                        <h3 className="-my-3 flow-root font-medium">Price</h3>
                         {open3 ? (
                             <IconMinus
                                 className="-my-[0.65rem] ml-auto h-5 w-5"
@@ -439,21 +446,21 @@ export const Filter = () => {
                                         placeholder="0"
                                         pattern="[0-9]*"
                                         inputMode="numeric"
-                                        className="max-w-[80px] rounded border border-gray-300 p-1 font-semibold text-text focus:ring-indigo-500"
+                                        className="max-w-[80px] rounded border bg-background px-2 placeholder:text-text border-text p-1 font-semibold text-text focus:ring-primary-button"
                                     />
-                                    <span className="text-gray-600">to</span>
+                                    <span className="text-text">to</span>
                                     <input
                                         ref={endPriceRef}
                                         type="text"
                                         placeholder="0"
                                         pattern="[0-9]*"
                                         inputMode="numeric"
-                                        className="max-w-[80px] rounded border border-gray-300 p-1 font-semibold text-text focus:ring-indigo-500"
+                                        className="max-w-[80px] rounded border bg-background px-2 placeholder:text-text border-text p-1 font-semibold text-text focus:ring-primary-button"
                                     />
                                 </span>
                                 <button
                                     type="submit"
-                                    className="rounded bg-indigo-600 px-2 py-1 text-white"
+                                    className="rounded-md shadow-sm hover:shadow-md hover:shadow-primary-button shadow-primary-button bg-primary-button px-2 py-1 text-background font-semibold"
                                 >
                                     Button
                                 </button>
@@ -472,7 +479,7 @@ export const Filter = () => {
                 aria-label="Mobile menu"
             >
                 <div className="fixed inset-0 z-10" {...closeNav}></div>
-                <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-text/10">
                     <div className="flex items-center justify-between">
                         <Link href="/" className="-m-1.5 p-1.5"></Link>
                         <button
@@ -480,7 +487,7 @@ export const Filter = () => {
                                 setMobileFilterOpen(!mobileFilterOpen)
                             }
                             type="button"
-                            className="-m-2.5 rounded-md p-2.5 text-black"
+                            className="-m-2.5 rounded-md p-2.5 text-text"
                             tabIndex={0}
                         >
                             <span className="sr-only">Close menu</span>
@@ -492,8 +499,8 @@ export const Filter = () => {
                             <div className="space-y-2 py-6">
                                 <div className="border-b border-gray-200 py-6">
                                     <span onClick={() => setOpen0(!open0)}>
-                                        <div className="flex w-full">
-                                            <h3 className="-my-3 flow-root font-medium text-gray-900">
+                                        <div className="flex w-full text-text">
+                                            <h3 className="-my-3 flow-root font-medium">
                                                 {filters[0].label}
                                             </h3>
                                             {open0 ? (
@@ -522,7 +529,7 @@ export const Filter = () => {
                                                                 option.value.toString() +
                                                                 optionId.toString()
                                                             }
-                                                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                            className="h-4 w-4 rounded border-text text-primary-button focus:ring-primary-button"
                                                             type="checkbox"
                                                             checked={
                                                                 option.checked
@@ -538,7 +545,7 @@ export const Filter = () => {
                                                                 );
                                                             }}
                                                         />
-                                                        <label className="ml-3 text-sm text-gray-600">
+                                                        <label className="ml-3 text-sm text-text">
                                                             {option.label}
                                                         </label>
                                                     </div>
@@ -547,12 +554,12 @@ export const Filter = () => {
                                         </div>
                                     ) : null}
                                 </div>
-                                <div className="border-b border-gray-200 py-6">
+                                <div className="border-b border-text py-6">
                                     <div
-                                        className="flex"
+                                        className="flex text-text"
                                         onClick={() => setOpen1(!open1)}
                                     >
-                                        <h3 className="-my-3 flow-root font-medium text-gray-900">
+                                        <h3 className="-my-3 flow-root font-medium">
                                             {filters[1].label}
                                         </h3>
                                         {open1 ? (
@@ -580,7 +587,7 @@ export const Filter = () => {
                                                                 option.value.toString() +
                                                                 optionId.toString()
                                                             }
-                                                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                            className="h-4 w-4 rounded border-text text-primary-button focus:ring-primary-button"
                                                             type="checkbox"
                                                             checked={
                                                                 option.checked
@@ -596,7 +603,7 @@ export const Filter = () => {
                                                                 );
                                                             }}
                                                         />
-                                                        <label className="ml-3 text-sm text-gray-600">
+                                                        <label className="ml-3 text-sm text-text">
                                                             {option.label}
                                                         </label>
                                                     </div>
@@ -607,10 +614,10 @@ export const Filter = () => {
                                 </div>
                                 <div className="border-b border-gray-200 py-6">
                                     <div
-                                        className="flex"
+                                        className="flex text-text"
                                         onClick={() => setOpen2(!open2)}
                                     >
-                                        <h3 className="-my-3 flow-root font-medium text-gray-900">
+                                        <h3 className="-my-3 flow-root font-medium">
                                             {filters[2].label}
                                         </h3>
                                         {open2 ? (
@@ -638,7 +645,7 @@ export const Filter = () => {
                                                                 option.value.toString() +
                                                                 optionId.toString()
                                                             }
-                                                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                            className="h-4 w-4 rounded border-text text-primary-button focus:ring-primary-button"
                                                             type="checkbox"
                                                             checked={
                                                                 option.checked
@@ -654,7 +661,7 @@ export const Filter = () => {
                                                                 );
                                                             }}
                                                         />
-                                                        <label className="ml-3 text-sm text-gray-600">
+                                                        <label className="ml-3 text-sm text-text">
                                                             {option.label}
                                                         </label>
                                                     </div>

@@ -7,7 +7,7 @@ import {
 import Link from "next/link";
 import { Search } from "./search";
 import { Filter } from "./filter";
-import { CarTile } from "../components/carTile";
+import { CarTile } from "../../../components/carTile";
 import { prisma } from "../../../lib/prisma";
 
 export interface Car {
@@ -133,22 +133,22 @@ export default async function Page({
                                     brand={car.brand}
                                     name={car.name}
                                 />
-                                <div className="flex gap-4 rounded-b-2xl border-t p-2 pl-4">
-                                    <h1 className="flex items-center gap-1 text-lg font-semibold text-gray-600">
+                                <div className="flex gap-4 rounded-b-2xl p-2 pl-4">
+                                    <h1 className="flex items-center gap-1 text-lg font-semibold text-gray-500">
                                         <IconUser
                                             size={16}
                                             aria-label="person"
                                         />
                                         {car.passengers}
                                     </h1>
-                                    <h1 className="flex items-center gap-1 text-lg font-semibold text-gray-600">
+                                    <h1 className="flex items-center gap-1 text-lg font-semibold text-gray-500">
                                         <IconManualGearbox
                                             size={16}
                                             aria-label="gearbox"
                                         />
                                         {car.transmission}
                                     </h1>
-                                    <h1 className="flex grow items-center gap-1 text-lg font-semibold text-gray-600">
+                                    <h1 className="flex grow items-center gap-1 text-lg font-semibold text-gray-500">
                                         <IconLuggage
                                             size={16}
                                             aria-label="luggage"
@@ -156,7 +156,7 @@ export default async function Page({
                                         {car.capacity}
                                     </h1>
                                     <div className="flex items-end">
-                                        <h1 className="font-mono text-2xl font-bold text-indigo-950">
+                                        <h1 className="font-mono text-2xl font-bold text-accent">
                                             ${car.price}
                                         </h1>
                                         <h1 className="text-lg font-semibold text-gray-600">

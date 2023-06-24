@@ -1,6 +1,6 @@
 import { IconBookmarkPlus } from "@tabler/icons-react";
 import Image from "next/image";
-import { logos } from "../assets";
+import { logos } from "../public/assets";
 
 export const CarTile = ({
     imageUrl,
@@ -17,13 +17,13 @@ export const CarTile = ({
         <div className={"flex flex-col p-4 pt-0 " + className}>
             <div className="flex items-center gap-2 p-2">
                 <div className="mr-2 flex aspect-square items-center">
-                    {logos[brand.toLowerCase()]}
+                    {/* {logos[brand.toLowerCase()]} */}
                 </div>
                 <div className="flex grow flex-col">
-                    <h1 className="text-xl font-semibold">{brand}</h1>
-                    <h1 className="font-semibold text-gray-600">{name}</h1>
+                    <h1 className="text-xl font-semibold text-text">{brand}</h1>
+                    <h1 className="font-semibold text-gray-500">{name}</h1>
                 </div>
-                <div className="aspect-square">
+                <div className="aspect-square text-text">
                     <IconBookmarkPlus aria-label="bookmark" />
                 </div>
             </div>

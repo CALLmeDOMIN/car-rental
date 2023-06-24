@@ -79,8 +79,8 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                             className={
                                 "mx-2 flex transform flex-col gap-2 rounded-2xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 " +
                                 (photo.id === "1"
-                                    ? "bg-primaryButton/20 "
-                                    : "bg-secondaryButton/10 ") +
+                                    ? "bg-primary-button/20 "
+                                    : "bg-secondary-button/10 ") +
                                 (photo.name ? "p-5" : " p-0")
                             }
                         >
@@ -88,8 +88,6 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                                 <Image
                                     src={photo.imageUrl}
                                     alt="image"
-                                    // width={1920}
-                                    // height={1080}
                                     fill
                                     sizes="(max-width: 768px) 80vw, (max-width: 1024px) 33vw, 25vw"
                                     className={
@@ -104,23 +102,23 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                             )}
                             {photo.people && (
                                 <div className="flex justify-start gap-2">
-                                    <div className="flex items-center gap-1 rounded-md bg-secondaryButton p-1 px-1 pr-2">
+                                    <div className="flex items-center gap-1 rounded-md bg-background p-1 px-1 pr-2">
                                         <IconUser
-                                            className="font-semibold text-white"
+                                            className="font-semibold text-text"
                                             size={20}
                                             aria-label="people"
                                         />
-                                        <h1 className="font-semibold text-white">
+                                        <h1 className="font-semibold text-text">
                                             {photo.people}
                                         </h1>
                                     </div>
-                                    <div className="flex items-center gap-1 rounded-md bg-secondaryButton p-1 px-1 pr-2">
+                                    <div className="flex items-center gap-1 rounded-md bg-background p-1 px-1 pr-2">
                                         <IconLuggage
-                                            className="font-semibold text-white"
+                                            className="font-semibold text-text"
                                             size={20}
                                             aria-label="bags"
                                         />
-                                        <h1 className="font-semibold text-white">
+                                        <h1 className="font-semibold text-text">
                                             {photo.bags}
                                         </h1>
                                     </div>
@@ -135,8 +133,8 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                 className={
                     "absolute right-16 top-0 z-10 " +
                     (currentIndex
-                        ? "cursor-pointer text-primaryButton"
-                        : "cursor-default text-gray-950/10")
+                        ? "cursor-pointer text-primary-button"
+                        : "cursor-default text-gray-500")
                 }
                 onClick={() => setCurrentIndex(clamp(currentIndex - 1))}
             >
@@ -147,7 +145,7 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
                 className={
                     "absolute right-4 top-0 z-10 " +
                     (currentIndex != photos.length - cols
-                        ? "cursor-pointer text-primaryButton"
+                        ? "cursor-pointer text-primary-button"
                         : "cursor-default text-gray-500")
                 }
                 onClick={() => setCurrentIndex(clamp(currentIndex + 1))}

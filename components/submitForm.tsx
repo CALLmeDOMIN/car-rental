@@ -69,7 +69,7 @@ export default function SubmitForm({ className }: { className?: string }) {
                     aria-label="rental days input"
                 >
                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center px-2">
-                        <span className="text-gray-500 sm:text-sm">
+                        <span className="text-text sm:text-sm">
                             <Icon24Hours size="18" aria-label="24h" />
                         </span>
                     </div>
@@ -78,7 +78,7 @@ export default function SubmitForm({ className }: { className?: string }) {
                         name="time"
                         id="rental-days-input"
                         inputMode="numeric"
-                        className="focus:ring-indigo-600 mr-2 block w-full rounded-md border-0 py-1.5 pl-8 pr-3 text-text ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                        className="focus:ring-indigo-600 mr-2 bg-background block w-full rounded-md border-0 py-1.5 pl-8 pr-3 text-text ring-1 ring-inset ring-gray-300 placeholder:text-text focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                         placeholder="0"
                         pattern="[0-9]*"
                         aria-label="rental days input"
@@ -100,7 +100,7 @@ export default function SubmitForm({ className }: { className?: string }) {
 
             <button
                 type="submit"
-                className="transform cursor-pointer rounded-md bg-primaryButton px-6 py-1.5 shadow-md shadow-primaryButton/30 duration-300 ease-in-out hover:shadow-xl hover:shadow-primaryButton/30"
+                className="text-background transform cursor-pointer rounded-md bg-primary-button px-6 py-1.5 shadow-md shadow-primary-button/30 duration-300 ease-in-out hover:shadow-xl hover:shadow-primary-button/30"
             >
                 Reserve now
             </button>

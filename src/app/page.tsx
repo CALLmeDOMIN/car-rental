@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconFlame, IconCopyright } from "@tabler/icons-react";
 import { IconArrowUpRight } from "@tabler/icons-react";
-import Slideshow from "./components/slideshow";
-import SubmitForm from "./components/submitForm";
+import Slideshow, { Photo } from "../../components/slideshow";
+import SubmitForm from "../../components/submitForm";
 import {
     cities,
     expolore,
@@ -11,12 +11,13 @@ import {
     socials,
     terms,
     whyChooseUs,
-} from "./assets";
+} from "../../public/assets";
 import { prisma } from "../../lib/prisma";
-import Alert from "./alert";
+import Alert from "../../components/alert";
+import { Car } from "./cars/page";
 
 export default async function Home() {
-    const cars = await prisma.car.findMany({
+    const cars = (await prisma.car.findMany({
         select: {
             id: true,
             brand: true,
@@ -26,15 +27,15 @@ export default async function Home() {
             passengers: true,
             imageUrl: true,
         },
-    });
+    })) as Car[];
 
-    const hotOffer = cars[5];
+    const hotOffer = cars[1];
 
     if (!cars) {
         return <div>Loading...</div>;
     }
 
-    const photos = cars.map((car) => ({
+    const photos = cars.map((car: Car) => ({
         id: car.id.toString(),
         imageUrl: car.imageUrl,
         people: car.passengers,
@@ -48,21 +49,22 @@ export default async function Home() {
             <section className="p-8">
                 <div className="relative mt-4 min-h-[80vh]">
                     <div className="absolute top-[8%] mt-4 flex w-full flex-col items-center justify-center md:mt-0 lg:left-1/2 lg:-translate-x-1/2">
-                        <h2 className="text-2xl font-bold text-text md:text-4xl lg:text-5xl">
+                        <h2 className="text-2xl font-bold text-background md:text-4xl lg:text-5xl">
                             Welcome to car-rental
                         </h2>
-                        <p className="flex max-w-[280px] justify-center text-center text-sm text-text sm:max-w-xs md:text-left md:text-base lg:max-w-none">
+                        <p className="flex max-w-[280px] justify-center text-center text-sm text-background sm:max-w-xs md:text-left md:text-base lg:max-w-none">
                             We offer professional car rental in our range of
                             high end vehicles
                         </p>
                     </div>
                     <Link
+                        passHref
                         href="/cars"
                         className="absolute bottom-5 ml-4 md:bottom-[8%] lg:left-1/2 lg:-translate-x-1/2"
                     >
                         <button
                             type="button"
-                            className="flex items-center justify-center rounded-md bg-white py-2 pl-6 text-center text-sm font-semibold text-black shadow-sm hover:bg-gray-50 hover:shadow-md focus:outline-none focus:ring-4"
+                            className="flex items-center justify-center rounded-md bg-background py-2 pl-6 text-center text-sm font-semibold text-text shadow-sm hover:shadow-xl focus:outline-none focus:ring-4"
                         >
                             Car catalog
                             <IconArrowUpRight
@@ -83,7 +85,7 @@ export default async function Home() {
                 </div>
 
                 {/* MOBILE VERSION */}
-                <SubmitForm className="mx-4 mt-4 flex flex-col space-y-4 rounded-xl bg-background p-4 shadow-md md:hidden" />
+                <SubmitForm className="mx-4 mt-4 flex flex-col space-y-4 rounded-xl bg-background p-4 md:hidden border border-text" />
                 {/* end of mobile version */}
             </section>
             {/* end of landing first screen */}
@@ -92,10 +94,10 @@ export default async function Home() {
             <section className="mb-20 mt-20">
                 <div className="grid gap-5 px-8 md:grid-cols-2 md:gap-10 md:px-36 lg:grid-rows-2 xl:grid-cols-3">
                     <div className="flex flex-col items-center leading-6 md:block">
-                        <h2 className="py-12 text-4xl font-bold md:text-3xl lg:text-5xl 2xl:text-6xl">
-                            Our <span className="text-accent">Services</span>
+                        <h2 className="py-12 text-4xl font-bold md:text-3xl lg:text-5xl 2xl:text-6xl text-text">
+                            Our Services
                         </h2>
-                        <p className="pb-3 pl-1 font-semibold text-gray-700 md:max-w-[32ch] md:pb-8 md:text-sm lg:text-base">
+                        <p className="pb-3 pl-1 font-semibold text-gray-500 md:max-w-[32ch] md:pb-8 md:text-sm lg:text-base">
                             Lorem ipsum dolor sit amet consectetur adipisicing
                             elit. <br />
                             Quisquam, voluptatum.
@@ -110,7 +112,7 @@ export default async function Home() {
                             className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl
                             md:max-h-[600px]"
                         />
-                        <button className="absolute bottom-[2%] left-[3%] rounded-md bg-white px-6 py-1.5 shadow-sm">
+                        <button className="absolute bottom-[2%] left-[3%] rounded-md bg-background text-text px-6 py-1.5 shadow-sm">
                             Wedding events
                         </button>
                     </div>
@@ -122,7 +124,7 @@ export default async function Home() {
                             alt="img2"
                             className="h-full max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
                         />
-                        <button className="absolute bottom-[5%] left-[3%] rounded-md bg-white px-6 py-1.5 shadow-sm">
+                        <button className="absolute bottom-[5%] left-[3%] rounded-md bg-background text-text px-6 py-1.5 shadow-sm">
                             Intercity trips
                         </button>
                     </div>
@@ -135,7 +137,7 @@ export default async function Home() {
                             className="max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
                             hover:shadow-2xl"
                         />
-                        <button className="absolute bottom-[5%] left-[3%] rounded-md bg-white px-6 py-1.5 shadow-sm">
+                        <button className="absolute bottom-[5%] left-[3%] rounded-md bg-background text-text px-6 py-1.5 shadow-sm">
                             Airport transfers
                         </button>
                     </div>
@@ -148,7 +150,7 @@ export default async function Home() {
                             className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
                             hover:shadow-2xl"
                         />
-                        <button className="absolute bottom-[5%] left-[3%] rounded-md bg-white px-6 py-1.5 shadow-sm">
+                        <button className="absolute bottom-[5%] left-[3%] rounded-md bg-background text-text px-6 py-1.5 shadow-sm">
                             Buisness meetings
                         </button>
                     </div>
@@ -161,11 +163,10 @@ export default async function Home() {
                 <div className="mt-4 p-2 md:p-8 ">
                     <div className="flex flex-col md:p-10">
                         <div className="mx-6 flex flex-col items-center justify-center gap-10 md:mx-0 md:flex-row">
-                            <h1 className="text-5xl font-bold leading-6 md:py-12 md:text-4xl xl:text-7xl">
-                                Our
-                                <span className="text-accent"> Fleet</span>
+                            <h1 className="text-5xl font-bold leading-6 md:py-12 md:text-4xl xl:text-7xl text-text">
+                                Our Fleet
                             </h1>
-                            <p className="max-w-[64ch] font-semibold text-gray-700 md:max-w-[32ch] md:py-12 lg:max-w-[64ch]">
+                            <p className="max-w-[64ch] font-semibold text-gray-500 md:max-w-[32ch] md:py-12 lg:max-w-[64ch]">
                                 Lorem ipsum dolor sit amet consectetur
                                 adipisicing elit. Ut, natus! Lorem ipsum, dolor
                                 sit amet consectetur adipisicing elit. Rem
@@ -175,9 +176,11 @@ export default async function Home() {
                         <div className="flex flex-col">
                             <Slideshow photos={photos} />
                             <span className="flex justify-center pt-4">
-                                <Link href={"/cars"}>
-                                    <button className="flex transform items-center rounded-md bg-primaryButton py-1.5 pl-6 text-text shadow-md shadow-primaryButton duration-500 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:shadow-primaryButton">
-                                        <h1> Show more </h1>
+                                <Link passHref href={"/cars"}>
+                                    <button className="flex transform items-center rounded-md bg-primary-button py-1.5 pl-6 text-background shadow-sm md:shadow-md shadow-primary-button duration-500 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-button">
+                                        <h1 className="font-semibold">
+                                            Show more
+                                        </h1>
                                         <IconArrowUpRight
                                             size={16}
                                             className="mx-2 mr-4"
@@ -196,11 +199,10 @@ export default async function Home() {
             <section className="mb-40 mt-20">
                 <div className="md:p8 mt-4 p-2">
                     <div className="flex flex-col items-center justify-center gap-10 pb-6 pt-12 md:flex-row md:py-12">
-                        <h1 className="text-4xl font-bold leading-6 md:text-5xl xl:text-7xl">
-                            Why
-                            <span className="text-accent"> Choose Us</span>
+                        <h1 className="text-4xl font-bold leading-6 md:text-5xl xl:text-7xl text-text">
+                            Why Choose Us
                         </h1>
-                        <p className="max-w-[64ch] font-semibold text-gray-600 md:max-w-[32ch] lg:max-w-[48ch]">
+                        <p className="max-w-[64ch] font-semibold text-gray-500 md:max-w-[32ch] lg:max-w-[48ch] px-6">
                             Lorem ipsum dolor sit, amet consectetur adipisicing
                             elit. Unde, aliquam placeat inventore laborum sint
                             corrupti.
@@ -211,13 +213,13 @@ export default async function Home() {
                     <div className="grid gap-10 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-4 xl:grid-rows-1">
                         {whyChooseUs.map((el, index) => (
                             <div key={index} className="flex flex-col">
-                                <div className="flex aspect-square transform items-center justify-center rounded-xl text-text shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105">
+                                <div className="flex bg-secondary-button aspect-square transform items-center justify-center rounded-xl text-accent shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105">
                                     {el.icon}
                                 </div>
-                                <h1 className="pt-6 text-lg font-semibold text-accent">
+                                <h1 className="pt-6 text-lg font-semibold text-text">
                                     {el.title}
                                 </h1>
-                                <p className="max-w-[24ch] pt-2 text-sm font-semibold text-gray-700">
+                                <p className="max-w-[24ch] pt-2 text-sm font-semibold text-gray-500">
                                     {el.description}
                                 </p>
                             </div>
@@ -231,17 +233,16 @@ export default async function Home() {
             <section className="my-20 flex justify-center">
                 <div className="m-2 max-w-5xl sm:m-4">
                     <div className="flex flex-col items-center justify-center gap-2 pb-3 pt-12 md:flex-row md:justify-center md:gap-10 md:py-12 md:pb-6">
-                        <h1 className="text-4xl font-bold leading-6 md:text-5xl xl:text-7xl">
-                            <span className="text-accent"> Todays </span>
-                            Offer
+                        <h1 className="text-4xl font-bold leading-6 md:text-5xl xl:text-7xl text-text">
+                            Todays Offer
                         </h1>
-                        <p className="max-w-[32ch] font-semibold text-gray-600 lg:max-w-[48ch]">
+                        <p className="max-w-[32ch] font-semibold text-gray-500 lg:max-w-[48ch]">
                             15% off
                         </p>
                     </div>
                     <div className="grid grid-cols-4 grid-rows-4 rounded-3xl border p-2 shadow-xl sm:p-4">
                         <div className="col-span-2 flex items-center justify-center">
-                            <h1 className="font-semibold leading-6 sm:text-xl md:text-3xl lg:text-5xl">
+                            <h1 className="font-semibold leading-6 sm:text-xl md:text-3xl lg:text-5xl text-text">
                                 {hotOffer.brand + " "}
                                 <span className="text-primaryButton">
                                     {hotOffer.name}
@@ -258,12 +259,12 @@ export default async function Home() {
                             />
                         </div>
                         <div className="col-span-2 row-span-2 flex items-center text-xs capitalize sm:text-lg md:col-span-1 md:items-stretch md:text-sm lg:text-base">
-                            <ul className="flex flex-col justify-center md:justify-around">
+                            <ul className="flex flex-col justify-center md:justify-around pr-4 md:pr-0">
                                 <li className="flex items-center text-text">
                                     <IconFlame
                                         size={32}
                                         aria-label="pointer"
-                                        className="text-primaryButton"
+                                        className="text-primary-button"
                                     />
                                     fast sports and drift car
                                 </li>
@@ -271,7 +272,7 @@ export default async function Home() {
                                     <IconFlame
                                         size={32}
                                         aria-label="pointer"
-                                        className="text-primaryButton"
+                                        className="text-primary-button"
                                     />
                                     {hotOffer.transmission} transmission
                                 </li>
@@ -279,7 +280,7 @@ export default async function Home() {
                                     <IconFlame
                                         size={32}
                                         aria-label="pointer"
-                                        className="text-primaryButton"
+                                        className="text-primary-button"
                                     />
                                     preparation for track usage
                                 </li>
@@ -287,7 +288,7 @@ export default async function Home() {
                                     <IconFlame
                                         size={32}
                                         aria-label="pointer"
-                                        className="text-primaryButton"
+                                        className="text-primary-button"
                                     />
                                     preparation for track usage
                                 </li>
@@ -299,7 +300,7 @@ export default async function Home() {
                                     <IconFlame
                                         size={32}
                                         aria-label="pointer"
-                                        className="text-primaryButton"
+                                        className="text-primary-button"
                                     />
                                     New tires on the car
                                 </li>
@@ -307,15 +308,15 @@ export default async function Home() {
                                     <IconFlame
                                         size={32}
                                         aria-label="pointer"
-                                        className="text-primaryButton"
+                                        className="text-primary-button"
                                     />
                                     Discount on additional tires
                                 </li>
-                                <li className="flex items-center">
+                                <li className="flex items-center text-text">
                                     <IconFlame
                                         size={32}
                                         aria-label="pointer"
-                                        className="text-primaryButton"
+                                        className="text-primary-button"
                                     />
                                     good sound system
                                 </li>
@@ -323,17 +324,21 @@ export default async function Home() {
                                     <IconFlame
                                         size={32}
                                         aria-label="pointer"
-                                        className="text-primaryButton"
+                                        className="text-primary-button"
                                     />
                                     good sound system
                                 </li>
                             </ul>
                         </div>
                         <div className="col-span-2 flex items-center justify-center">
-                            <Link href={`/car/${hotOffer.id}`} className="m-1">
+                            <Link
+                                passHref
+                                href={`/car/${hotOffer.id}`}
+                                className="m-1"
+                            >
                                 <button
                                     type="button"
-                                    className="flex transform items-center justify-center rounded-md bg-secondaryButton py-2 pl-3 text-center text-sm font-semibold text-white shadow-sm shadow-secondaryButton duration-500 ease-in-out hover:-translate-y-1 hover:shadow-md hover:shadow-secondaryButton focus:outline-none focus:ring-4 md:pl-6"
+                                    className="flex transform items-center justify-center rounded-md bg-primary-button py-2 pl-3 text-center text-sm font-semibold text-background shadow-sm shadow-primary-button duration-500 ease-in-out hover:-translate-y-1 hover:shadow-md hover:shadow-primary-button focus:outline-none focus:ring-4 md:pl-6"
                                 >
                                     Reserve now
                                     <IconArrowUpRight
@@ -353,11 +358,12 @@ export default async function Home() {
             <footer>
                 <div className="m-2 grid gap-3 rounded-3xl bg-accent p-6 pt-10 md:m-8 md:p-8 lg:grid-cols-5 lg:grid-rows-6 lg:gap-0 ">
                     <Link
+                        passHref
                         href="/"
                         className="col-span-2 hidden items-center justify-start pl-4 lg:flex"
                     >
                         <Image
-                            className="h-auto w-auto"
+                            className="h-auto w-auto bg-background rounded-full"
                             src={"/logo1.png"}
                             alt="logo"
                             width={32}
@@ -365,22 +371,29 @@ export default async function Home() {
                             aria-label="logo"
                         />
                     </Link>
-                    <h1 className="hidden items-center justify-start font-semibold text-white lg:flex">
+                    <h1 className="hidden items-center justify-start font-semibold text-background lg:flex">
                         Top cities
                     </h1>
-                    <h1 className="hidden items-center justify-start font-semibold text-white lg:flex">
+                    <h1 className="hidden items-center justify-start font-semibold text-background lg:flex">
                         Explore
                     </h1>
-                    <h1 className="hidden items-center justify-start font-semibold text-white lg:flex">
+                    <h1 className="hidden items-center justify-start font-semibold text-background lg:flex">
                         Intercity Rides
                     </h1>
                     <div className="col-span-2 row-span-3 hidden flex-col justify-center space-y-4 p-4 lg:flex">
-                        <h1 className="text-white">Subscribe to newsletter</h1>
                         {/* <form action=""> */}
                         <div className="relative w-3/5">
+                            <label
+                                htmlFor="newsletter"
+                                className="text-background"
+                            >
+                                Subscribe to newsletter
+                            </label>
                             <input
                                 type="text"
-                                className="w-full cursor-default rounded-md border-none bg-transparent py-1.5 pl-4 pr-10 text-left text-gray-50 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                                name="newsletter"
+                                id="newsletter"
+                                className="w-full cursor-default bg-background/20 rounded-md border-none py-1.5 pl-4 pr-10 text-left text-background placeholder:text-background shadow-sm ring-1 ring-inset ring-background focus:outline-none focus:ring-2 focus:ring-primary-button-500 sm:text-sm sm:leading-6"
                                 placeholder="Email"
                             />
                             <Alert />
@@ -389,21 +402,21 @@ export default async function Home() {
                     </div>
                     <div className="row-span-3 hidden flex-col items-start space-y-2 text-sm lg:flex">
                         {cities.map((el, index) => (
-                            <div key={index} className="text-gray-300">
+                            <div key={index} className="text-background">
                                 <h1>{el}</h1>
                             </div>
                         ))}
                     </div>
                     <div className="row-span-3 hidden flex-col items-start space-y-2 text-sm lg:flex">
                         {expolore.map((el, index) => (
-                            <div key={index} className="text-gray-300">
+                            <div key={index} className="text-background">
                                 <h1>{el}</h1>
                             </div>
                         ))}
                     </div>
                     <div className="row-span-3 hidden flex-col items-start space-y-2 text-sm lg:flex">
                         {intercity.map((el, index) => (
-                            <div key={index} className="text-gray-300">
+                            <div key={index} className="text-background">
                                 <h1>{el}</h1>
                             </div>
                         ))}
@@ -413,20 +426,20 @@ export default async function Home() {
                     <span className="hidden lg:block"></span>
                     <span className="hidden lg:block"></span>
                     <span className="hidden lg:block"></span>
-                    <div className="hidden items-end gap-1 pl-4 text-white lg:flex">
-                        <span className="flex items-center">
+                    <div className="hidden items-end gap-1 pl-4 text-background lg:flex">
+                        <span className="flex items-center text-background">
                             <IconCopyright size={14} aria-label="copyright" />
-                            <h1 className="text-sm">2023 Car-rental</h1>
+                            <h1 className="text-sm ">2023 Car-rental</h1>
                         </span>
                     </div>
-                    <div className="col-span-2 flex items-center justify-center gap-6 text-xs font-semibold text-white md:text-sm lg:col-span-3 lg:items-end">
+                    <div className="col-span-2 flex items-center justify-center gap-6 text-xs font-semibold text-background md:text-sm lg:col-span-3 lg:items-end">
                         {terms.map((el, index) => (
-                            <Link key={index} href={"/"}>
+                            <Link key={index} href={"/"} passHref>
                                 <h1>{el}</h1>
                             </Link>
                         ))}
                     </div>
-                    <div className="flex items-end gap-1 text-white lg:hidden">
+                    <div className="flex items-end gap-1 text-background lg:hidden">
                         <span className="flex items-center">
                             <IconCopyright size={14} aria-label="copyright" />
                             <h3 className="text-xs md:text-sm">
@@ -434,7 +447,7 @@ export default async function Home() {
                             </h3>
                         </span>
                     </div>
-                    <div className="flex items-end justify-center gap-2 text-white lg:justify-normal">
+                    <div className="flex items-end justify-center gap-2 text-background lg:justify-normal">
                         {socials.map((el) => (
                             <Link
                                 key={el.key}

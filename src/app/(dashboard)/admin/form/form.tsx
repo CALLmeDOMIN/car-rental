@@ -38,7 +38,7 @@ export default function Form() {
                         />
                         <button
                             type="button"
-                            className="mt-2 rounded-md bg-indigo-600 px-2 p-1 text-white font-semibold"
+                            className="mt-2 rounded-md bg-black px-2 p-1 text-white font-semibold"
                             onClick={() => setStep(step + 1)}
                         >
                             Next
