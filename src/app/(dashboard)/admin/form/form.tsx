@@ -1,15 +1,15 @@
-"use client";
+'use client'
 
-import { useRef, useState } from "react";
-import addCar from "./addCar";
+import { useRef, useState } from 'react'
+import addCar from './addCar'
 
 export default function Form() {
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(1)
 
     const carRef = useRef({
-        brand: "",
-        name: "",
-        transmission: "",
+        brand: '',
+        name: '',
+        transmission: '',
         price: 0,
         distance: 0,
         passengers: 0,
@@ -17,28 +17,28 @@ export default function Form() {
         engineCapacity: 0,
         horsepower: 0,
         topSpeed: 0,
-    });
+    })
 
     const handleChange = (e: any) => {
         carRef.current = {
             ...carRef.current,
             [e.target.name]: e.target.value,
-        };
-    };
+        }
+    }
 
     return (
         <>
-            <form className="flex flex-col items-center p-4 shadow-md min-w-[500px] min-h-[400px]">
+            <form className="flex min-h-[400px] min-w-[500px] flex-col items-center p-4 shadow-md">
                 <h1 className="text-4xl font-bold text-text">Add car</h1>
                 {step === 1 ? (
                     <>
                         <Step1
                             handleChange={handleChange}
-                            className="flex flex-col grow justify-center"
+                            className="flex grow flex-col justify-center"
                         />
                         <button
                             type="button"
-                            className="mt-2 rounded-md bg-black px-2 p-1 text-white font-semibold"
+                            className="mt-2 rounded-md bg-black p-1 px-2 font-semibold text-white"
                             onClick={() => setStep(step + 1)}
                         >
                             Next
@@ -48,11 +48,11 @@ export default function Form() {
                     <>
                         <Step2
                             handleChange={handleChange}
-                            className="flex flex-col grow"
+                            className="flex grow flex-col"
                         />
                         <button
                             type="button"
-                            className="mt-2 rounded-md bg-indigo-600 px-2 p-1 text-white font-semibold"
+                            className="mt-2 rounded-md bg-indigo-600 p-1 px-2 font-semibold text-white"
                             onClick={() => setStep(step + 1)}
                         >
                             Next
@@ -62,11 +62,11 @@ export default function Form() {
                     <>
                         <Step3
                             handleChange={handleChange}
-                            className="flex flex-col grow"
+                            className="flex grow flex-col"
                         />
                         <button
                             type="button"
-                            className="mt-2 rounded-md bg-indigo-600 px-2 p-1 text-white font-semibold"
+                            className="mt-2 rounded-md bg-indigo-600 p-1 px-2 font-semibold text-white"
                             onClick={() => setStep(step + 1)}
                         >
                             Next
@@ -76,14 +76,14 @@ export default function Form() {
                     <>
                         <Step4
                             handleChange={handleChange}
-                            className="flex flex-col grow"
+                            className="flex grow flex-col"
                         />
                         <button
                             type="button"
-                            className="mt-2 rounded-md bg-indigo-600 px-2 p-1 text-white font-semibold"
+                            className="mt-2 rounded-md bg-indigo-600 p-1 px-2 font-semibold text-white"
                             onClick={() => {
-                                setStep(step + 1);
-                                addCar(carRef.current);
+                                setStep(step + 1)
+                                addCar(carRef.current)
                             }}
                         >
                             Next
@@ -94,7 +94,7 @@ export default function Form() {
                         <h1 className="grow">Done</h1>
                         <button
                             type="button"
-                            className="mt-2 rounded-md bg-indigo-600 px-2 p-1 text-white font-semibold"
+                            className="mt-2 rounded-md bg-indigo-600 p-1 px-2 font-semibold text-white"
                             onClick={() => setStep(1)}
                         >
                             Add another one
@@ -103,15 +103,15 @@ export default function Form() {
                 )}
             </form>
         </>
-    );
+    )
 }
 
 const Step1 = ({
     handleChange,
     className,
 }: {
-    handleChange: any;
-    className: string;
+    handleChange: any
+    className: string
 }) => {
     return (
         <div className={className}>
@@ -161,15 +161,15 @@ const Step1 = ({
                 required
             />
         </div>
-    );
-};
+    )
+}
 
 const Step2 = ({
     handleChange,
     className,
 }: {
-    handleChange: any;
-    className: string;
+    handleChange: any
+    className: string
 }) => {
     return (
         <div className={className}>
@@ -209,15 +209,15 @@ const Step2 = ({
                 required
             />
         </div>
-    );
-};
+    )
+}
 
 const Step3 = ({
     handleChange,
     className,
 }: {
-    handleChange: any;
-    className: string;
+    handleChange: any
+    className: string
 }) => {
     return (
         <div className={className}>
@@ -257,15 +257,15 @@ const Step3 = ({
                 required
             />
         </div>
-    );
-};
+    )
+}
 
 const Step4 = ({
     handleChange,
     className,
 }: {
-    handleChange: any;
-    className: string;
+    handleChange: any
+    className: string
 }) => {
     return (
         <div className={className}>
@@ -274,9 +274,9 @@ const Step4 = ({
                 id="description"
                 name="description"
                 onChange={handleChange}
-                className="border p-1 grow"
+                className="grow border p-1"
                 required
             />
         </div>
-    );
-};
+    )
+}

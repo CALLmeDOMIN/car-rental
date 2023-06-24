@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { useRef } from "react";
-import addImage from "./addImage";
+import { useRef } from 'react'
+import addImage from './addImage'
 
 export default function Img({ id }: { id: number }) {
-    const pictureRef = useRef<HTMLInputElement>(null!);
+    const pictureRef = useRef<HTMLInputElement>(null!)
 
     return (
         <div className="flex">
@@ -26,5 +26,5 @@ export default function Img({ id }: { id: number }) {
                 placeholder="url"
             />
         </div>
-    );
+    )
 }

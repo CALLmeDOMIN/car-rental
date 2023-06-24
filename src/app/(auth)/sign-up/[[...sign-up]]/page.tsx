@@ -1,5 +1,5 @@
-import { SignUp } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
+import { SignUp } from '@clerk/nextjs'
+import { dark } from '@clerk/themes'
 
 export default function Page() {
     return (
@@ -8,10 +8,10 @@ export default function Page() {
                 appearance={{
                     baseTheme: dark,
                     variables: {
-                        colorPrimary: "#63447e",
+                        colorPrimary: '#63447e',
                     },
                 }}
             />
         </div>
-    );
+    )
 }

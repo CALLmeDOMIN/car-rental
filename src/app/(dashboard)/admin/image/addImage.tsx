@@ -1,9 +1,9 @@
-"use server";
+'use server'
 
-import { prisma } from "../../../../../lib/prisma";
+import { prisma } from '../../../../../lib/prisma'
 
 export default async function addCar(data: any) {
-    "use server";
+    'use server'
     const newCar = await prisma.car.update({
         where: {
             id: parseInt(data.id),
@@ -11,5 +11,5 @@ export default async function addCar(data: any) {
         data: {
             imageUrl: data.url,
         },
-    });
+    })
 }

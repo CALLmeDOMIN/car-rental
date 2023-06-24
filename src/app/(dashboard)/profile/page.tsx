@@ -1,15 +1,15 @@
-"use client";
+'use client'
 
-import { useUser } from "@clerk/nextjs";
+import { useUser } from '@clerk/nextjs'
 
 type Params = {
-    id: number;
-};
+    id: number
+}
 
 export default function Page({ params }: { params: Params }) {
-    const { user } = useUser();
+    const { user } = useUser()
 
-    console.log(user);
+    console.log(user)
 
-    return <div>Hello, user</div>;
+    return <div>Hello, user</div>
 }

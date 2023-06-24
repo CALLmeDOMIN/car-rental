@@ -1,42 +1,42 @@
-import type { Car } from "../../cars/page";
-import { prisma } from "../../../../lib/prisma";
-import { currentUser } from "@clerk/nextjs";
-import { revalidatePath } from "next/cache";
-import Form from "./form/form";
-import Img from "./image/Img";
-import Upload from "./upload";
-import Error from "../../../components/errorSite";
+import type { Car } from '../../cars/page'
+import { prisma } from '../../../../lib/prisma'
+import { currentUser } from '@clerk/nextjs'
+import { revalidatePath } from 'next/cache'
+import Form from './form/form'
+import Img from './image/Img'
+import Upload from './upload'
+import Error from '../../../components/errorSite'
 
 export default async function Page() {
-    const cars = (await prisma.car.findMany()) as Car[];
+    const cars = (await prisma.car.findMany()) as Car[]
 
     async function handleRecord(data: any) {
-        "use server";
-        console.log(data);
+        'use server'
+        console.log(data)
 
-        let newCar = {};
+        let newCar = {}
 
-        if (data.get("toDelete"))
+        if (data.get('toDelete'))
             newCar = await prisma.car.delete({
                 where: {
-                    id: parseInt(data.get("toDelete")),
+                    id: parseInt(data.get('toDelete')),
                 },
-            });
+            })
 
-        revalidatePath("/admin");
+        revalidatePath('/admin')
     }
 
-    const user = await currentUser();
+    const user = await currentUser()
 
     if (user?.id !== process.env.NEXT_PUBLIC_ADMIN_ID || !user)
-        return <Error code={401} />;
-    if (!cars) return <div>Loading...</div>;
+        return <Error code={401} />
+    if (!cars) return <div>Loading...</div>
 
     return (
         <main className="mx-auto max-w-7xl">
             <div className="flex flex-col items-center justify-center space-y-4">
                 <h1 className="text-7xl text-text">Hello {user?.firstName}!</h1>
-                <div className="flex gap-2 flex-col md:flex-row">
+                <div className="flex flex-col gap-2 md:flex-row">
                     <Form />
                     <Upload />
                 </div>
@@ -84,7 +84,7 @@ export default async function Page() {
                         {cars.map((car) => (
                             <>
                                 <div className="border p-1 px-2 font-semibold">
-                                    {car.brand + " "}
+                                    {car.brand + ' '}
                                     {car.name}
                                 </div>
                                 <div className="border p-1 px-2 font-semibold">
@@ -133,5 +133,5 @@ export default async function Page() {
                 </div>
             </div>
         </main>
-    );
+    )
 }
