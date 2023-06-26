@@ -7,15 +7,15 @@ interface FormProps {
     className?: string
 }
 
-const submit = async (data: any) => {
-    await fetch('../api/contact', {
+export const onSubmit = async (data: any) => {
+    await fetch('/api/contact', {
         method: 'POST',
         body: JSON.stringify(data),
     }).then((res) => {
         if (res.status === 200) {
-            console.log('Message sent!')
+            alert('Message sent!')
         } else {
-            console.log('Message failed to send.')
+            alert('Error sending message')
         }
     })
 }
@@ -37,7 +37,7 @@ const Form: FunctionComponent<FormProps> = ({ className }) => {
                 </h1>
 
                 <form
-                    onSubmit={handleSubmit(submit)}
+                    onSubmit={handleSubmit(onSubmit)}
                     className="flex w-full flex-col justify-center gap-4 px-4"
                 >
                     <span className="my-10 flex w-full flex-col justify-around px-4 lg:flex-row">

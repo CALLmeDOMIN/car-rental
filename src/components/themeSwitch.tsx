@@ -16,7 +16,6 @@ export const ThemeSwitch: FC<Props> = ({ theme }) => {
     const [_theme, setTheme] = useState(theme)
 
     const toggleTheme = () => {
-        console.log('toggle')
         const root = document.getElementsByTagName('html')[0]
         root.classList.toggle(Theme.dark)
         if (root.classList.contains('dark')) {

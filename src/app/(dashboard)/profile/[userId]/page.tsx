@@ -9,7 +9,7 @@ type Params = {
 export default function Page({ params }: { params: Params }) {
     const { user } = useUser()
 
-    console.log(user)
+    if (!user) return <div>Not logged in</div>
 
-    return <div>Hello, user</div>
+    return <div>Hello, {user?.fullName}</div>
 }

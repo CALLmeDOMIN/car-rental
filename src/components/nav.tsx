@@ -92,7 +92,7 @@ export default function Nav() {
                             Contact Us
                         </Link>
                     </div>
-                    <div className="mr-10 font-semibold text-text dark:text-darktext">
+                    <div className="mr-10 text-sm font-semibold leading-6 text-text dark:text-darktext">
                         <SignedIn>
                             <span className="font-semibold text-text dark:text-darktext">
                                 <UserButton
@@ -100,14 +100,6 @@ export default function Nav() {
                                     afterSignOutUrl="/"
                                     userProfileMode={'navigation'}
                                     userProfileUrl={`/profile/${user?.id}`}
-                                    appearance={{
-                                        baseTheme: dark,
-                                        variables: {
-                                            colorText: '#dde8ee',
-                                            colorBackground: '#0c1418',
-                                            fontWeight: { bold: 600 },
-                                        },
-                                    }}
                                 />
                             </span>
                         </SignedIn>
@@ -150,13 +142,6 @@ export default function Nav() {
                                 afterSignOutUrl="/"
                                 userProfileMode={'navigation'}
                                 userProfileUrl={`/profile/${user?.id}`}
-                                appearance={{
-                                    baseTheme: dark,
-                                    variables: {
-                                        colorBackground: '#0c1418',
-                                        colorText: '#dde8ee',
-                                    },
-                                }}
                             />
                         </SignedIn>
                         <SignedOut>

@@ -12,8 +12,6 @@ export default async function Page() {
 
     async function handleRecord(data: any) {
         'use server'
-        console.log(data)
-
         let newCar = {}
 
         if (data.get('toDelete'))
