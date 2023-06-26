@@ -13,14 +13,16 @@ import { CarTile } from '../../../components/carTile'
 import { prisma } from '@/../lib/prisma'
 import Error from '../../../components/errorSite'
 
-type Params = {
-    id: number
+interface PageProps {
+    params: {
+        carId: string
+    }
 }
 
-export default async function Page({ params }: { params: Params }) {
+const Page = async ({ params }: PageProps) => {
     const car = await prisma.car.findUnique({
         where: {
-            id: Number(params.id),
+            id: Number(params.carId),
         },
         select: {
             id: true,
@@ -34,13 +36,10 @@ export default async function Page({ params }: { params: Params }) {
             imageUrl: true,
         },
     })
-
     if (!car) return <Error code={404} />
-
     const photos: Photo[] = []
     for (let i = 0; i < 6; ++i)
         photos.push({ id: i.toString(), imageUrl: car.imageUrl })
-
     return (
         <main className="mt-4 flex justify-center bg-background dark:bg-darkbg">
             {/* main grid */}
@@ -232,3 +231,5 @@ export default async function Page({ params }: { params: Params }) {
         </main>
     )
 }
+
+export default Page

@@ -81,6 +81,7 @@ export default async function Home() {
                         className="rounded-xl object-cover object-center shadow-xl lg:max-h-[80vh]"
                         fill
                         sizes="90vw"
+                        loading="eager"
                     />
                 </div>
 
