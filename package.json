@@ -6,12 +6,16 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "email": "email dev --dir src/email"
     },
     "dependencies": {
         "@clerk/nextjs": "^4.21.8",
         "@clerk/themes": "^1.7.5",
         "@prisma/client": "^4.16.1",
+        "@react-email/button": "0.0.9",
+        "@react-email/components": "^0.0.7",
+        "@react-email/html": "0.0.4",
         "@react-spring/web": "^9.7.2",
         "@tabler/icons-react": "^2.22.0",
         "@types/node": "20.2.3",
@@ -29,6 +33,9 @@
         "react-day-picker": "^8.7.1",
         "react-dom": "18.2.0",
         "react-dropzone": "^14.2.3",
+        "react-email": "1.9.4",
+        "react-hook-form": "^7.45.0",
+        "resend": "^0.15.3",
         "tailwindcss": "^3.3.2",
         "typescript": "5.0.4",
         "uploadthing": "^5.0.0"
