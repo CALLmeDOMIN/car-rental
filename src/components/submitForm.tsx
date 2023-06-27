@@ -4,7 +4,7 @@ import { IconBuildingSkyscraper } from '@tabler/icons-react'
 import { IconHotelService } from '@tabler/icons-react'
 import { IconMapPins, IconPlaneDeparture } from '@tabler/icons-react'
 import { Icon24Hours } from '@tabler/icons-react'
-import { Calendar } from './calendar'
+import Calendar from './calendar'
 import { useRef } from 'react'
 import { Dropdown } from './dropdown'
 import { IconArrowUpRight } from '@tabler/icons-react'
@@ -96,7 +96,7 @@ export default function SubmitForm({ className }: { className?: string }) {
                     Pick Up Date
                 </h3>
 
-                <Calendar ref={dateRef} />
+                <Calendar />
             </span>
 
             <button

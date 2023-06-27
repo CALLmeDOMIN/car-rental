@@ -4,78 +4,78 @@ import {
     IconBrandLinkedin,
     IconBrandToyota,
     IconBrandTwitter,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react'
 import {
     IconBrandYoutube,
     IconCar,
     IconDevices,
     IconDiscount2,
     IconRotateRectangle,
-} from "@tabler/icons-react";
+} from '@tabler/icons-react'
 
 export type WhyChooseUs = {
-    title: string;
-    description: string;
-    icon: React.ReactNode;
-};
+    title: string
+    description: string
+    icon: React.ReactNode
+}
 
 export const whyChooseUs: WhyChooseUs[] = [
     {
-        title: "Variety of car brands",
+        title: 'Variety of car brands',
         description:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.",
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.',
         icon: <IconCar size={96} aria-label="Car" />,
     },
     {
-        title: "Resonable Rates",
+        title: 'Resonable Rates',
         description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.",
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.',
         icon: <IconDiscount2 size={96} aria-label="Price" />,
     },
     {
-        title: "Easy Online Booking",
+        title: 'Easy Online Booking',
         description:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.",
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.',
         icon: <IconDevices size={96} aria-label="Devices" />,
     },
     {
-        title: "Quick & Easy Pickup & Return",
+        title: 'Quick & Easy Pickup & Return',
         description:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.",
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet.',
         icon: <IconRotateRectangle size={96} aria-label="Rotate rectangle" />,
     },
-];
+]
 
 export const cities: string[] = [
-    "CityPlaceholder",
-    "CityPlaceholder",
-    "CityPlaceholder",
-    "CityPlaceholder",
-    "CityPlaceholder",
-];
+    'CityPlaceholder',
+    'CityPlaceholder',
+    'CityPlaceholder',
+    'CityPlaceholder',
+    'CityPlaceholder',
+]
 
 export const expolore: string[] = [
-    "ExplorePlaceholder",
-    "ExplorePlaceholder",
-    "ExplorePlaceholder",
-    "ExplorePlaceholder",
-    "ExplorePlaceholder",
-];
+    'ExplorePlaceholder',
+    'ExplorePlaceholder',
+    'ExplorePlaceholder',
+    'ExplorePlaceholder',
+    'ExplorePlaceholder',
+]
 
 export const intercity: string[] = [
-    "CityName - CityName2",
-    "CityName2 - CityName3",
-    "CityName3 - CityName1",
-    "CityName1 - CityName4",
-    "CityName4 - CityName2",
-];
+    'CityName - CityName2',
+    'CityName2 - CityName3',
+    'CityName3 - CityName1',
+    'CityName1 - CityName4',
+    'CityName4 - CityName2',
+]
 
 export const terms: string[] = [
-    "Terms",
-    "Privacy Policy",
-    "Legal notice",
-    "Accessibility",
-];
+    'Terms',
+    'Privacy Policy',
+    'Legal notice',
+    'Accessibility',
+]
 
 export const socials = [
     { key: 1, icon: <IconBrandYoutube size={24} aria-label="youtube" /> },
@@ -83,11 +83,11 @@ export const socials = [
     { key: 3, icon: <IconBrandTwitter size={24} aria-label="twitter" /> },
     { key: 4, icon: <IconBrandInstagram size={24} aria-label="instagram" /> },
     { key: 5, icon: <IconBrandLinkedin size={24} aria-label="linkedin" /> },
-];
+]
 
 type brandIcons = {
-    [key: string]: React.ReactNode;
-};
+    [key: string]: React.ReactNode
+}
 
 export const logos: brandIcons = {
     toyota: (
@@ -2044,7 +2044,7 @@ export const logos: brandIcons = {
             y="0px"
             width="100%"
             viewBox="0 0 1203 1254"
-            enableBackground={"new 0 0 1203 1254"}
+            enableBackground={'new 0 0 1203 1254'}
             // xml:space="preserve"
         >
             <path
@@ -5933,7 +5933,7 @@ z"
             height="4500"
             viewBox="0 0 192.756 192.756"
         >
-            <g fillRule={"evenodd"} clipRule={"evenodd"}>
+            <g fillRule={'evenodd'} clipRule={'evenodd'}>
                 <path
                     fill="#fff"
                     fillOpacity={0}
@@ -5988,7 +5988,7 @@ z"
             y="0px"
             width="100%"
             viewBox="0 0 1024 1024"
-            enableBackground={"new 0 0 1024 1024"}
+            enableBackground={'new 0 0 1024 1024'}
         >
             <path
                 fill="#000000"
@@ -6563,4 +6563,4 @@ z"
             />
         </svg>
     ),
-};
+}

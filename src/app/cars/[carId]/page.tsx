@@ -8,11 +8,11 @@ import {
 } from '@tabler/icons-react'
 import { IconBrandSpeedtest } from '@tabler/icons-react'
 import { IconPlaystationCircle } from '@tabler/icons-react'
-import Slideshow, { Photo } from '../../../components/slideshow'
-import { CarTile } from '../../../components/carTile'
+import Slideshow, { Photo } from '@/components/slideshow'
+import { CarTile } from '@/components/carTile'
 import { prisma } from '@/../lib/prisma'
-import Error from '../../../components/errorSite'
-
+import Error from '@/components/errorSite'
+import DetailForm from './detailForm'
 interface PageProps {
     params: {
         carId: string
@@ -28,6 +28,7 @@ const Page = async ({ params }: PageProps) => {
             id: true,
             name: true,
             brand: true,
+            price: true,
             engineCapacity: true,
             horsepower: true,
             topSpeed: true,
@@ -37,15 +38,21 @@ const Page = async ({ params }: PageProps) => {
         },
     })
     if (!car) return <Error code={404} />
+
     const photos: Photo[] = []
+
     for (let i = 0; i < 6; ++i)
         photos.push({ id: i.toString(), imageUrl: car.imageUrl })
+
     return (
         <main className="mt-4 flex justify-center bg-background dark:bg-darkbg">
             {/* main grid */}
             <div className="grid max-w-7xl gap-6 rounded-xl p-4 md:grid-cols-3">
-                <div className="row-span-6 hidden h-screen rounded-xl bg-background text-text shadow-xl dark:bg-darkbg dark:text-darktext md:block">
-                    TODO
+                <div className="col-span-2 row-span-6 w-full md:col-span-1">
+                    <DetailForm
+                        price={car.price}
+                        className="col-span-1 flex flex-col rounded-xl bg-background p-4 text-text shadow-xl dark:bg-darkbg dark:text-darktext"
+                    />
                 </div>
                 <div className="col-span-2 row-span-1 flex flex-col gap-8 md:flex-row">
                     <CarTile
