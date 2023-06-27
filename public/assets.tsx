@@ -46,30 +46,6 @@ export const whyChooseUs: WhyChooseUs[] = [
     },
 ]
 
-export const cities: string[] = [
-    'CityPlaceholder',
-    'CityPlaceholder',
-    'CityPlaceholder',
-    'CityPlaceholder',
-    'CityPlaceholder',
-]
-
-export const expolore: string[] = [
-    'ExplorePlaceholder',
-    'ExplorePlaceholder',
-    'ExplorePlaceholder',
-    'ExplorePlaceholder',
-    'ExplorePlaceholder',
-]
-
-export const intercity: string[] = [
-    'CityName - CityName2',
-    'CityName2 - CityName3',
-    'CityName3 - CityName1',
-    'CityName1 - CityName4',
-    'CityName4 - CityName2',
-]
-
 export const terms: string[] = [
     'Terms',
     'Privacy Policy',

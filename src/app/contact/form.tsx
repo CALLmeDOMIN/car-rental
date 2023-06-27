@@ -7,7 +7,7 @@ interface FormProps {
     className?: string
 }
 
-export const onSubmit = async (data: any) => {
+const onSubmit = async (data: any) => {
     await fetch('/api/contact', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -21,7 +21,7 @@ export const onSubmit = async (data: any) => {
 }
 
 const Form: FunctionComponent<FormProps> = ({ className }) => {
-    const { register, handleSubmit } = useForm({
+    const { register, handleSubmit, reset } = useForm({
         defaultValues: {
             name: '',
             email: '',
@@ -37,7 +37,10 @@ const Form: FunctionComponent<FormProps> = ({ className }) => {
                 </h1>
 
                 <form
-                    onSubmit={handleSubmit(onSubmit)}
+                    onSubmit={handleSubmit((data) => {
+                        onSubmit(data)
+                        setTimeout(() => reset(), 3000)
+                    })}
                     className="flex w-full flex-col justify-center gap-4 px-4"
                 >
                     <span className="my-10 flex w-full flex-col justify-around px-4 lg:flex-row">

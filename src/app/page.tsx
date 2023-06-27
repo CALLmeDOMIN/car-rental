@@ -2,19 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { IconFlame, IconCopyright } from '@tabler/icons-react'
 import { IconArrowUpRight } from '@tabler/icons-react'
-import Slideshow, { Photo } from '../components/slideshow'
-import SubmitForm from '../components/submitForm'
-import {
-    cities,
-    expolore,
-    intercity,
-    socials,
-    terms,
-    whyChooseUs,
-} from '../../public/assets'
-import { prisma } from '../../lib/prisma'
-import Alert from '../components/alert'
+import Slideshow from '@/components/slideshow'
+import SubmitForm from '@/components/submitForm'
+import { socials, terms, whyChooseUs } from '@/../public/assets'
+import { prisma } from '@/../lib/prisma'
 import { Car } from './cars/page'
+import NewsForm from '../components/newsForm'
 
 export default async function Home() {
     const cars = (await prisma.car.findMany({
@@ -104,7 +97,7 @@ export default async function Home() {
                             Quisquam, voluptatum.
                         </p>
                     </div>
-                    <div className="relative flex min-h-[280px] items-end justify-center md:row-span-2">
+                    <div className="relative flex min-h-[280px] items-end justify-center">
                         <Image
                             src={'/wedding.jpg'}
                             fill
@@ -357,11 +350,17 @@ export default async function Home() {
 
             {/* footer */}
             <footer>
-                <div className="m-2 mb-0 grid gap-3 rounded-3xl bg-accent p-6 pt-10 md:m-8 md:mb-0 md:p-8 lg:grid-cols-5 lg:grid-rows-6 lg:gap-0 ">
+                <div className="m-2 mb-0 grid grid-cols-2 gap-3 rounded-t-3xl bg-accent p-6 pt-10 md:m-8 md:mb-0 md:p-8 lg:grid-cols-3 lg:gap-0 ">
+                    <div className="col-span-2 hidden flex-col justify-center space-y-4 p-4 lg:flex">
+                        <NewsForm className="relative w-3/5" />
+                    </div>
                     <Link
                         passHref
                         href="/"
-                        className="col-span-2 hidden items-center justify-start pl-4 lg:flex"
+                        className="hidden items-center justify-center lg:flex"
+                        ease-in-out
+                        duration-300
+                        aria-label="logo"
                     >
                         <Image
                             className="h-auto w-auto rounded-full bg-transparent"
@@ -372,101 +371,58 @@ export default async function Home() {
                             aria-label="logo"
                         />
                     </Link>
-                    <h1 className="hidden items-center justify-start font-semibold text-background dark:text-darkbg lg:flex">
-                        Top cities
-                    </h1>
-                    <h1 className="hidden items-center justify-start font-semibold text-background dark:text-darkbg lg:flex">
-                        Explore
-                    </h1>
-                    <h1 className="hidden items-center justify-start font-semibold text-background dark:text-darkbg lg:flex">
-                        Intercity Rides
-                    </h1>
-                    <div className="col-span-2 row-span-3 hidden flex-col justify-center space-y-4 p-4 lg:flex">
-                        {/* <form action=''> */}
-                        <div className="relative w-3/5">
-                            <label
-                                htmlFor="newsletter"
-                                className="text-background dark:text-darkbg"
-                            >
-                                Subscribe to newsletter
-                            </label>
-                            <input
-                                type="text"
-                                name="newsletter"
-                                id="newsletter"
-                                className="focus:ring-primary-button-500 w-full cursor-default rounded-md border-none bg-background py-1.5 pl-4 pr-10 text-left text-text shadow-sm ring-1 ring-inset ring-background placeholder:text-text/20  focus:outline-none focus:ring-2 dark:bg-darkbg dark:text-darktext dark:ring-transparent dark:placeholder:text-darktext sm:text-sm sm:leading-6"
-                                placeholder="placeholder@email.com"
-                            />
-                            <Alert />
-                        </div>
-                        {/* </form> */}
-                    </div>
-                    <div className="row-span-3 hidden flex-col items-start space-y-2 text-sm lg:flex">
-                        {cities.map((el, index) => (
-                            <div
-                                key={index}
-                                className="text-background dark:text-darkbg"
-                            >
-                                <h1>{el}</h1>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="row-span-3 hidden flex-col items-start space-y-2 text-sm lg:flex">
-                        {expolore.map((el, index) => (
-                            <div
-                                key={index}
-                                className="text-background dark:text-darkbg"
-                            >
-                                <h1>{el}</h1>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="row-span-3 hidden flex-col items-start space-y-2 text-sm lg:flex">
-                        {intercity.map((el, index) => (
-                            <div
-                                key={index}
-                                className="text-background dark:text-darkbg"
-                            >
-                                <h1>{el}</h1>
-                            </div>
-                        ))}
-                    </div>
-                    <span className="hidden lg:block"></span>
-                    <span className="hidden lg:block"></span>
-                    <span className="hidden lg:block"></span>
-                    <span className="hidden lg:block"></span>
-                    <span className="hidden lg:block"></span>
+
                     <div className="hidden items-end gap-1 pl-4 text-background dark:text-darkbg lg:flex">
                         <span className="flex items-center text-background dark:text-darkbg">
                             <IconCopyright size={14} aria-label="copyright" />
                             <h1 className="text-sm ">2023 Car-rental</h1>
                         </span>
                     </div>
-                    <div className="col-span-2 flex items-center justify-center gap-6 text-xs font-semibold text-background dark:text-darkbg md:text-sm lg:col-span-3 lg:items-end">
+                    <div className="col-span-2 flex items-center justify-center gap-6 text-xs font-semibold text-background dark:text-darkbg md:col-span-1 md:text-sm lg:items-end">
                         {terms.map((el, index) => (
-                            <Link key={index} href={'/'} passHref>
+                            <Link
+                                key={index}
+                                href={'/'}
+                                passHref
+                                className="duration-300 ease-in-out hover:-translate-y-1"
+                            >
                                 <h1>{el}</h1>
                             </Link>
                         ))}
                     </div>
-                    <div className="flex items-end gap-1 text-background dark:text-darkbg lg:hidden">
-                        <span className="flex items-center">
+                    <div className="flex items-end gap-1 text-background dark:text-darkbg md:hidden">
+                        <span className="flex items-center text-background dark:text-darkbg">
                             <IconCopyright size={14} aria-label="copyright" />
-                            <h3 className="text-xs md:text-sm">
-                                2023 Car-rental
-                            </h3>
+                            <h1 className="text-sm ">2023 Car-rental</h1>
                         </span>
                     </div>
-                    <div className="flex items-end justify-center gap-2 text-background dark:text-darkbg lg:justify-normal">
-                        {socials.map((el) => (
-                            <Link
-                                key={el.key}
-                                href={'/'}
-                                className="transform duration-500 ease-in-out hover:-translate-y-1"
-                            >
-                                {el.icon}
-                            </Link>
-                        ))}
+                    <div className="flex flex-col items-center justify-center gap-2">
+                        <Link
+                            href={'/cars'}
+                            className="hidden items-center justify-start font-semibold text-background duration-300 ease-in-out hover:-translate-y-1 dark:text-darkbg lg:flex"
+                            aria-label="cars site"
+                        >
+                            Cars
+                        </Link>
+                        <Link
+                            href={'/contact'}
+                            className="hidden items-center justify-start font-semibold text-background duration-300 ease-in-out hover:-translate-y-1 dark:text-darkbg lg:flex"
+                            aria-label="contact us site"
+                        >
+                            Contact Us
+                        </Link>
+                        <div className="flex items-end justify-center gap-2 text-background dark:text-darkbg lg:justify-normal">
+                            {socials.map((el) => (
+                                <Link
+                                    key={el.key}
+                                    href={'/'}
+                                    className="transform duration-500 ease-in-out hover:-translate-y-1"
+                                    aria-label="social"
+                                >
+                                    {el.icon}
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </footer>
