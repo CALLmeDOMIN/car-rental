@@ -17,6 +17,7 @@ export default async function addCar(data: any) {
             engineCapacity: parseFloat(data.engineCapacity),
             horsepower: parseInt(data.horsepower),
             topSpeed: parseInt(data.topSpeed),
+            description: data.description,
         },
     })
 

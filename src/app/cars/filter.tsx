@@ -43,6 +43,7 @@ let filters = [
         options: [
             { value: '2', label: '2', checked: false },
             { value: '4', label: '4', checked: false },
+            { value: '5', label: '5', checked: false },
         ],
     },
 ]

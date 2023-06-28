@@ -16,8 +16,8 @@ export const CarTile = ({
     return (
         <div className={'flex flex-col p-4 pt-0 ' + className}>
             <div className="flex items-center gap-2 p-2">
-                <div className="mr-2 flex aspect-square items-center">
-                    {/* {logos[brand.toLowerCase()]} */}
+                <div className="mr-2 flex aspect-square items-center rounded-full bg-accent p-1">
+                    {logos[brand.toLowerCase()]}
                 </div>
                 <div className="flex grow flex-col">
                     <h1 className="text-xl font-semibold text-text dark:text-darktext">

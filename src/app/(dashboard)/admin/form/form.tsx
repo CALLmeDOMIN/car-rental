@@ -17,6 +17,7 @@ export default function Form() {
         engineCapacity: 0,
         horsepower: 0,
         topSpeed: 0,
+        description: '',
     })
 
     const handleChange = (e: any) => {

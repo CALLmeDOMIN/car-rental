@@ -1,15 +1,9 @@
-import {
-    IconBusinessplan,
-    IconLuggage,
-    IconManualGearbox,
-    IconUser,
-} from '@tabler/icons-react'
+import { IconLuggage, IconManualGearbox, IconUser } from '@tabler/icons-react'
 import Link from 'next/link'
 import { Search } from './search'
 import { Filter } from './filter'
 import { CarTile } from '../../components/carTile'
 import { prisma } from '../../../lib/prisma'
-import { CarTileLoading } from './loading'
 
 export interface Car {
     id: number
@@ -91,7 +85,7 @@ export default async function Page({
 
     if (!transmission.length) transmission = ['Automatic', 'Manual']
     if (!capacity.length) capacity = [1, 2, 4]
-    if (!passengers.length) passengers = [2, 4]
+    if (!passengers.length) passengers = [2, 4, 5]
 
     const cars = (await prisma.car.findMany({
         where: {
