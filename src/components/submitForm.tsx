@@ -1,40 +1,20 @@
 'use client'
 
-import { IconBuildingSkyscraper } from '@tabler/icons-react'
-import { IconHotelService } from '@tabler/icons-react'
-import { IconMapPins, IconPlaneDeparture } from '@tabler/icons-react'
-import Dropdown from './dropdown'
 import { IconArrowUpRight } from '@tabler/icons-react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import Datepicker from 'react-tailwindcss-datepicker'
 import { useState } from 'react'
 import Link from 'next/link'
+import Select from 'react-select'
 
-const locations = [
-    {
-        name: 'Address',
-        isSelected: true,
-        icon: <IconMapPins size="18" aria-label="map" />,
-    },
-    {
-        name: 'Airport',
-        isSelected: false,
-        icon: <IconPlaneDeparture size="18" aria-label="plane" />,
-    },
-    {
-        name: 'City',
-        isSelected: false,
-        icon: <IconBuildingSkyscraper size="18" aria-label="building" />,
-    },
-    {
-        name: 'Hotel',
-        isSelected: false,
-        icon: <IconHotelService size="18" aria-label="hotel" />,
-    },
+const options = [
+    { value: 'City', label: 'City' },
+    { value: 'Airport', label: 'Airport' },
+    { value: 'Hotel', label: 'Hotel' },
 ]
 
 export default function SubmitForm({ className }: { className?: string }) {
-    const { handleSubmit, register } = useForm({
+    const { handleSubmit, control } = useForm({
         defaultValues: {
             location: '',
         },
@@ -60,22 +40,89 @@ export default function SubmitForm({ className }: { className?: string }) {
         console.log(data, value, days)
     }
 
+    const styles = {
+        clearIndicator: (style: any) => ({
+            ...style,
+            color: '#dde8ee',
+        }),
+        dropdownIndicator: (style: any) => ({
+            ...style,
+            color: '#dde8ee',
+        }),
+        indicatorSeparator: (style: any) => ({
+            ...style,
+            backgroundColor: '#dde8ee',
+        }),
+        placeholder: (style: any) => ({
+            ...style,
+            color: '#dde8ee',
+        }),
+        singleValue: (style: any) => ({
+            ...style,
+            color: '#dde8ee',
+        }),
+        container: (style: any) => ({
+            ...style,
+            color: 'red',
+        }),
+        control: (style: any) => ({
+            ...style,
+            backgroundColor: '#0c1418',
+            color: 'red',
+            padding: '2px',
+            borderRadius: '6px',
+            border: '1px solid #dde8ee',
+        }),
+        menuList: (style: any) => {
+            return {
+                ...style,
+                backgroundColor: '#0c1418',
+                color: '#dde8ee',
+                borderRadius: '6px',
+            }
+        },
+        option: (style: any) => {
+            return {
+                ...style,
+                backgroundColor: '#0c1418',
+                color: '#dde8ee',
+            }
+        },
+    }
+
     return (
         <form className={className} onSubmit={handleSubmit(onSubmit)}>
-            <Dropdown
-                label="Pick Up and Drop Off location"
-                locations={locations}
-                register={register}
-            />
+            <span>
+                <label htmlFor="location">Pick Up location</label>
+
+                <div className="mb-4 mt-1 text-text dark:text-darktext">
+                    <Controller
+                        name="location"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field: { onChange } }) => (
+                            <Select
+                                options={options}
+                                onChange={(val) => {
+                                    //@ts-ignore
+                                    onChange(val?.value)
+                                }}
+                                isClearable
+                                styles={styles}
+                            />
+                        )}
+                    />
+                </div>
+            </span>
 
             <span>
                 <label
                     htmlFor="calendar"
                     className="block text-sm font-medium leading-6 text-text dark:text-darktext"
                 >
-                    Pick Up and Drop Off date
+                    Pick Up and Drop Off Date
                 </label>
-                <div>
+                <div className="mb-4 mt-1">
                     <Datepicker
                         value={value}
                         inputName="calendar"

@@ -35,7 +35,7 @@ export default function RootLayout({
             <html lang="en" className={theme}>
                 <body className="bg-background font-sans text-text transition duration-700 dark:bg-darkbg dark:text-darktext">
                     <Nav />
-                    <ThemeSwitch theme={theme} />
+                    {/* <ThemeSwitch theme={theme} /> */}
                     {children}
                 </body>
             </html>
