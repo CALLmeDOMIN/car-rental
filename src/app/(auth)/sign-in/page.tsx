@@ -5,7 +5,7 @@ export default function Page() {
     return (
         <div className="flex min-h-[80vh] flex-col lg:flex-row">
             <div className="flex flex-col items-center justify-center lg:w-3/5">
-                <SignIn />
+                <SignIn afterSignInUrl={'/'} />
             </div>
             <div className="m-4 hidden min-h-[80vh] max-w-md sm:mx-auto sm:w-full lg:block lg:w-2/5">
                 <div className="relative min-h-[80vh] w-full">

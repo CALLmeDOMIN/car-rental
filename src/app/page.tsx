@@ -24,9 +24,7 @@ export default async function Home() {
 
     const hotOffer = cars[1]
 
-    if (!cars) {
-        return <div>Loading...</div>
-    }
+    if (!cars) throw new Error('Database error')
 
     const photos = cars.map((car: Car) => ({
         id: car.id.toString(),

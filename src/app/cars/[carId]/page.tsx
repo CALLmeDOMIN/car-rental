@@ -11,7 +11,6 @@ import { IconPlaystationCircle } from '@tabler/icons-react'
 import Slideshow, { Photo } from '@/components/slideshow'
 import { CarTile } from '@/components/carTile'
 import { prisma } from '@/../lib/prisma'
-import Error from '@/components/errorSite'
 import DetailForm from './detailForm'
 interface PageProps {
     params: {
@@ -37,7 +36,8 @@ const Page = async ({ params }: PageProps) => {
             imageUrl: true,
         },
     })
-    if (!car) return <Error code={404} />
+
+    if (!car) throw new Error('Car not found')
 
     const photos: Photo[] = []
 

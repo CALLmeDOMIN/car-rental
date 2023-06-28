@@ -31,7 +31,7 @@ This is a car rental site built with [Next.js](https://nextjs.org/) and bootstra
 -   New App Dir
 -   Routing, Layouts, Laoyout Groups, Nested Layouts
 -   Data fetching, caching, server actions
--   Loading states UI
+-   Loading states UI, Error handling UI
 -   Route Handlers
 -   Metadata Files
 -   Server and Client Components

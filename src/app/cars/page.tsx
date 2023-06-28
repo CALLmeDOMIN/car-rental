@@ -112,6 +112,8 @@ export default async function Page({
         },
     })) as Car[]
 
+    if (!cars.length) throw new Error('No cars found')
+
     const total = cars.length
     let totalPages = Math.ceil(total / limit)
     let hasNextPage = page < totalPages
