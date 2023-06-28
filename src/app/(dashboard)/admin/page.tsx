@@ -5,7 +5,6 @@ import { revalidatePath } from 'next/cache'
 import Form from './form/form'
 import Img from './image/Img'
 import Upload from './upload'
-import Error from '../../../components/errorSite'
 
 export default async function Page() {
     const cars = (await prisma.car.findMany()) as Car[]
@@ -27,8 +26,9 @@ export default async function Page() {
     const user = await currentUser()
 
     if (user?.id !== process.env.NEXT_PUBLIC_ADMIN_ID || !user)
-        return <Error code={401} />
-    if (!cars) return <div>Loading...</div>
+        throw new Error('You are not authorized to view this page.')
+    if (!cars)
+        throw new Error("Database error. Couldn't fetch cars from database.")
 
     return (
         <main className="mx-auto max-w-7xl">
