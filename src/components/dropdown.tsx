@@ -1,22 +1,21 @@
 'use client'
 
-import { useState, ReactNode, forwardRef } from 'react'
+import { useState, ReactNode, FunctionComponent } from 'react'
 
 type Location = { name: string; isSelected: boolean; icon: ReactNode }
 
-type Props = {
+interface DropdownProps {
     label?: string
     locations: Location[]
+    register?: any
 }
 
-export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
-    props,
-    ref
-) {
+const Dropdown: FunctionComponent<DropdownProps> = ({
+    label,
+    locations,
+    register,
+}) => {
     const [isOpen, setIsOpen] = useState(false)
-
-    const label = props.label
-    let locations = props.locations
 
     let openStyle = isOpen
         ? 'absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-background dark:bg-darkbg py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm border border-text'
@@ -47,7 +46,15 @@ export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
                                         <span className="px-2">
                                             {location.icon}
                                         </span>
-                                        <div ref={ref}>{location.name}</div>
+                                        <input
+                                            className="bg-transparent text-text dark:text-darktext"
+                                            value={location.name}
+                                            type="text"
+                                            name="location"
+                                            id="location"
+                                            disabled
+                                            {...register('location')}
+                                        />
                                     </div>
                                 )
                         )}
@@ -120,4 +127,6 @@ export const Dropdown = forwardRef<HTMLDivElement, Props>(function Dropdown(
             </div>
         </div>
     )
-})
+}
+
+export default Dropdown

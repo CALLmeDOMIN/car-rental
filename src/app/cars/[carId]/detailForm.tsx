@@ -43,7 +43,7 @@ const DetailForm: FunctionComponent<DetailFormProps> = ({
     }
 
     const onSubmit = (data: any) => {
-        // console.log(data, value, days)
+        console.log(data, value, days)
     }
 
     const styles = {
@@ -110,6 +110,9 @@ const DetailForm: FunctionComponent<DetailFormProps> = ({
                     separator={'-'}
                     showFooter={true}
                     inputClassName="bg-background text-text dark:bg-darkbg dark:text-darktext w-full cursor-pointer rounded-md border border-darktext p-2"
+                    placeholder="Select a date"
+                    useRange={false}
+                    minDate={new Date(Date.now())}
                 />
             </div>
 

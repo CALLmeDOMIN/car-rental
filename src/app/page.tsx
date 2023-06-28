@@ -57,7 +57,7 @@ export default async function Home() {
                     >
                         <button
                             type="button"
-                            className="flex items-center justify-center rounded-md bg-background py-2 pl-6 text-center text-sm font-semibold text-text shadow-sm hover:shadow-xl focus:outline-none focus:ring-4 dark:bg-darkbg dark:text-darktext"
+                            className="flex items-center justify-center rounded-md bg-background py-2 pl-6 text-center text-sm font-semibold text-text shadow-sm duration-300 ease-in-out hover:shadow-xl focus:outline-none focus:ring-4 dark:bg-darkbg dark:text-darktext"
                         >
                             Car catalog
                             <IconArrowUpRight
@@ -75,6 +75,7 @@ export default async function Home() {
                         fill
                         sizes="90vw"
                         loading="eager"
+                        quality={100}
                     />
                 </div>
 
@@ -97,7 +98,7 @@ export default async function Home() {
                             Quisquam, voluptatum.
                         </p>
                     </div>
-                    <div className="relative flex min-h-[280px] items-end justify-center">
+                    <div className="relative row-span-2 flex min-h-[280px] items-end justify-center">
                         <Image
                             src={'/wedding.jpg'}
                             fill
@@ -106,9 +107,9 @@ export default async function Home() {
                             className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl
                             md:max-h-[600px]"
                         />
-                        <button className="absolute bottom-[2%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
+                        <div className="absolute bottom-[2%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
                             Wedding events
-                        </button>
+                        </div>
                     </div>
                     <div className="relative flex min-h-[280px] items-end">
                         <Image
@@ -118,9 +119,9 @@ export default async function Home() {
                             alt="img2"
                             className="h-full max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
                         />
-                        <button className="absolute bottom-[5%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
+                        <div className="absolute bottom-[5%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
                             Intercity trips
-                        </button>
+                        </div>
                     </div>
                     <div className="relative flex min-h-[280px] items-end">
                         <Image
@@ -131,9 +132,9 @@ export default async function Home() {
                             className="max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
                             hover:shadow-2xl"
                         />
-                        <button className="absolute bottom-[5%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
+                        <div className="absolute bottom-[5%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
                             Airport transfers
-                        </button>
+                        </div>
                     </div>
                     <div className="relative flex min-h-[280px] items-end">
                         <Image
@@ -144,9 +145,9 @@ export default async function Home() {
                             className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
                             hover:shadow-2xl"
                         />
-                        <button className="absolute bottom-[5%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
+                        <div className="absolute bottom-[5%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
                             Buisness meetings
-                        </button>
+                        </div>
                     </div>
                 </div>
             </section>
