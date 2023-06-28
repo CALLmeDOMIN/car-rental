@@ -26,6 +26,22 @@ This is a car rental site built with [Next.js](https://nextjs.org/) and bootstra
 
 > ### [UploadThing](https://uploadthing.com/) - File uploading and hosting
 
+# Features
+
+-   New App Dir
+-   Routing, Layouts, Laoyout Groups, Nested Layouts
+-   Data fetching, caching, server actions
+-   Loading states UI
+-   Route Handlers
+-   Metadata Files
+-   Server and Client Components
+-   API Routes
+-   Authentication using Clerk
+-   ORM using Prisma
+-   Database on PlanetScale
+-   Proprietary UI using Tailwindcss
+-   TypeScript
+
 # Description
 
- Project is a car rental site. It symulates a car rental company. The intention is to learn web development, new technologies and build a fully functional site. It is a work in progress and will be updated with new features, since its purpose is to learn newest things in practice.
+Project is a car rental site. It symulates a car rental company. The intention is to learn web development, new technologies and build a fully functional site. It is a work in progress and will be updated with new features, since its purpose is to learn newest things in practice.
