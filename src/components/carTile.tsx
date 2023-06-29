@@ -16,14 +16,16 @@ export const CarTile = ({
     isBookmarked,
     carId,
     displayBookmark = true,
+    displayColors = true,
 }: {
     imageUrl: string
     brand: string
     name: string
     className?: string
-    isBookmarked: number | null
+    isBookmarked?: number | null
     carId: number
     displayBookmark?: boolean
+    displayColors?: boolean
 }) => {
     const [bookmark, setBookmark] = useState(
         isBookmarked === null ? false : true
@@ -84,11 +86,13 @@ export const CarTile = ({
                         className="aspect-video rounded-3xl object-cover object-center shadow-lg"
                     />
                 </div>
-                <div className="flex flex-col items-end justify-end gap-1">
-                    <div className="aspect-square h-6 rounded-full border bg-white shadow-md"></div>
-                    <div className="aspect-square h-6 rounded-full bg-primary-button shadow-md"></div>
-                    <div className="aspect-square h-6 rounded-full bg-yellow-400 shadow-md"></div>
-                </div>
+                {displayColors ? (
+                    <div className="flex flex-col items-end justify-end gap-1">
+                        <div className="aspect-square h-6 rounded-full border bg-white shadow-md"></div>
+                        <div className="aspect-square h-6 rounded-full bg-primary-button shadow-md"></div>
+                        <div className="aspect-square h-6 rounded-full bg-yellow-400 shadow-md"></div>
+                    </div>
+                ) : null}
             </div>
         </div>
     )

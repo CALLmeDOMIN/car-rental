@@ -1,6 +1,6 @@
 import { Filter } from './filter'
 import { Search } from './search'
-import { IconBookmarkPlus } from '@tabler/icons-react'
+import { IconBookmarkFilled } from '@tabler/icons-react'
 
 export default function LoadingSkeleton() {
     return (
@@ -44,7 +44,7 @@ export const CarTileLoading = () => {
                             <div className="h-5 w-12 rounded-md bg-rose-100/20"></div>
                         </div>
                         <div className="aspect-square text-rose-100/5">
-                            <IconBookmarkPlus aria-label="bookmark" />
+                            <IconBookmarkFilled aria-label="bookmark" />
                         </div>
                     </div>
                     <div className="flex gap-3">
