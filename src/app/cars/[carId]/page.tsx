@@ -12,6 +12,8 @@ import Slideshow, { Photo } from '@/components/slideshow'
 import { CarTile } from '@/components/carTile'
 import { prisma } from '@/../lib/prisma'
 import DetailForm from './detailForm'
+import { auth } from '@clerk/nextjs'
+import { Bookmark } from '../page'
 interface PageProps {
     params: {
         carId: string
@@ -19,6 +21,16 @@ interface PageProps {
 }
 
 const Page = async ({ params }: PageProps) => {
+    const { userId } = auth()
+
+    let bookmarks: Bookmark[] = []
+
+    if (userId) {
+        bookmarks = (await prisma.bookmark.findMany({
+            where: { userId: userId },
+        })) as Bookmark[]
+    }
+
     const car = await prisma.car.findUnique({
         where: {
             id: Number(params.carId),
@@ -60,6 +72,16 @@ const Page = async ({ params }: PageProps) => {
                         brand={car.brand}
                         name={car.name}
                         className="mx-auto gap-1 md:mx-0 md:justify-normal"
+                        isBookmarked={
+                            bookmarks.filter(
+                                (bookmark) => bookmark.carId === car.id
+                            ).length > 0
+                                ? bookmarks.filter(
+                                      (bookmark) => bookmark.carId === car.id
+                                  )[0].id
+                                : null
+                        }
+                        carId={car.id}
                     />
                     <div className="mx-auto ml-2 rounded-2xl bg-background p-2 px-4 shadow-md dark:bg-darkbg md:mx-0">
                         <h1 className="pb-2 text-3xl font-bold text-text dark:text-darktext">

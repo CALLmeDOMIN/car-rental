@@ -4,6 +4,7 @@ import { Search } from './search'
 import { Filter } from './filter'
 import { CarTile } from '../../components/carTile'
 import { prisma } from '../../../lib/prisma'
+import { auth } from '@clerk/nextjs'
 
 export interface Car {
     id: number
@@ -20,6 +21,12 @@ export interface Car {
     topSpeed: number
     description: string
     imageUrl: string
+}
+
+export interface Bookmark {
+    id: number
+    carId: number
+    userId: string
 }
 
 const filterSearchParams = (str: string) => {
@@ -69,6 +76,16 @@ export default async function Page({
 }: {
     searchParams: { search: string; page: string; filter: string }
 }) {
+    const { userId } = auth()
+
+    let bookmarks: Bookmark[] = []
+
+    if (userId) {
+        bookmarks = (await prisma.bookmark.findMany({
+            where: { userId: userId },
+        })) as Bookmark[]
+    }
+
     let search = searchParams.search ?? ''
     let page = parseInt(searchParams.page ?? '1')
     let filter = searchParams.filter ?? ''
@@ -141,6 +158,19 @@ export default async function Page({
                                     imageUrl={car.imageUrl}
                                     brand={car.brand}
                                     name={car.name}
+                                    isBookmarked={
+                                        bookmarks.filter(
+                                            (bookmark) =>
+                                                bookmark.carId === car.id
+                                        ).length > 0
+                                            ? bookmarks.filter(
+                                                  (bookmark) =>
+                                                      bookmark.carId === car.id
+                                              )[0].id
+                                            : null
+                                    }
+                                    carId={car.id}
+                                    displayBookmark={false}
                                 />
                                 <div className="flex gap-4 rounded-b-2xl p-2 pl-4">
                                     <h1 className="flex items-center gap-1 text-lg font-semibold text-gray-500">

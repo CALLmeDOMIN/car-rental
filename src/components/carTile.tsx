@@ -1,18 +1,55 @@
-import { IconBookmarkPlus } from '@tabler/icons-react'
+'use client'
+
+import { IconBookmarkFilled, IconBookmarkPlus } from '@tabler/icons-react'
 import Image from 'next/image'
 import { logos } from '../../public/assets'
+import { useUser } from '@clerk/nextjs'
+import { useState } from 'react'
+import addBookmark from './addbookmark'
+import { useRouter } from 'next/navigation'
 
 export const CarTile = ({
     imageUrl,
     brand,
     name,
     className,
+    isBookmarked,
+    carId,
+    displayBookmark = true,
 }: {
     imageUrl: string
     brand: string
     name: string
     className?: string
+    isBookmarked: number | null
+    carId: number
+    displayBookmark?: boolean
 }) => {
+    const [bookmark, setBookmark] = useState(
+        isBookmarked === null ? false : true
+    )
+
+    const router = useRouter()
+
+    const { user } = useUser()
+
+    const handleBookmarks = () => {
+        console.log(bookmark, user?.id, carId, isBookmarked)
+
+        if (!user?.id) {
+            router.push('/sign-in')
+            return
+        }
+        setBookmark(!bookmark)
+
+        addBookmark({
+            userId: user?.id,
+            isBM: !bookmark,
+            carId: carId,
+            bookmarkId: isBookmarked,
+        })
+    }
+
     return (
         <div className={'flex flex-col p-4 pt-0 ' + className}>
             <div className="flex items-center gap-2 p-2">
@@ -25,9 +62,19 @@ export const CarTile = ({
                     </h1>
                     <h1 className="font-semibold text-gray-500">{name}</h1>
                 </div>
-                <div className="aspect-square text-text dark:text-darktext">
-                    <IconBookmarkPlus aria-label="bookmark" />
-                </div>
+                <button
+                    onClick={() => handleBookmarks()}
+                    className="aspect-square text-text dark:text-darktext"
+                >
+                    {bookmark ? (
+                        <IconBookmarkFilled
+                            aria-label="bookmark"
+                            className="text-yellow-500"
+                        />
+                    ) : displayBookmark ? (
+                        <IconBookmarkPlus aria-label="add bookmark" />
+                    ) : null}
+                </button>
             </div>
             <div className="flex gap-3">
                 <div className="relative min-h-[150px] min-w-[280px] grow">

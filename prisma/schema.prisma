@@ -20,7 +20,7 @@ model Car {
   price          Float  @default(0)
   distance       Int    @default(0)
   passengers     Int    @default(2)
-  capacity       Int    @default(2)
+  capacity       Int    @default(1)
   engineCapacity Float  @default(0)
   horsepower     Int    @default(0)
   topSpeed       Int    @default(0)
@@ -28,9 +28,8 @@ model Car {
   imageUrl       String @default("")
 }
 
-model repair {
-  id    Int    @id @default(autoincrement())
-  name  String @default("")
-  date  String @default("")
-  carId Int    @default(0)
+model Bookmark {
+  id     Int    @id @default(autoincrement())
+  carId  Int
+  userId String
 }
