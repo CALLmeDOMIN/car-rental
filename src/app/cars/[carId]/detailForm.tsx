@@ -43,7 +43,7 @@ const DetailForm: FunctionComponent<DetailFormProps> = ({
     }
 
     const onSubmit = (data: any) => {
-        console.log(data, value, days)
+        // console.log(data, value, days)
     }
 
     const styles = {

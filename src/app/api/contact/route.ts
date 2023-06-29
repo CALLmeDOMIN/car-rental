@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     try {
         console.log('Sending email')
         await resend.sendEmail({
-            from: 'contact@carrental.com',
+            from: 'onboarding@resend.dev',
             to: 'dominiksieron13@gmail.com',
             subject: 'Contact form',
             react: Contact(data),

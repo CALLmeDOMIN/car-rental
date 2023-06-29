@@ -37,7 +37,7 @@ export default function SubmitForm({ className }: { className?: string }) {
     }
 
     const onSubmit = (data: any) => {
-        console.log(data, value, days)
+        // console.log(data, value, days)
     }
 
     const styles = {

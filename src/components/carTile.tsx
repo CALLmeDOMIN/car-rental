@@ -34,8 +34,6 @@ export const CarTile = ({
     const { user } = useUser()
 
     const handleBookmarks = () => {
-        console.log(bookmark, user?.id, carId, isBookmarked)
-
         if (!user?.id) {
             router.push('/sign-in')
             return

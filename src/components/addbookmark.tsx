@@ -15,7 +15,6 @@ export default async function addBookmark({
 }) {
     if (!bookmarkId) bookmarkId = 0
     if (isBM) {
-        console.log('add')
         const bookmark = await prisma.bookmark.create({
             data: {
                 userId: userId,
@@ -23,7 +22,6 @@ export default async function addBookmark({
             },
         })
     } else {
-        console.log('delete')
         const bookmark = await prisma.bookmark.delete({
             where: {
                 id: bookmarkId,

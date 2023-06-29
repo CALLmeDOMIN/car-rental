@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     try {
         console.log('Sending email')
         await resend.sendEmail({
-            from: 'newsletter@carrental.com',
+            from: 'onboarding@resend.dev',
             to: data.email,
             subject: 'Contact form',
             react: Newsletter(),
