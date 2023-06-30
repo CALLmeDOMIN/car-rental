@@ -19,6 +19,7 @@ export default async function Home() {
             capacity: true,
             passengers: true,
             imageUrl: true,
+            engineCapacity: true,
         },
     })) as Car[]
 
@@ -136,7 +137,7 @@ export default async function Home() {
                     </div>
                     <div className="relative flex min-h-[280px] items-end">
                         <Image
-                            src={'/buisness.jpg'}
+                            src={'/business.jpg'}
                             fill
                             sizes="(max-width: 768px) 100vw,(max-width: 1280px) 50vw, 33vw"
                             alt="img4"
@@ -144,7 +145,7 @@ export default async function Home() {
                             hover:shadow-2xl"
                         />
                         <div className="absolute bottom-[5%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
-                            Buisness meetings
+                            Business meetings
                         </div>
                     </div>
                 </div>
@@ -275,7 +276,7 @@ export default async function Home() {
                                         aria-label="pointer"
                                         className="text-primary-button"
                                     />
-                                    preparation for track usage
+                                    reliable {hotOffer.engineCapacity}l engine
                                 </li>
                                 <li className="hidden items-center text-text dark:text-darktext lg:flex ">
                                     <IconFlame
@@ -311,7 +312,7 @@ export default async function Home() {
                                         aria-label="pointer"
                                         className="text-primary-button"
                                     />
-                                    good sound system
+                                    No distance limit
                                 </li>
                                 <li className="hidden items-center text-text dark:text-darktext lg:flex">
                                     <IconFlame

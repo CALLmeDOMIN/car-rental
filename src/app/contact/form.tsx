@@ -1,5 +1,7 @@
 'use client'
 
+import { useUser } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
 import { FunctionComponent } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -21,6 +23,10 @@ const onSubmit = async (data: any) => {
 }
 
 const Form: FunctionComponent<FormProps> = ({ className }) => {
+    const { user } = useUser()
+
+    const router = useRouter()
+
     const { register, handleSubmit, reset } = useForm({
         defaultValues: {
             name: '',
@@ -28,6 +34,8 @@ const Form: FunctionComponent<FormProps> = ({ className }) => {
             message: '',
         },
     })
+
+    if (!user) router.push('/sign-in')
 
     return (
         <div className={className}>
