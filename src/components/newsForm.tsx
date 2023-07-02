@@ -16,7 +16,7 @@ const onSubmit = async ({ data }: { data: { email: string } }) => {
         if (res.status === 200) {
             alert('Message sent!')
         } else {
-            alert('Error sending message')
+            alert('Error sending message, you might need to log in')
         }
     })
 }
@@ -47,7 +47,7 @@ const NewsForm: FunctionComponent<NewsFormProps> = ({ className }) => {
                 type="text"
                 name="email"
                 id="email"
-                className="focus:ring-primary-button-500 w-full cursor-default rounded-md border-none bg-background py-1.5 pl-4 pr-10 text-left text-text shadow-sm ring-1 ring-inset ring-background placeholder:text-text/20  focus:outline-none focus:ring-2 dark:bg-darkbg dark:text-darktext dark:ring-transparent dark:placeholder:text-darktext sm:text-sm sm:leading-6"
+                className="focus:ring-primary-button-500 w-full rounded-md border-none bg-background py-1.5 pl-4 pr-10 text-left text-text shadow-sm ring-1 ring-inset ring-background placeholder:text-text/20  focus:outline-none focus:ring-2 dark:bg-darkbg dark:text-darktext dark:ring-transparent dark:placeholder:text-darktext sm:text-sm sm:leading-6"
                 placeholder="placeholder@email.com"
                 pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$"
             />

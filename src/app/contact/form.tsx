@@ -10,6 +10,7 @@ interface FormProps {
 }
 
 const onSubmit = async (data: any) => {
+    console.log(data)
     await fetch('/api/contact', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -74,7 +75,7 @@ const Form: FunctionComponent<FormProps> = ({ className }) => {
                             </label>
                             <input
                                 type="email"
-                                {...(register('email'), { required: true })}
+                                {...register('email')}
                                 id="email"
                                 pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$"
                                 className="mb-4 w-full rounded-md border bg-background p-4 text-text shadow-md dark:bg-darkbg dark:text-darktext"
