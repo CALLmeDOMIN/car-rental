@@ -1,4 +1,6 @@
-# [Car-rental](car-rental-dominiksieron.vercel.app/)
+<h1 align="center">🔴🔴🔴MAINTENANCE🔴🔴🔴</h1>
+
+# [Car-rental](https://carrental.dsieron.pl/)
 
 > **Warning**
 >
@@ -6,7 +8,7 @@
 
 This is a car rental site built with [Next.js](https://nextjs.org/) and bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-[![Skateshop13](./public/hero.jpg)](https://skateshop13.vercel.app/)
+[![Car rental](./public/hero.jpg)](https://carrental.dsieron.pl/)
 
 > **Warning**
 >
