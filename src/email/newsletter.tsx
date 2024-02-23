@@ -46,9 +46,7 @@ export const Newsletter = () => (
                     </Text>
                     <Section className="flex justify-center text-center">
                         <Button
-                            pX={12}
-                            pY={12}
-                            className="text-bg block rounded-md bg-primary-button text-base"
+                            className="text-bg block rounded-md bg-primary-button p-3 text-base"
                             href="https://car-rental-dominiksieron.vercel.app"
                         >
                             Visit Car-rental

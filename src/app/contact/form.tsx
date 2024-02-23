@@ -10,7 +10,6 @@ interface FormProps {
 }
 
 const onSubmit = async (data: any) => {
-    console.log(data)
     await fetch('/api/contact', {
         method: 'POST',
         body: JSON.stringify(data),

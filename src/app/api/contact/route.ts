@@ -5,16 +5,21 @@ import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: Request) {
-    const data = await req.json()
+    const received = await req.json()
     try {
-        await resend.sendEmail({
+        const { data, error } = await resend.emails.send({
             from: 'contact@dsieron.pl',
             to: 'dominiksieron13@gmail.com',
             subject: 'Contact form',
-            react: Contact(data),
+            react: Contact(received),
         })
-        return NextResponse.json(data)
+
+        if (error) {
+            return NextResponse.json({ error })
+        }
+
+        return NextResponse.json({ data })
     } catch (error) {
-        return NextResponse.json(error)
+        return NextResponse.json({ error })
     }
 }
