@@ -1,5 +1,3 @@
-<h1 align="center">🔴🔴🔴MAINTENANCE🔴🔴🔴</h1>
-
 # [Car-rental](https://carrental.dsieron.pl/)
 
 > **Warning**
