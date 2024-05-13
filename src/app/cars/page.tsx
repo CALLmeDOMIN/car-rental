@@ -5,29 +5,7 @@ import { Filter } from "./filter";
 import { CarTile } from "../../components/carTile";
 import { prisma } from "../../../lib/prisma";
 import { auth } from "@clerk/nextjs";
-
-export interface Car {
-  id: number;
-  name: string;
-  brand: string;
-  transmission: string;
-  year: number;
-  price: number;
-  distance: number;
-  passengers: number;
-  capacity: number;
-  engineCapacity: number;
-  horsepower: number;
-  topSpeed: number;
-  description: string;
-  imageUrl: string;
-}
-
-export interface Bookmark {
-  id: number;
-  carId: number;
-  userId: string;
-}
+import { type Bookmarks, type Cars } from "@/utils/types";
 
 const filterSearchParams = (str: string) => {
   let capacity: number[] = [];
@@ -78,12 +56,12 @@ export default async function Page({
 }) {
   const { userId } = auth();
 
-  let bookmarks: Bookmark[] = [];
+  let bookmarks: Bookmarks = [];
 
   if (userId) {
     bookmarks = (await prisma.bookmark.findMany({
       where: { userId: userId },
-    })) as Bookmark[];
+    })) as Bookmarks;
   }
 
   let search = searchParams.search ?? "";
@@ -127,7 +105,7 @@ export default async function Page({
       capacity: true,
       price: true,
     },
-  })) as Car[];
+  })) as Cars;
 
   const total = cars.length;
   let totalPages = Math.ceil(total / limit);
