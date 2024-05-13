@@ -339,10 +339,11 @@ export const Filter = () => {
           {open3 ? (
             <div className="p-2 pt-6">
               <form
-                className="flex flex-col items-center gap-4"
+                className="grid grid-cols-4 items-center"
                 onSubmit={handleInputChange}
               >
-                <span className="flex items-center gap-2">
+                <div />
+                <div className="col-span-2 flex items-center justify-center gap-2">
                   <input
                     ref={startPriceRef}
                     type="text"
@@ -351,7 +352,7 @@ export const Filter = () => {
                     inputMode="numeric"
                     className="max-w-[80px] rounded border border-text/30 bg-background p-1 px-2 font-semibold text-text placeholder:text-text focus:ring-primary-button dark:border-darktext/30 dark:bg-darkbg dark:text-darktext dark:placeholder:text-darktext"
                   />
-                  <span className="text-text dark:text-darktext">to</span>
+                  <div className="text-text dark:text-darktext">to</div>
                   <input
                     ref={endPriceRef}
                     type="text"
@@ -360,13 +361,15 @@ export const Filter = () => {
                     inputMode="numeric"
                     className="max-w-[80px] rounded border border-text/30 bg-background p-1 px-2 font-semibold text-text placeholder:text-text focus:ring-primary-button dark:border-darktext/30 dark:bg-darkbg dark:text-darktext dark:placeholder:text-darktext"
                   />
-                </span>
-                <button
-                  type="submit"
-                  className="transform rounded-md bg-primary-button px-2 py-1 font-semibold text-background shadow-sm shadow-primary-button duration-300 ease-in-out hover:shadow-md hover:shadow-primary-button dark:text-darkbg"
-                >
-                  Button
-                </button>
+                </div>
+                <div className="mr-4 flex justify-end">
+                  <button
+                    type="submit"
+                    className="transform rounded-md bg-primary-button px-2 py-1 font-semibold text-background shadow-sm shadow-primary-button duration-300 ease-in-out hover:shadow-md hover:shadow-primary-button dark:text-darkbg"
+                  >
+                    Search
+                  </button>
+                </div>
               </form>
             </div>
           ) : null}
@@ -532,6 +535,66 @@ export const Filter = () => {
                           </label>
                         </div>
                       ))}
+                    </div>
+                  ) : null}
+                </div>
+                <div
+                  className={
+                    "border-b border-text/30 py-6 dark:border-darktext/30 " +
+                    (open3 ? "pb-2" : "")
+                  }
+                >
+                  <div
+                    className="flex text-text dark:text-darktext"
+                    onClick={() => setOpen3(!open3)}
+                  >
+                    <h3 className="-my-3 flow-root font-medium">Price</h3>
+                    {open3 ? (
+                      <IconMinus
+                        className="-my-[0.65rem] ml-auto h-5 w-5"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <IconPlus
+                        className="-my-[0.65rem] ml-auto h-5 w-5"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
+                  {open3 ? (
+                    <div className="p-2 pt-6">
+                      <form
+                        className="grid grid-cols-4 items-center"
+                        onSubmit={handleInputChange}
+                      >
+                        <div className="col-span-3 flex items-center justify-center gap-2">
+                          <input
+                            ref={startPriceRef}
+                            type="text"
+                            placeholder="0"
+                            pattern="[0-9]*"
+                            inputMode="numeric"
+                            className="max-w-[80px] rounded border border-text/30 bg-background p-1 px-2 font-semibold text-text placeholder:text-text focus:ring-primary-button dark:border-darktext/30 dark:bg-darkbg dark:text-darktext dark:placeholder:text-darktext"
+                          />
+                          <div className="text-text dark:text-darktext">to</div>
+                          <input
+                            ref={endPriceRef}
+                            type="text"
+                            placeholder="0"
+                            pattern="[0-9]*"
+                            inputMode="numeric"
+                            className="max-w-[80px] rounded border border-text/30 bg-background p-1 px-2 font-semibold text-text placeholder:text-text focus:ring-primary-button dark:border-darktext/30 dark:bg-darkbg dark:text-darktext dark:placeholder:text-darktext"
+                          />
+                        </div>
+                        <div className="mr-4 flex justify-end">
+                          <button
+                            type="submit"
+                            className="transform rounded-md bg-primary-button px-2 py-1 font-semibold text-background shadow-sm shadow-primary-button duration-300 ease-in-out hover:shadow-md hover:shadow-primary-button dark:text-darkbg"
+                          >
+                            Search
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   ) : null}
                 </div>

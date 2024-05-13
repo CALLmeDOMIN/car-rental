@@ -99,7 +99,7 @@ export default async function Page({ searchParams }: { searchParams: Params }) {
                   passHref
                   href={"/cars/" + car.id}
                   key={car.id}
-                  className="max-h-[287px] transform rounded-2xl shadow-md transition-all duration-200 hover:scale-105 hover:shadow-xl"
+                  className="max-h-[287px] transform overflow-x-hidden rounded-2xl shadow-md transition-all duration-200 hover:scale-105 hover:shadow-xl"
                 >
                   <CarTile
                     imageUrl={car.imageUrl}
@@ -141,10 +141,6 @@ export default async function Page({ searchParams }: { searchParams: Params }) {
                 </Link>
               ))
             )}
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
           </div>
         </div>
       </div>
