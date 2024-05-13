@@ -10,7 +10,7 @@ import { type Cars, type Car } from "@/utils/types";
 import NewsForm from "../components/newsForm";
 
 export default async function Home() {
-  const cars = (await prisma.car.findMany({
+  let cars = (await prisma.car.findMany({
     select: {
       id: true,
       brand: true,
@@ -25,7 +25,9 @@ export default async function Home() {
 
   const hotOffer = cars[1];
 
-  if (!cars) throw new Error("Database error");
+  if (!cars) {
+    return <div>Loading...</div>;
+  }
 
   const photos = cars.map((car: Car) => ({
     id: car.id.toString(),

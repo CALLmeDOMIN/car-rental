@@ -1,53 +1,69 @@
-'use client'
+"use client";
 
-import { IconSearch } from '@tabler/icons-react'
-import { useRouter, usePathname } from 'next/navigation'
-import { useTransition } from 'react'
-import Spinner from '../../components/spinner'
+import { IconSearch } from "@tabler/icons-react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useState, useTransition } from "react";
+import Spinner from "../../components/spinner";
 
 export function Search() {
-    let { replace } = useRouter()
-    let pathname = usePathname()
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-    let [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
 
-    let handleSearch = (term: string) => {
-        let params = new URLSearchParams(location.search)
-        if (term) {
-            params.set('search', term)
-        } else {
-            params.delete('search')
-        }
-        params.delete('page')
+  const search = searchParams.get("search") ?? "";
 
-        startTransition(() => {
-            replace(`${pathname}?${params.toString()}`)
-        })
+  const [searchTerm, setSearchTerm] = useState(search);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      handleSearch(searchTerm);
+    }, 500);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [searchTerm]);
+
+  let handleSearch = (term: string) => {
+    const params = new URLSearchParams(searchParams);
+
+    if (term) {
+      params.set("search", term);
+    } else {
+      params.delete("search");
     }
 
-    return (
-        <div className="relative max-w-xs">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
-                <span className="text-text dark:text-darktext sm:text-sm">
-                    <IconSearch size="16px" aria-label="search" />
-                </span>
-            </div>
-            <input
-                type="text"
-                // icon={IconSearch}
-                className="focus:ring-primary-button-600 block w-full rounded-md border-0 bg-background py-1.5 pl-7 pr-20 text-text ring-1 ring-inset ring-text placeholder:text-text focus:ring-2 focus:ring-inset dark:bg-darkbg dark:text-darktext dark:ring-darktext dark:placeholder:text-darktext sm:text-sm sm:leading-6"
-                placeholder="Search"
-                spellCheck={false}
-                onChange={(e) => {
-                    handleSearch(e.target.value)
-                }}
-            />
+    startTransition(() => {
+      replace(`${pathname}?${params.toString()}`);
+    });
+  };
 
-            {isPending && (
-                <div className="absolute bottom-0 right-0 top-0 flex items-center justify-center">
-                    <Spinner />
-                </div>
-            )}
+  return (
+    <div className="relative max-w-xs">
+      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
+        <span className="text-text dark:text-darktext sm:text-sm">
+          <IconSearch size="16px" aria-label="search" />
+        </span>
+      </div>
+      <input
+        type="text"
+        // icon={IconSearch}
+        className="focus:ring-primary-button-600 block w-full rounded-md border-0 bg-background py-1.5 pl-7 pr-20 text-text ring-1 ring-inset ring-text placeholder:text-text focus:ring-2 focus:ring-inset dark:bg-darkbg dark:text-darktext dark:ring-darktext dark:placeholder:text-darktext sm:text-sm sm:leading-6"
+        placeholder="Search"
+        spellCheck={false}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
+        value={searchTerm}
+      />
+
+      {isPending && (
+        <div className="absolute bottom-0 right-0 top-0 flex items-center justify-center">
+          <Spinner />
         </div>
-    )
+      )}
+    </div>
+  );
 }

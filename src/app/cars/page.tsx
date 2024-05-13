@@ -7,89 +7,55 @@ import { prisma } from "../../../lib/prisma";
 import { auth } from "@clerk/nextjs";
 import { type Bookmarks, type Cars } from "@/utils/types";
 
-const filterSearchParams = (str: string) => {
-  let capacity: number[] = [];
-  let transmission: string[] = [];
-  let passengers: number[] = [];
-  let startPrice: number = 0;
-  let endPrice: number = 0;
-
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] === "C") {
-      capacity.push(Number(str[i + 1]));
-    } else if (str[i] === "T") {
-      if (str[i + 1] === "A") transmission.push("Automatic");
-      else transmission.push("Manual");
-    } else if (str[i] === "P") {
-      passengers.push(Number(str[i + 1]));
-    } else if (str[i] === "S") {
-      let startPriceStr = "";
-      while (str[i + 1] !== "-") {
-        startPriceStr += str[i + 1];
-        i++;
-      }
-      startPrice = Number(startPriceStr);
-
-      i++;
-      let endPriceStr = "";
-      while (str[i + 1] !== "E") {
-        endPriceStr += str[i + 1];
-        i++;
-      }
-      endPrice = Number(endPriceStr);
-    }
-  }
-
-  return {
-    t: transmission,
-    c: capacity,
-    p: passengers,
-    s: startPrice,
-    e: endPrice,
-  };
+type Params = {
+  search: string;
+  // page: string;
+  capacity: string;
+  transmission: string;
+  passengers: string;
+  startPrice: string;
+  endPrice: string;
 };
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { search: string; page: string; filter: string };
-}) {
+const filterBySearch = (cars: Cars, search: string) => {
+  return cars.filter((car) => {
+    const name = car.brand.toLowerCase() + " " + car.name.toLowerCase();
+    return name.toLowerCase().includes(search.toLowerCase());
+  });
+};
+
+export default async function Page({ searchParams }: { searchParams: Params }) {
   const { userId } = auth();
 
   let bookmarks: Bookmarks = [];
 
   if (userId) {
-    bookmarks = (await prisma.bookmark.findMany({
+    bookmarks = await prisma.bookmark.findMany({
       where: { userId: userId },
-    })) as Bookmarks;
+    });
   }
 
-  let search = searchParams.search ?? "";
-  let page = parseInt(searchParams.page ?? "1");
-  let filter = searchParams.filter ?? "";
-  let limit = 10;
-  let offset = (page - 1) * limit;
+  const search = searchParams.search ?? "";
+  const capacity = searchParams.capacity?.split(",").map(Number) ?? [1, 2, 4];
+  const transmission = searchParams.transmission?.split(",") ?? [
+    "Automatic",
+    "Manual",
+  ];
+  const passengers = searchParams.passengers?.split(",").map(Number) ?? [
+    2, 4, 5,
+  ];
+  const startPrice = Number(searchParams.startPrice) ?? 0;
+  const endPrice = Number(searchParams.endPrice) ?? 999999;
 
-  let {
-    t: transmission,
-    c: capacity,
-    p: passengers,
-    s: startPrice,
-    e: endPrice,
-  } = filterSearchParams(filter);
-
-  if (!transmission.length) transmission = ["Automatic", "Manual"];
-  if (!capacity.length) capacity = [1, 2, 4];
-  if (!passengers.length) passengers = [2, 4, 5];
+  // let page = parseInt(searchParams.page ?? "1");
+  // let limit = 10;
+  // let offset = (page - 1) * limit;
 
   const cars = (await prisma.car.findMany({
     where: {
-      ...(search && {
-        name: { contains: search } || { brand: { contains: search } },
-      }),
-      ...(passengers && { passengers: { in: passengers } }),
-      ...(capacity && { capacity: { in: capacity } }),
-      ...(transmission && { transmission: { in: transmission } }),
+      ...(passengers.length > 0 && { passengers: { in: passengers } }),
+      ...(capacity.length > 0 && { capacity: { in: capacity } }),
+      ...(transmission.length > 0 && { transmission: { in: transmission } }),
       ...(startPrice &&
         endPrice && {
           price: { gte: startPrice, lte: endPrice },
@@ -107,10 +73,12 @@ export default async function Page({
     },
   })) as Cars;
 
-  const total = cars.length;
-  let totalPages = Math.ceil(total / limit);
-  let hasNextPage = page < totalPages;
-  let hasPreviousPage = page > 1;
+  const filteredCars = filterBySearch(cars, search);
+
+  // const total = cars.length;
+  // let totalPages = Math.ceil(total / limit);
+  // let hasNextPage = page < totalPages;
+  // let hasPreviousPage = page > 1;
 
   return (
     <>
@@ -123,10 +91,10 @@ export default async function Page({
         </div>
         <div className="mx-auto flex justify-center md:mt-5 lg:w-3/4">
           <div className="grid max-w-md gap-4 p-4 pt-0 md:max-w-3xl md:grid-cols-2 md:pt-4 lg:max-w-4xl xl:max-w-7xl 2xl:grid-cols-3">
-            {cars.length === 0 ? (
+            {filteredCars.length === 0 ? (
               <NoCarsFound />
             ) : (
-              cars.map((car) => (
+              filteredCars.map((car) => (
                 <Link
                   passHref
                   href={"/cars/" + car.id}
