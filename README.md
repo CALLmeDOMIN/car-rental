@@ -38,7 +38,7 @@ This is a car rental site built with [Next.js](https://nextjs.org/) and bootstra
 -   API Routes
 -   Authentication using Clerk
 -   ORM using Prisma
--   Database on PlanetScale
+-   Database on Vercel
 -   Proprietary UI using Tailwindcss
 -   TypeScript
 
