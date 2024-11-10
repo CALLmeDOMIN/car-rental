@@ -109,7 +109,7 @@ export default async function Page({ searchParams }: { searchParams: Params }) {
                       bookmarks.filter((bookmark) => bookmark.carId === car.id)
                         .length > 0
                         ? bookmarks.filter(
-                            (bookmark) => bookmark.carId === car.id
+                            (bookmark) => bookmark.carId === car.id,
                           )[0].id
                         : null
                     }

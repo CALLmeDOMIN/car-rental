@@ -10,7 +10,7 @@ import { type Cars, type Car } from "@/utils/types";
 import NewsForm from "../components/newsForm";
 
 export default async function Home() {
-  let cars = (await prisma.car.findMany({
+  const cars = (await prisma.car.findMany({
     select: {
       id: true,
       brand: true,
@@ -103,8 +103,7 @@ export default async function Home() {
               fill
               sizes="(max-width: 768px) 100vw,(max-width: 1280px) 50vw, 33vw"
               alt="img1"
-              className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl
-                            md:max-h-[600px]"
+              className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl md:max-h-[600px]"
             />
             <div className="absolute bottom-[2%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
               Wedding events
@@ -128,8 +127,7 @@ export default async function Home() {
               sizes="(max-width: 768px) 100vw,(max-width: 1280px) 50vw, 33vw"
               src={"/airport.jpg"}
               alt="img3"
-              className="max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
-                            hover:shadow-2xl"
+              className="max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
             />
             <div className="absolute bottom-[5%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
               Airport transfers
@@ -141,8 +139,7 @@ export default async function Home() {
               fill
               sizes="(max-width: 768px) 100vw,(max-width: 1280px) 50vw, 33vw"
               alt="img4"
-              className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105
-                            hover:shadow-2xl"
+              className="h-auto max-h-[280px] transform rounded-xl object-cover object-center shadow-xl transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 hover:shadow-2xl"
             />
             <div className="absolute bottom-[5%] left-[3%] rounded-md bg-background px-6 py-1.5 text-text shadow-sm dark:bg-darkbg dark:text-darktext">
               Business meetings
@@ -154,7 +151,7 @@ export default async function Home() {
 
       {/* our fleet section */}
       <section>
-        <div className="mt-4 p-2 md:p-8 ">
+        <div className="mt-4 p-2 md:p-8">
           <div className="flex flex-col md:p-10">
             <div className="mx-6 flex flex-col items-center justify-center gap-10 md:mx-0 md:flex-row">
               <h1 className="text-5xl font-bold leading-6 text-text dark:text-darktext md:py-12 md:text-4xl xl:text-7xl">
@@ -272,7 +269,7 @@ export default async function Home() {
                   />
                   reliable {hotOffer.engineCapacity}l engine
                 </li>
-                <li className="hidden items-center text-text dark:text-darktext lg:flex ">
+                <li className="hidden items-center text-text dark:text-darktext lg:flex">
                   <IconFlame
                     size={32}
                     aria-label="pointer"
@@ -340,7 +337,7 @@ export default async function Home() {
 
       {/* footer */}
       <footer>
-        <div className="m-2 mb-0 grid grid-cols-2 gap-3 rounded-t-3xl bg-accent p-6 pt-10 md:m-8 md:mb-0 md:p-8 lg:grid-cols-3 lg:gap-0 ">
+        <div className="m-2 mb-0 grid grid-cols-2 gap-3 rounded-t-3xl bg-accent p-6 pt-10 md:m-8 md:mb-0 md:p-8 lg:grid-cols-3 lg:gap-0">
           <div className="col-span-2 hidden flex-col justify-center space-y-4 p-4 lg:flex">
             <NewsForm className="relative w-3/5" />
           </div>
@@ -365,7 +362,7 @@ export default async function Home() {
           <div className="hidden items-end gap-1 pl-4 text-background dark:text-darkbg lg:flex">
             <span className="flex items-center text-background dark:text-darkbg">
               <IconCopyright size={14} aria-label="copyright" />
-              <h1 className="text-sm ">2023 Car-rental</h1>
+              <h1 className="text-sm">2023 Car-rental</h1>
             </span>
           </div>
           <div className="col-span-2 flex items-center justify-center gap-6 text-xs font-semibold text-background dark:text-darkbg md:col-span-1 md:text-sm lg:items-end">
@@ -383,7 +380,7 @@ export default async function Home() {
           <div className="flex items-end gap-1 text-background dark:text-darkbg md:hidden">
             <span className="flex items-center text-background dark:text-darkbg">
               <IconCopyright size={14} aria-label="copyright" />
-              <h1 className="text-sm ">2023 Car-rental</h1>
+              <h1 className="text-sm">2023 Car-rental</h1>
             </span>
           </div>
           <div className="flex flex-col items-center justify-center gap-2">

@@ -9,14 +9,12 @@ import Upload from "./upload";
 export default async function Page() {
   const cars = (await prisma.car.findMany()) as Car[];
 
-  async function handleRecord(data: any) {
+  async function handleRecord(data: FormData) {
     "use server";
-    let newCar = {};
-
     if (data.get("toDelete"))
-      newCar = await prisma.car.delete({
+      await prisma.car.delete({
         where: {
-          id: parseInt(data.get("toDelete")),
+          id: parseInt(data.get("toDelete") as string),
         },
       });
 

@@ -7,7 +7,7 @@ import { IconFilter } from "@tabler/icons-react";
 import Link from "next/link";
 import { IconFilterX } from "@tabler/icons-react";
 
-let filters = [
+const filters = [
   {
     id: "capacity",
     label: "Capacity",
@@ -64,12 +64,12 @@ export const Filter = () => {
   const { replace } = useRouter();
   const pathname = usePathname();
 
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const handleFilterChange = (
     term: string,
     label: string,
-    isChecked?: boolean
+    isChecked?: boolean,
   ) => {
     const params = new URLSearchParams(searchParams);
 
@@ -126,21 +126,27 @@ export const Filter = () => {
     const passengers = params.get("passengers")?.split(",").map(Number) ?? [];
 
     filters[0].options.forEach((option) => {
-      capacity.includes(Number(option.value))
-        ? (option.checked = true)
-        : (option.checked = false);
+      if (capacity.includes(Number(option.value))) {
+        option.checked = true;
+      } else {
+        option.checked = false;
+      }
     });
 
     filters[1].options.forEach((option) => {
-      transmission.includes(option.value)
-        ? (option.checked = true)
-        : (option.checked = false);
+      if (transmission.includes(option.value)) {
+        option.checked = true;
+      } else {
+        option.checked = false;
+      }
     });
 
     filters[2].options.forEach((option) => {
-      passengers.includes(Number(option.value))
-        ? (option.checked = true)
-        : (option.checked = false);
+      if (passengers.includes(Number(option.value))) {
+        option.checked = true;
+      } else {
+        option.checked = false;
+      }
     });
 
     return () => {
@@ -211,7 +217,7 @@ export const Filter = () => {
                       handleFilterChange(
                         option.value,
                         filters[0].id,
-                        option.checked
+                        option.checked,
                       );
                     }}
                   />
@@ -257,7 +263,7 @@ export const Filter = () => {
                       handleFilterChange(
                         option.value,
                         filters[1].id,
-                        option.checked
+                        option.checked,
                       );
                     }}
                   />
@@ -274,7 +280,7 @@ export const Filter = () => {
             className="flex text-text dark:text-darktext"
             onClick={() => setOpen2(!open2)}
           >
-            <h3 className="-my-3 flow-root font-medium ">{filters[2].label}</h3>
+            <h3 className="-my-3 flow-root font-medium">{filters[2].label}</h3>
             {open2 ? (
               <IconMinus
                 className="-my-[0.65rem] ml-auto h-5 w-5"
@@ -301,7 +307,7 @@ export const Filter = () => {
                       handleFilterChange(
                         option.value,
                         filters[2].id,
-                        option.checked
+                        option.checked,
                       );
                     }}
                   />
@@ -399,7 +405,7 @@ export const Filter = () => {
             </button>
           </div>
           <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/10 ">
+            <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <div className="border-b border-text/30 py-6 dark:border-darktext/30">
                   <span onClick={() => setOpen0(!open0)}>
@@ -434,7 +440,7 @@ export const Filter = () => {
                               handleFilterChange(
                                 option.value,
                                 filters[0].id,
-                                option.checked
+                                option.checked,
                               );
                             }}
                           />
@@ -480,7 +486,7 @@ export const Filter = () => {
                               handleFilterChange(
                                 option.value,
                                 filters[1].id,
-                                option.checked
+                                option.checked,
                               );
                             }}
                           />
@@ -526,7 +532,7 @@ export const Filter = () => {
                               handleFilterChange(
                                 option.value,
                                 filters[2].id,
-                                option.checked
+                                option.checked,
                               );
                             }}
                           />

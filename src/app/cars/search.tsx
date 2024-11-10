@@ -26,7 +26,7 @@ export function Search() {
     };
   }, [searchTerm]);
 
-  let handleSearch = (term: string) => {
+  const handleSearch = (term: string) => {
     const params = new URLSearchParams(searchParams);
 
     if (term) {

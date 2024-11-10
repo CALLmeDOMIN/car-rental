@@ -98,7 +98,7 @@ const Page = async ({ params }: PageProps) => {
           </h1>
           <p className="font-semibold text-gray-500">{car.description}</p>
         </div>
-        <div className="col-span-2 row-span-1 grid grid-cols-2 grid-rows-2 gap-4 md:grid-cols-4  md:grid-rows-1">
+        <div className="col-span-2 row-span-1 grid grid-cols-2 grid-rows-2 gap-4 md:grid-cols-4 md:grid-rows-1">
           <div className="flex transform flex-col items-center rounded-xl bg-background p-2 shadow-lg shadow-amber-700/30 transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-105 dark:bg-darkbg">
             <div className="aspect-square rounded-full bg-amber-600/20 p-2 text-amber-700 shadow-sm shadow-amber-700">
               <IconEngine aria-label="engine" className="h-10 w-auto" />
@@ -110,7 +110,7 @@ const Page = async ({ params }: PageProps) => {
                 ? car.engineCapacity + ".0l"
                 : car.engineCapacity + "l"}
             </p>
-            <h1 className="text-sm font-bold uppercase  text-gray-500">
+            <h1 className="text-sm font-bold uppercase text-gray-500">
               engine capacity
             </h1>
           </div>
@@ -121,7 +121,7 @@ const Page = async ({ params }: PageProps) => {
             <p className="font-bold uppercase text-text dark:text-darktext">
               {car.horsepower}
             </p>
-            <h1 className="text-sm font-bold uppercase  text-gray-500">
+            <h1 className="text-sm font-bold uppercase text-gray-500">
               horsepower
             </h1>
           </div>
