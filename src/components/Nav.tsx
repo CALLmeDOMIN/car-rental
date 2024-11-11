@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import {
   SignInButton,
   SignedIn,
@@ -7,19 +9,11 @@ import {
   UserButton,
   useUser,
 } from "@clerk/nextjs";
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
-import React from "react";
+import { cn } from "@/utils/utils";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
-
-  const openStyles = `${
-    open
-      ? "translate-x-0 ease-out duration-300 backdrop-blur-sm bg-black bg-opacity-50"
-      : "translate-x-full ease-in duration-300"
-  } fixed inset-0 z-40 flex`;
 
   const closeNav = { onClick: () => setOpen(false) };
 
@@ -109,14 +103,16 @@ export default function Nav() {
         </div>
       </nav>
 
-      {/* mobile */}
-
       <div
-        className={openStyles}
+        className={cn(
+          "fixed inset-0 z-40 flex translate-x-full duration-300 ease-in",
+          open &&
+            "translate-x-0 bg-black bg-opacity-50 backdrop-blur-sm duration-300 ease-out",
+        )}
         role="dialog"
         aria-modal="true"
         aria-label="Mobile menu"
-        // {...closeNav}
+        {...closeNav}
       >
         <div className="fixed inset-0 z-10"></div>
         <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-background px-6 py-6 dark:bg-darkbg sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">

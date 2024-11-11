@@ -1,7 +1,7 @@
-import { currentUser } from "@clerk/nextjs";
-import { prisma } from "@/../lib/prisma";
-import { CarTile } from "@/components/carTile";
 import Link from "next/link";
+import { currentUser } from "@clerk/nextjs";
+import CarTile from "@/components/CarTile";
+import { prisma } from "@/../lib/prisma";
 
 export default async function Page() {
   const user = await currentUser();

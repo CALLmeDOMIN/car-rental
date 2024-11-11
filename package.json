@@ -27,6 +27,7 @@
         "@uploadthing/react": "^6.8.0",
         "@vercel/postgres": "^0.7.2",
         "autoprefixer": "10.4.14",
+        "clsx": "^2.1.1",
         "date-fns": "^2.30.0",
         "dayjs": "^1.11.13",
         "eslint-config-next": "^15.0.3",
@@ -41,6 +42,8 @@
         "react-select": "^5.8.3",
         "react-tailwindcss-datepicker": "^1.7.2",
         "resend": "^3.5.0",
+        "sharp": "^0.33.5",
+        "tailwind-merge": "^2.5.4",
         "uploadthing": "^6.13.3"
     },
     "devDependencies": {

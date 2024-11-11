@@ -2,14 +2,14 @@
 
 import { IconRefresh } from "@tabler/icons-react";
 import Link from "next/link";
-import { FunctionComponent, useEffect } from "react";
+import { useEffect } from "react";
 
-interface ErrorProps {
+type ErrorProps = {
   error: Error;
   reset: () => void;
-}
+};
 
-const Error: FunctionComponent<ErrorProps> = ({ error, reset }) => {
+export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
     console.log(error);
   }, [error]);
@@ -51,6 +51,4 @@ const Error: FunctionComponent<ErrorProps> = ({ error, reset }) => {
       </main>
     </div>
   );
-};
-
-export default Error;
+}

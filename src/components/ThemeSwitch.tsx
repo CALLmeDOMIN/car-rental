@@ -1,18 +1,14 @@
 "use client";
 
 import { IconMoonStars, IconSun } from "@tabler/icons-react";
-import { FC, useState } from "react";
+import { useState } from "react";
 
 export enum Theme {
   light = "light",
   dark = "dark",
 }
 
-interface Props {
-  theme?: string;
-}
-
-export const ThemeSwitch: FC<Props> = ({ theme }) => {
+export default function ThemeSwitch({ theme }: { theme?: string }) {
   const [_theme, setTheme] = useState(theme);
 
   const toggleTheme = () => {
@@ -26,14 +22,13 @@ export const ThemeSwitch: FC<Props> = ({ theme }) => {
       document.cookie = "theme=light";
     }
   };
+
   return (
-    <>
-      <button
-        className="absolute right-20 top-7 lg:right-5"
-        onClick={toggleTheme}
-      >
-        {_theme === Theme.light ? <IconSun /> : <IconMoonStars />}
-      </button>
-    </>
+    <button
+      className="absolute right-20 top-7 lg:right-5"
+      onClick={toggleTheme}
+    >
+      {_theme === Theme.light ? <IconSun /> : <IconMoonStars />}
+    </button>
   );
-};
+}

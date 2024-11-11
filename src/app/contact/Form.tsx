@@ -2,18 +2,13 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { FunctionComponent } from "react";
 import { useForm } from "react-hook-form";
 
-interface FormProps {
-  className?: string;
-}
-
-interface FormData {
+type FormData = {
   name: string;
   email: string;
   message: string;
-}
+};
 
 const onSubmit = async (data: FormData) => {
   await fetch("/api/contact", {
@@ -28,7 +23,7 @@ const onSubmit = async (data: FormData) => {
   });
 };
 
-const Form: FunctionComponent<FormProps> = ({ className }) => {
+export default function Form({ className }: { className?: string }) {
   const { user } = useUser();
 
   const router = useRouter();
@@ -101,6 +96,4 @@ const Form: FunctionComponent<FormProps> = ({ className }) => {
       </div>
     </div>
   );
-};
-
-export default Form;
+}

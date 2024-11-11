@@ -1,9 +1,9 @@
 import "./globals.css";
-import Nav from "../components/nav";
 import { ClerkProvider } from "@clerk/nextjs";
-import { cookies } from "next/dist/client/components/headers";
-import { ThemeSwitch } from "@/components/themeSwitch";
 import { dark } from "@clerk/themes";
+import { cookies } from "next/dist/client/components/headers";
+import Nav from "@/components/Nav";
+import ThemeSwitch from "@/components/ThemeSwitch";
 
 export const metadata = {
   title: "Car rental",
@@ -33,9 +33,11 @@ export default function RootLayout({
       }}
     >
       <html lang="en" className={theme}>
-        <body className="bg-background font-sans text-text transition duration-700 dark:bg-darkbg dark:text-darktext">
+        <body className="bg-background font-sans text-text transition duration-150 dark:bg-darkbg dark:text-darktext">
           <Nav />
-          <ThemeSwitch theme={theme} />
+          {process.env.NODE_ENV === "development" && (
+            <ThemeSwitch theme={theme} />
+          )}
           {children}
         </body>
       </html>

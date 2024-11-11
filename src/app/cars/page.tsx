@@ -1,10 +1,10 @@
 import { IconLuggage, IconManualGearbox, IconUser } from "@tabler/icons-react";
 import Link from "next/link";
-import { Search } from "./search";
-import { Filter } from "./filter";
-import { CarTile } from "../../components/carTile";
-import { prisma } from "../../../lib/prisma";
 import { auth } from "@clerk/nextjs";
+import { Search } from "./Search";
+import { Filter } from "./Filter";
+import CarTile from "@/components/CarTile";
+import { prisma } from "@/../../lib/prisma";
 import { type Bookmarks, type Cars } from "@/utils/types";
 
 type Params = {

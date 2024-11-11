@@ -1,6 +1,6 @@
-import { Filter } from "./filter";
-import { Search } from "./search";
 import { IconBookmarkFilled } from "@tabler/icons-react";
+import { Filter } from "./Filter";
+import { Search } from "./Search";
 
 export default function LoadingSkeleton() {
   return (
@@ -24,7 +24,7 @@ export default function LoadingSkeleton() {
   );
 }
 
-export const CarTileLoading = () => {
+const CarTileLoading = () => {
   return (
     <>
       <div className="relative isolate overflow-hidden rounded-2xl shadow-xl shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:border-t before:border-rose-100/10 before:bg-gradient-to-r before:from-transparent before:via-rose-100/10 before:to-transparent">

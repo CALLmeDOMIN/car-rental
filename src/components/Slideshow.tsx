@@ -1,6 +1,5 @@
 "use client";
 
-import { animated, useSpring } from "@react-spring/web";
 import {
   IconCircleChevronLeft,
   IconCircleChevronRight,
@@ -10,32 +9,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
-function SlideshowElement({
-  current,
-  children,
-  className,
-}: {
-  current: number;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  const getPercentage = () => ({
-    x: -100 * current + "%",
-  });
-  const [springs, api] = useSpring(getPercentage);
-
-  useEffect(() => {
-    api.start({ to: getPercentage() });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current]);
-
-  return (
-    <animated.div className={className} style={springs}>
-      {children}
-    </animated.div>
-  );
-}
+import { animated, useSpring } from "@react-spring/web";
 
 export type Photo = {
   id: string;
@@ -175,3 +149,29 @@ const useCols = () => {
 
   return cols;
 };
+
+function SlideshowElement({
+  current,
+  children,
+  className,
+}: {
+  current: number;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const getPercentage = () => ({
+    x: -100 * current + "%",
+  });
+  const [springs, api] = useSpring(getPercentage);
+
+  useEffect(() => {
+    api.start({ to: getPercentage() });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current]);
+
+  return (
+    <animated.div className={className} style={springs}>
+      {children}
+    </animated.div>
+  );
+}

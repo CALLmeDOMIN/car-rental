@@ -8,11 +8,11 @@ import {
   Text,
 } from "@react-email/components";
 
-interface ContactProps {
+type ContactProps = {
   name: string;
   email: string;
   message: string;
-}
+};
 
 export const Contact = ({ name, email, message }: ContactProps) => (
   <Html>

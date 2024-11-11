@@ -1,12 +1,7 @@
 "use client";
 
 import { IconArrowNarrowRight } from "@tabler/icons-react";
-import { FunctionComponent } from "react";
 import { useForm } from "react-hook-form";
-
-interface NewsFormProps {
-  className?: string;
-}
 
 const onSubmit = async ({ data }: { data: { email: string } }) => {
   await fetch("/api/newsletter", {
@@ -21,7 +16,7 @@ const onSubmit = async ({ data }: { data: { email: string } }) => {
   });
 };
 
-const NewsForm: FunctionComponent<NewsFormProps> = ({ className }) => {
+export default function NewsForm({ className }: { className?: string }) {
   const { handleSubmit, register, reset } = useForm({
     defaultValues: {
       email: "",
@@ -60,6 +55,4 @@ const NewsForm: FunctionComponent<NewsFormProps> = ({ className }) => {
       </button>
     </form>
   );
-};
-
-export default NewsForm;
+}

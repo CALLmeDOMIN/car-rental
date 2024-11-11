@@ -1,11 +1,14 @@
 "use client";
 
+import {
+  IconPlus,
+  IconMinus,
+  IconFilterX,
+  IconFilter,
+} from "@tabler/icons-react";
+import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useTransition, useState, useEffect, useRef } from "react";
-import { IconPlus, IconMinus } from "@tabler/icons-react";
-import { IconFilter } from "@tabler/icons-react";
-import Link from "next/link";
-import { IconFilterX } from "@tabler/icons-react";
 
 const filters = [
   {
@@ -162,6 +165,7 @@ export const Filter = () => {
         option.checked = false;
       });
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const openStyles = `${

@@ -5,23 +5,23 @@ import {
   IconHorseToy,
   IconInnerShadowRight,
   IconManualGearbox,
+  IconPlaystationCircle,
+  IconBrandSpeedtest,
 } from "@tabler/icons-react";
-import { IconBrandSpeedtest } from "@tabler/icons-react";
-import { IconPlaystationCircle } from "@tabler/icons-react";
-import Slideshow, { Photo } from "@/components/slideshow";
-import { CarTile } from "@/components/carTile";
-import { prisma } from "@/../lib/prisma";
-import DetailForm from "./detailForm";
 import { auth } from "@clerk/nextjs";
+import Slideshow, { Photo } from "@/components/Slideshow";
+import CarTile from "@/components/CarTile";
+import DetailForm from "./DetailForm";
 import { type Bookmarks } from "@/utils/types";
+import { prisma } from "@/../lib/prisma";
 
-interface PageProps {
+type PageProps = {
   params: {
     carId: string;
   };
-}
+};
 
-const Page = async ({ params }: PageProps) => {
+export default async function Page({ params }: PageProps) {
   const { userId } = auth();
 
   let bookmarks: Bookmarks = [];
@@ -227,6 +227,4 @@ const Page = async ({ params }: PageProps) => {
       {/* end of main grid */}
     </main>
   );
-};
-
-export default Page;
+}

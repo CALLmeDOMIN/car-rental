@@ -2,13 +2,13 @@
 
 import { IconBookmarkFilled, IconBookmarkPlus } from "@tabler/icons-react";
 import Image from "next/image";
-import { logos } from "../../public/assets";
-import { useUser } from "@clerk/nextjs";
-import { useState } from "react";
-import addBookmark from "./addbookmark";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import addBookmark from "./AddBookmark";
+import { logos } from "@/utils/data";
 
-export const CarTile = ({
+export default function CarTile({
   imageUrl,
   brand,
   name,
@@ -26,7 +26,7 @@ export const CarTile = ({
   carId: number;
   displayBookmark?: boolean;
   displayColors?: boolean;
-}) => {
+}) {
   const [bookmark, setBookmark] = useState(
     isBookmarked === null ? false : true,
   );
@@ -96,4 +96,4 @@ export const CarTile = ({
       </div>
     </div>
   );
-};
+}

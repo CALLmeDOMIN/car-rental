@@ -2,7 +2,7 @@
 
 /* eslint-disable */
 
-import { FunctionComponent, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Datepicker from "react-tailwindcss-datepicker";
 import Select from "react-select";
@@ -13,15 +13,12 @@ const options = [
   { value: "Hotel", label: "Hotel" },
 ];
 
-interface DetailFormProps {
+type DetailFormProps = {
   className?: string;
   price: number;
-}
+};
 
-const DetailForm: FunctionComponent<DetailFormProps> = ({
-  className,
-  price,
-}) => {
+export default function DetailForm({ className, price }: DetailFormProps) {
   const { handleSubmit, control } = useForm({
     defaultValues: {
       location: "",
@@ -159,6 +156,4 @@ const DetailForm: FunctionComponent<DetailFormProps> = ({
       />
     </form>
   );
-};
-
-export default DetailForm;
+}

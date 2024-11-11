@@ -1,10 +1,10 @@
-import { type Car } from "@/utils/types";
-import { prisma } from "../../../../lib/prisma";
-import { currentUser } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
+import { currentUser } from "@clerk/nextjs";
 import Form from "./form/form";
 import Img from "./image/Img";
 import Upload from "./upload";
+import { type Car } from "@/utils/types";
+import { prisma } from "@/../lib/prisma";
 
 export default async function Page() {
   const cars = (await prisma.car.findMany()) as Car[];

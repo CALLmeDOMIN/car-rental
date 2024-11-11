@@ -1,13 +1,17 @@
+import {
+  IconFlame,
+  IconCopyright,
+  IconArrowUpRight,
+} from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import { IconFlame, IconCopyright } from "@tabler/icons-react";
-import { IconArrowUpRight } from "@tabler/icons-react";
-import Slideshow from "@/components/slideshow";
-import SubmitForm from "@/components/submitForm";
-import { socials, terms, whyChooseUs } from "@/../public/assets";
-import { prisma } from "@/../lib/prisma";
+import Slideshow from "@/components/Slideshow";
+import SubmitForm from "@/components/SubmitForm";
+import NewsForm from "@/components/NewsForm";
+import Spinner from "@/components/Spinner";
+import { socials, terms, whyChooseUs } from "@/utils/data";
 import { type Cars, type Car } from "@/utils/types";
-import NewsForm from "../components/newsForm";
+import { prisma } from "@/../lib/prisma";
 
 export default async function Home() {
   const cars = (await prisma.car.findMany({
@@ -26,7 +30,11 @@ export default async function Home() {
   const hotOffer = cars[1];
 
   if (!cars) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex min-h-[80vh] items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   const photos = cars.map((car: Car) => ({
@@ -39,7 +47,6 @@ export default async function Home() {
 
   return (
     <>
-      {/* landing picture and form */}
       <section className="p-8">
         <div className="relative mt-4 min-h-[80vh]">
           <div className="absolute top-[8%] z-10 mt-4 flex w-full flex-col items-center justify-center md:mt-0 lg:left-1/2 lg:-translate-x-1/2">
@@ -78,14 +85,9 @@ export default async function Home() {
             quality={100}
           />
         </div>
-
-        {/* MOBILE VERSION */}
         <SubmitForm className="mx-4 mt-4 flex flex-col space-y-4 rounded-xl border border-text bg-background p-4 dark:bg-darkbg md:hidden" />
-        {/* end of mobile version */}
       </section>
-      {/* end of landing first screen */}
 
-      {/* Our services section */}
       <section className="mb-20 mt-20">
         <div className="grid gap-5 px-8 md:grid-cols-2 md:gap-10 md:px-36 lg:grid-rows-2 xl:grid-cols-3">
           <div className="flex flex-col items-center leading-6 md:block">
@@ -147,9 +149,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      {/* end of our servicers section */}
-
-      {/* our fleet section */}
       <section>
         <div className="mt-4 p-2 md:p-8">
           <div className="flex flex-col md:p-10">
@@ -181,9 +180,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      {/* end of fleet section */}
-
-      {/* why choose us section */}
       <section className="mb-40 mt-20">
         <div className="md:p8 mt-4 p-2">
           <div className="flex flex-col items-center justify-center gap-10 pb-6 pt-12 md:flex-row md:py-12">
@@ -214,9 +210,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      {/* end of why choose us */}
-
-      {/* hot offer section */}
       <section className="my-20 flex justify-center">
         <div className="m-2 max-w-5xl sm:m-4">
           <div className="flex flex-col items-center justify-center gap-2 pb-3 pt-12 md:flex-row md:justify-center md:gap-10 md:py-12 md:pb-6">
@@ -333,9 +326,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      {/* end of hot offer section */}
-
-      {/* footer */}
       <footer>
         <div className="m-2 mb-0 grid grid-cols-2 gap-3 rounded-t-3xl bg-accent p-6 pt-10 md:m-8 md:mb-0 md:p-8 lg:grid-cols-3 lg:gap-0">
           <div className="col-span-2 hidden flex-col justify-center space-y-4 p-4 lg:flex">
@@ -358,11 +348,10 @@ export default async function Home() {
               aria-label="logo"
             />
           </Link>
-
           <div className="hidden items-end gap-1 pl-4 text-background dark:text-darkbg lg:flex">
             <span className="flex items-center text-background dark:text-darkbg">
               <IconCopyright size={14} aria-label="copyright" />
-              <h1 className="text-sm">2023 Car-rental</h1>
+              <h1 className="text-sm">{new Date().getFullYear()} Car-rental</h1>
             </span>
           </div>
           <div className="col-span-2 flex items-center justify-center gap-6 text-xs font-semibold text-background dark:text-darkbg md:col-span-1 md:text-sm lg:items-end">
@@ -380,7 +369,7 @@ export default async function Home() {
           <div className="flex items-end gap-1 text-background dark:text-darkbg md:hidden">
             <span className="flex items-center text-background dark:text-darkbg">
               <IconCopyright size={14} aria-label="copyright" />
-              <h1 className="text-sm">2023 Car-rental</h1>
+              <h1 className="text-sm">{new Date().getFullYear()} Car-rental</h1>
             </span>
           </div>
           <div className="flex flex-col items-center justify-center gap-2">

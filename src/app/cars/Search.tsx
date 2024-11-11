@@ -3,7 +3,7 @@
 import { IconSearch } from "@tabler/icons-react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
-import Spinner from "../../components/spinner";
+import Spinner from "@/components/Spinner";
 
 export function Search() {
   const { replace } = useRouter();
@@ -24,6 +24,7 @@ export function Search() {
     return () => {
       clearTimeout(timeoutId);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
 
   const handleSearch = (term: string) => {

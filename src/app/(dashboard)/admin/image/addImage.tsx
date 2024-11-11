@@ -1,13 +1,8 @@
 "use server";
 
-import { prisma } from "../../../../../lib/prisma";
+import { prisma } from "@/../lib/prisma";
 
-interface CarData {
-  id: string;
-  url: string;
-}
-
-export default async function addCar(data: CarData) {
+export default async function addCar(data: { id: string; url: string }) {
   "use server";
   await prisma.car.update({
     where: {
