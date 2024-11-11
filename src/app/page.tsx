@@ -9,6 +9,7 @@ import Slideshow from "@/components/Slideshow";
 import SubmitForm from "@/components/SubmitForm";
 import NewsForm from "@/components/NewsForm";
 import Spinner from "@/components/Spinner";
+import { Button } from "@/components/Button";
 import { socials, terms, whyChooseUs } from "@/utils/data";
 import { type Cars, type Car } from "@/utils/types";
 import { prisma } from "@/../lib/prisma";
@@ -62,17 +63,14 @@ export default async function Home() {
             href="/cars"
             className="absolute bottom-5 z-10 ml-4 md:bottom-[8%] lg:left-1/2 lg:-translate-x-1/2"
           >
-            <button
-              type="button"
-              className="flex items-center justify-center rounded-md bg-background py-2 pl-6 text-center text-sm font-semibold text-text shadow-sm duration-300 ease-in-out hover:shadow-xl focus:outline-none focus:ring-4 dark:bg-darkbg dark:text-darktext"
-            >
+            <Button variant="secondary" className="pr-0">
               Car catalog
               <IconArrowUpRight
-                className="mx-2 mr-4"
+                className="ml-1 mr-4"
                 size={16}
                 aria-label="arrow up right"
               />
-            </button>
+            </Button>
           </Link>
           <SubmitForm className="absolute bottom-[8%] right-[5%] z-10 hidden flex-col space-y-4 rounded-xl bg-background p-4 dark:bg-darkbg md:flex" />
           <Image
@@ -166,14 +164,14 @@ export default async function Home() {
               <Slideshow photos={photos} />
               <span className="flex justify-center pt-4">
                 <Link passHref href={"/cars"}>
-                  <button className="flex transform items-center rounded-md bg-primary-button py-1.5 pl-6 text-background shadow-sm shadow-primary-button duration-500 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:shadow-primary-button dark:text-darkbg md:shadow-md">
-                    <h1 className="font-semibold">Show more</h1>
+                  <Button className="pr-0">
+                    Show more
                     <IconArrowUpRight
                       size={16}
-                      className="mx-2 mr-4"
+                      className="ml-1 mr-4"
                       aria-label="arrow up right"
                     />
-                  </button>
+                  </Button>
                 </Link>
               </span>
             </div>
@@ -310,17 +308,14 @@ export default async function Home() {
             </div>
             <div className="col-span-2 flex items-center justify-center">
               <Link passHref href={`/car/${hotOffer.id}`} className="m-1">
-                <button
-                  type="button"
-                  className="flex transform items-center justify-center rounded-md bg-primary-button py-2 pl-3 text-center text-sm font-semibold text-background shadow-sm shadow-primary-button duration-500 ease-in-out hover:-translate-y-1 hover:shadow-md hover:shadow-primary-button focus:outline-none focus:ring-4 dark:text-darkbg md:pl-6"
-                >
+                <Button className="pr-0">
                   Reserve now
                   <IconArrowUpRight
-                    className="mx-2 md:mr-4"
+                    className="ml-1 mr-4"
                     size={16}
                     aria-label="arrow up right"
                   />
-                </button>
+                </Button>
               </Link>
             </div>
           </div>

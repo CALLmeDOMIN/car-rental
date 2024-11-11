@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Datepicker from "react-tailwindcss-datepicker";
 import Select from "react-select";
+import { Button } from "@/components/Button";
 
 const options = [
   { value: "City", label: "City" },
@@ -135,7 +136,7 @@ export default function DetailForm({ className, price }: DetailFormProps) {
         />
       </div>
 
-      <div>
+      <div className="mb-4">
         <h1>Payment Info</h1>
         <div className="m-2 flex justify-between rounded-md border border-darktext bg-transparent p-2 text-text dark:text-darktext">
           <p>Rent per day</p>
@@ -149,11 +150,7 @@ export default function DetailForm({ className, price }: DetailFormProps) {
         </div>
       </div>
 
-      <input
-        type="submit"
-        value={"Submit"}
-        className="mt-4 cursor-pointer rounded-md bg-primary-button p-4 font-semibold text-background shadow-md dark:text-darkbg"
-      />
+      <Button>Submit</Button>
     </form>
   );
 }

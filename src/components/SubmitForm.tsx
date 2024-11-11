@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Datepicker from "react-tailwindcss-datepicker";
 import Select from "react-select";
+import { Button } from "./Button";
 
 const options = [
   { value: "City", label: "City" },
@@ -140,19 +141,15 @@ export default function SubmitForm({ className }: { className?: string }) {
           />
         </div>
       </span>
-      <Link
-        passHref
-        href={"/cars"}
-        className="flex items-center justify-center rounded-md bg-primary-button py-2 pl-3 text-center font-semibold text-background shadow-sm shadow-primary-button duration-500 ease-in-out hover:-translate-y-1 hover:shadow-md hover:shadow-primary-button focus:outline-none focus:ring-4 dark:text-darkbg md:pl-6"
-      >
-        <button type="submit" className="flex items-center justify-center">
-          <h1>Reserve now</h1>
+      <Link href={"/cars"} passHref prefetch className="flex justify-end">
+        <Button className="pr-0">
+          Reserve now
           <IconArrowUpRight
-            className="mx-2"
+            className="ml-1 mr-4"
             size={20}
             aria-label="arrow up right"
           />
-        </button>
+        </Button>
       </Link>
     </form>
   );
