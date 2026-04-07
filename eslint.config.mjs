@@ -1,28 +1,9 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import js from "@eslint/js";
-import ts from "typescript-eslint";
-import prettierConfigRecommended from "eslint-plugin-prettier/recommended";
-import { FlatCompat } from "@eslint/eslintrc";
-import { fixupConfigRules } from "@eslint/compat";
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
-
-const patchedConfig = fixupConfigRules([
-  ...compat.extends("next/core-web-vitals"),
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
 ]);
 
-const config = [
-  ...patchedConfig,
-  ...ts.configs.recommended,
-  prettierConfigRecommended,
-  { ignores: [".next/*"] },
-];
-
-export default config;
+export default eslintConfig;

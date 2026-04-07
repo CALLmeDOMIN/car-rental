@@ -1,5 +1,5 @@
 import { revalidatePath } from "next/cache";
-import { currentUser } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 import Form from "./form/form";
 import Img from "./image/Img";
 import Upload from "./upload";

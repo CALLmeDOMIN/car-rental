@@ -1,6 +1,6 @@
 import { IconLuggage, IconManualGearbox, IconUser } from "@tabler/icons-react";
 import Link from "next/link";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { Search } from "./Search";
 import { Filter } from "./Filter";
 import CarTile from "@/components/CarTile";
@@ -24,8 +24,9 @@ const filterBySearch = (cars: Cars, search: string) => {
   });
 };
 
-export default async function Page({ searchParams }: { searchParams: Params }) {
-  const { userId } = auth();
+export default async function Page(props: { searchParams: Promise<Params> }) {
+  const searchParams = await props.searchParams;
+  const { userId } = await auth();
 
   let bookmarks: Bookmarks = [];
 

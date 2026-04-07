@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 
 // /** app/api/uploadthing/core.ts */
 // import { auth } from "@clerk/nextjs";

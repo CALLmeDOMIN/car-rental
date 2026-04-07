@@ -131,18 +131,20 @@ export default function Slideshow({ photos }: { photos: Photo[] }) {
   );
 }
 
-const useCols = () => {
-  const [cols, setCols] = useState(1);
+const getColsFromWidth = () => {
+  if (typeof window === "undefined") return 1;
+  if (window.innerWidth < 768) return 1;
+  if (window.innerWidth < 1024) return 2;
+  if (window.innerWidth < 1280) return 3;
+  return 4;
+};
 
-  const updateCols = () => {
-    if (window.innerWidth < 768) setCols(1);
-    else if (window.innerWidth < 1024) setCols(2);
-    else if (window.innerWidth < 1280) setCols(3);
-    else setCols(4);
-  };
+const useCols = () => {
+  const [cols, setCols] = useState(getColsFromWidth);
+
+  const updateCols = () => setCols(getColsFromWidth());
 
   useEffect(() => {
-    updateCols();
     window?.addEventListener("resize", updateCols);
     return () => window?.removeEventListener("resize", updateCols);
   }, []);

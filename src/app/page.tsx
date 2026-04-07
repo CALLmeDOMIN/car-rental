@@ -330,8 +330,6 @@ export default async function Home() {
             passHref
             href="/"
             className="hidden items-center justify-center lg:flex"
-            ease-in-out
-            duration-300
             aria-label="logo"
           >
             <Image
