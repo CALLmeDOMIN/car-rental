@@ -2,13 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-  useUser,
-} from "@clerk/nextjs";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import { Show } from "@clerk/react";
 import { useState } from "react";
 import { cn } from "@/utils/utils";
 
@@ -86,19 +81,18 @@ export default function Nav() {
             </Link>
           </div>
           <div className="mr-10 text-sm font-semibold leading-6 text-text dark:text-darktext">
-            <SignedIn>
+            <Show when="signed-in">
               <span className="font-semibold text-text dark:text-darktext">
                 <UserButton
                   showName={true}
-                  afterSignOutUrl="/"
                   userProfileMode={"navigation"}
                   userProfileUrl={`/profile/${user?.id}`}
                 />
               </span>
-            </SignedIn>
-            <SignedOut>
+            </Show>
+            <Show when="signed-out">
               <SignInButton />
-            </SignedOut>
+            </Show>
           </div>
         </div>
       </nav>
@@ -131,17 +125,16 @@ export default function Nav() {
                 aria-label="logo"
               />
             </Link>
-            <SignedIn>
+            <Show when="signed-in">
               <UserButton
                 showName={true}
-                afterSignOutUrl="/"
                 userProfileMode={"navigation"}
                 userProfileUrl={`/profile/${user?.id}`}
               />
-            </SignedIn>
-            <SignedOut>
+            </Show>
+            <Show when="signed-out">
               <SignInButton />
-            </SignedOut>
+            </Show>
             <button
               onClick={() => setOpen(!open)}
               type="button"

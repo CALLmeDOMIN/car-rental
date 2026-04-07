@@ -1,12 +1,10 @@
 "use client";
 
-/* eslint-disable */
-
 import { IconArrowUpRight } from "@tabler/icons-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import Datepicker from "react-tailwindcss-datepicker";
+// import Datepicker from "react-tailwindcss-datepicker";
 import Select from "react-select";
 import { Button } from "./Button";
 
@@ -99,7 +97,7 @@ export default function SubmitForm({ className }: { className?: string }) {
         <label htmlFor="location">Pick Up location</label>
 
         <div className="mb-4 mt-1 text-text dark:text-darktext">
-          <Controller
+          {/* <Controller
             name="location"
             control={control}
             rules={{ required: true }}
@@ -113,7 +111,7 @@ export default function SubmitForm({ className }: { className?: string }) {
                 styles={styles}
               />
             )}
-          />
+          /> */}
         </div>
       </span>
 
@@ -125,7 +123,7 @@ export default function SubmitForm({ className }: { className?: string }) {
           Pick Up and Drop Off Date
         </label>
         <div className="mb-4 mt-1">
-          <Datepicker
+          {/* <Datepicker
             value={value}
             inputName="calendar"
             startWeekOn="mon"
@@ -138,7 +136,7 @@ export default function SubmitForm({ className }: { className?: string }) {
             placeholder="Select a date"
             useRange={false}
             minDate={new Date(Date.now())}
-          />
+          /> */}
         </div>
       </span>
       <Link href={"/cars"} passHref prefetch className="flex justify-end">

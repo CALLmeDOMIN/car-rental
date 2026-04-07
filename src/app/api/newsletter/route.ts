@@ -11,7 +11,7 @@ export async function POST(req: Request) {
       from: "newsletter@dsieron.pl",
       to: received.email,
       subject: "Contact form",
-      react: Newsletter() as React.ReactElement,
+      react: Newsletter() as React.ReactElement<any>,
     });
 
     if (error) {
